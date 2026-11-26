@@ -3,7 +3,7 @@
 <section>
   <div class="narrow">
     <h2>Two editors and the verdict of the court</h2>
-    <p>The left editor holds a <code>.proz</code> declaration, and the right one carries the Markdown text of its piece. The court judges both in this browser: the page sends nothing to a server.</p>
+    <p>The first editor holds a <code>.proz</code> declaration, and the second one carries the Markdown text of its piece. The court judges both in this browser: the page sends nothing to a server.</p>
     <form class="court-bar" id="court-form" onsubmit="return false">
       <div class="field">
         <label for="sample">Example</label>
@@ -56,6 +56,6 @@
   <div class="narrow">
     <h2>How the page runs the reference court</h2>
     <p>The page loads <code>prosa.js</code>, the same file the command <code>prosa</code> runs under Node, and the contract of diagnostics. It parses the declaration, checks it at level 2, and judges the text against the first <code>PIECE</code> of the declaration.</p>
-    <p>A line <code>USE "prosa:reader_rights"</code> reads the constitution, which the page carries with it. A declaration that spans several files is pasted into the left editor as one text.</p>
+    <p>A line <code>USE "prosa:reader_rights"</code> reads the constitution, which the page carries with it. A declaration that spans several files is pasted into the first editor as one text.</p>
   </div>
 </section>

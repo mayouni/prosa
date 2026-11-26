@@ -28,16 +28,24 @@
   }
   window.ProsaLiveCourt = court;
 
+  // one span per line, as the build gives every code block: a long line wraps under its own indentation (prosa.css, pre .l)
+  function line(into, text) {
+    var l = document.createElement('span'), i = text.length - text.replace(/^ +/, '').length;
+    l.className = 'ln'; if (i) l.style.setProperty('--ind', String(i)); into.appendChild(l); return l;
+  }
   function paint(report) { // the finding's head line in colour, built as nodes: the editors' text never becomes markup
     verdict.textContent = '';
-    report.split('\n').forEach(function (line, k) {
-      if (k) verdict.appendChild(document.createTextNode('\n'));
-      var m = /^(\S+:\d+  )(error|warning)(  )([A-Z][A-Z0-9_]*)(.*)$/.exec(line), span = function (cls, t) { var s = document.createElement('span'); s.className = cls; s.textContent = t; return s; };
-      if (m) { var c = m[2] === 'error' ? 'bad' : 'warn'; verdict.appendChild(document.createTextNode(m[1])); verdict.appendChild(span(c, m[2])); verdict.appendChild(document.createTextNode(m[3])); verdict.appendChild(span(c, m[4])); verdict.appendChild(document.createTextNode(m[5])); }
-      else if (/^    /.test(line)) verdict.appendChild(span('dim', line));
-      else verdict.appendChild(document.createTextNode(line));
+    report.split('\n').forEach(function (text) {
+      var l = line(verdict, text);
+      var m = /^(\S+:\d+  )(error|warning)(  )([A-Z][A-Z0-9_]*)(.*)$/.exec(text), span = function (cls, t) { var s = document.createElement('span'); s.className = cls; s.textContent = t; return s; };
+      if (m) { var c = m[2] === 'error' ? 'bad' : 'warn'; l.appendChild(document.createTextNode(m[1])); l.appendChild(span(c, m[2])); l.appendChild(document.createTextNode(m[3])); l.appendChild(span(c, m[4])); l.appendChild(document.createTextNode(m[5])); }
+      else if (/^    /.test(text)) l.appendChild(span('dim', text));
+      else l.textContent = text;
     });
   }
+  function plain(pre, text) { pre.textContent = ''; text.split('\n').forEach(function (t) { line(pre, t).textContent = t; }); }
+  // an editor is as tall as its text: nothing scrolls inside the page
+  function grow(ta) { ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight + 2) + 'px'; }
   function run() {
     var out;
     try { out = court(proz.value, text.value, parseInt(level.value, 10)); }
@@ -48,22 +56,23 @@
     state.textContent = (refused ? 'Refused: ' : 'Lawful: ') + out.errors + ' error(s), ' + out.warnings + ' warning(s).';
     var b = '';
     try { if (out.target && out.lawful) b = P.brief(out.decls, out.target); } catch (e) { b = ''; }
-    brief.textContent = b || 'The brief is written from a lawful declaration that holds a style.';
+    plain(brief, b ? b.replace(/\s+$/, '') : 'The brief is written from a lawful declaration that holds a style.');
   }
-  function load(k) { var s = S.samples[k]; proz.value = s.proz; text.value = s.text; run(); }
+  function load(k) { var s = S.samples[k]; proz.value = s.proz; text.value = s.text; grow(proz); grow(text); run(); }
 
   S.samples.forEach(function (s, k) { var o = document.createElement('option'); o.value = String(k); o.textContent = s.label; sample.appendChild(o); });
   sample.addEventListener('change', function () { load(parseInt(sample.value, 10)); });
   level.addEventListener('change', run);
   var timer = null, later = function () { clearTimeout(timer); timer = setTimeout(run, 120); };
-  proz.addEventListener('input', later); text.addEventListener('input', later);
+  proz.addEventListener('input', function () { grow(proz); later(); }); text.addEventListener('input', function () { grow(text); later(); });
+  var again = null; window.addEventListener('resize', function () { clearTimeout(again); again = setTimeout(function () { grow(proz); grow(text); }, 60); });
   // Tab indents in an editor; Escape gives Tab back to the page, so the keyboard is never held
   [proz, text].forEach(function (ta) {
     var free = false;
     ta.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { free = true; return; }
       if (e.key === 'Tab' && !free && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-        e.preventDefault(); var a = ta.selectionStart, b = ta.selectionEnd; ta.value = ta.value.slice(0, a) + '  ' + ta.value.slice(b); ta.selectionStart = ta.selectionEnd = a + 2; later();
+        e.preventDefault(); var a = ta.selectionStart, b = ta.selectionEnd; ta.value = ta.value.slice(0, a) + '  ' + ta.value.slice(b); ta.selectionStart = ta.selectionEnd = a + 2; grow(ta); later();
       }
     });
     ta.addEventListener('blur', function () { free = false; });

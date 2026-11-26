@@ -3,7 +3,7 @@
 <section>
   <div class="narrow">
     <h2>What each stage judges and what it needs</h2>
-    <div class="scroll" role="region" aria-label="The five levels" tabindex="0"><table>
+    <div class="table"><table>
       <thead><tr><th scope="col">Level</th><th scope="col">What is judged</th><th scope="col">The court needs</th></tr></thead>
       <tbody>
         <tr><th scope="row">1 Syntax</th><td>The <code>.proz</code> file parses and each field has its shape</td><td>The file</td></tr>

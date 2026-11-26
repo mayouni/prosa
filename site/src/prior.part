@@ -3,7 +3,7 @@
 <section>
   <div class="narrow">
     <h2>Seven lines of earlier work, and the addition of Prosa to each</h2>
-    <div class="scroll" role="region" aria-label="Earlier work compared with Prosa" tabindex="0"><table>
+    <div class="table"><table>
       <thead><tr><th scope="col">Earlier work</th><th scope="col">What it gives</th><th scope="col">What Prosa adds</th><th scope="col">Source</th></tr></thead>
       <tbody>
         <tr><th scope="row">Vale, textlint, proselint</th><td>Rules as files in the repository, markup-aware matching and checks in continuous integration.</td><td>A typed language in place of YAML and regular expressions, the declaration of each piece, measures and evidence.</td><td><a href="https://vale.sh/docs/styles">Vale, styles and rules</a></td></tr>

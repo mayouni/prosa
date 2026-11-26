@@ -1,6 +1,6 @@
 <p class="sub">Prosa is a declarative language that governs written text by compilation: a writing style is declared in <code>.proz</code> files, and a court refuses, by name, every sentence the declaration forbids. It ensures that a remark an author makes about a draft becomes a rule the court raises on every later draft.</p>
 <div class="actions">
-  <a class="primary" href="try.html">Open the court in this browser</a>
+  <a href="try.html">Open the court in this browser</a>
   <a href="kinds.html">Read the ten declarations</a>
 </div>
 <!--main-->
@@ -34,7 +34,7 @@
 <section>
   <div class="narrow">
     <h2>A declaration, a text and the verdict of the court</h2>
-    <p>The declaration below gives one thing one word: the person who writes programs is a programmer. The text beside it uses another word. The court refuses the line.</p>
+    <p>The declaration below gives one thing one word: the person who writes programs is a programmer. The text under it uses another word. The court refuses the line.</p>
     <div class="three">
       <div>
         <div class="lbl">The declaration: term-synonym.proz</div>
@@ -68,7 +68,7 @@
 <section>
   <div class="narrow">
     <h2>Four entry points into the site</h2>
-    <ul class="cards">
+    <ul>
       <li><a href="approach.html">The five commitments</a> state the principles that decide what the language declares.</li>
       <li><a href="levels.html">The five levels</a> show a real refusal at each stage of the judgment.</li>
       <li><a href="commands.html">The eight commands</a> give the syntax of the program and the output of a run.</li>

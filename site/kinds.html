@@ -6,8 +6,9 @@
 <title>The kinds: the ten declarations of a .proz file</title>
 <meta name="description" content="A kind of Prosa is one of the ten forms a declaration takes in a .proz file. The page shows each kind with a declaration cut from a real file of the repository.">
 <meta name="prosa:subject" content="kind">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1f1b'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23ff8c69'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="prosa.css">
+<script>try{var t=localStorage.getItem('prosa-theme');if(t==='vellum'||t==='lamplight')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a>
@@ -16,12 +17,21 @@
   <div class="wrap">
     <div class="menu">
       <a class="brand" href="index.html">Prosa</a>
+      <div class="entries">
       <a href="approach.html">Approach</a>
       <a class="here" aria-current="true" href="kinds.html">Language</a>
       <a href="try.html">Live court</a>
       <a href="commands.html">Use</a>
       <a href="book.html">Book</a>
-      <a href="softanza.html">Softanza</a>
+      </div>
+      <div class="end">
+        <select id="theme" aria-label="Colour theme">
+          <option value="system">System</option>
+          <option value="vellum">Vellum</option>
+          <option value="lamplight">Lamplight</option>
+        </select>
+        <a href="https://github.com/mayouni/prosa">GitHub ↗</a>
+      </div>
     </div>
   </div>
 </nav>
@@ -34,34 +44,53 @@
   </div>
 </nav>
 </div>
+<nav class="vh" aria-label="Breadcrumb"><a href="index.html">Prosa</a><span class="sep"> › </span><a href="kinds.html">Language</a><span class="sep"> › </span><span class="here-crumb" aria-current="page">The kinds</span></nav>
 
 <header class="page">
-  <div class="narrow">
+  <div class="wrap">
     <div class="kicker">Language</div>
     <h1>The ten kinds of declaration</h1>
     <p class="sub">A kind is one of the ten forms a declaration of Prosa takes in a <code>.proz</code> file. The kinds let a house state its whole style as data: its rules, the structure of its texts, its excuses and the judgments that stay with a reader.</p>
   </div>
 </header>
 
+<div class="layout with-outline">
+<nav class="outline" aria-label="On this page">
+  <p class="head">On this page</p>
+  <ul>
+    <li><a href="#the-grammar-every-declaration-shares">The grammar every declaration shares</a></li>
+    <li><a href="#style-a-named-set-of-rules">STYLE: a named set of rules</a></li>
+    <li><a href="#term-one-word-for-one-thing">TERM: one word for one thing</a></li>
+    <li><a href="#wordlist-a-list-of-refused-words">WORDLIST: a list of refused words</a></li>
+    <li><a href="#pattern-a-refused-construction-with-its-own-test">PATTERN: a refused construction with its own test</a></li>
+    <li><a href="#profile-the-measure-of-a-voice">PROFILE: the measure of a voice</a></li>
+    <li><a href="#form-the-structure-of-a-page-a-chapter-or-a-post">FORM: the structure of a page, a chapter or a post</a></li>
+    <li><a href="#zone-a-region-excused-with-a-reason">ZONE: a region excused with a reason</a></li>
+    <li><a href="#allow-one-line-excused-with-a-reason">ALLOW: one line excused with a reason</a></li>
+    <li><a href="#piece-a-text-bound-to-its-style">PIECE: a text bound to its style</a></li>
+    <li><a href="#reading-a-question-that-stays-with-a-reader">READING: a question that stays with a reader</a></li>
+    <li><a href="#the-files-the-ten-examples-are-cut-from">The files the ten examples are cut from</a></li>
+  </ul>
+</nav>
 <main id="main">
 <section>
   <div class="narrow">
-    <h2>The grammar every declaration shares</h2>
+    <h2 id="the-grammar-every-declaration-shares">The grammar every declaration shares</h2>
     <p>A declaration is written <code>DEFINE KIND name ( FIELD value, ... )</code>. A keyword is UPPER_SNAKE, a name is lower_snake, a string stands between two double quotes on one line, and <code>//</code> opens a comment. The list of kinds is closed, and each one has a closed list of fields.</p>
     <p>A <code>USE "path.proz"</code> line reads another file, and <code>USE "prosa:reader_rights"</code> reads the constitution shipped with the language. A name is declared once across all the files read together.</p>
-    <div class="scroll" role="region" aria-label="The ten kinds and their roles" tabindex="0"><table>
+    <div class="table"><table>
       <thead><tr><th scope="col">Kind</th><th scope="col">Role</th><th scope="col">What it declares</th></tr></thead>
       <tbody>
-        <tr><th scope="row"><code>STYLE</code></th><td>Groups rules</td><td>The voice of a house, or a set a house adopts</td></tr>
-        <tr><th scope="row"><code>TERM</code></th><td>Rule</td><td>The house word for one thing, and the words refused in its place</td></tr>
-        <tr><th scope="row"><code>WORDLIST</code></th><td>Rule</td><td>A list of refused words or phrases, with an optional budget</td></tr>
-        <tr><th scope="row"><code>PATTERN</code></th><td>Rule</td><td>A refused construction, at a position when one is given</td></tr>
-        <tr><th scope="row"><code>PROFILE</code></th><td>Rule</td><td>The measure of a voice, with bounds in both directions</td></tr>
-        <tr><th scope="row"><code>FORM</code></th><td>Structure</td><td>The title, the first sentence, the headings and the close of a chapter, a page or a post</td></tr>
-        <tr><th scope="row"><code>ZONE</code></th><td>Excuse</td><td>A region of a text excused from named codes, with a reason</td></tr>
-        <tr><th scope="row"><code>ALLOW</code></th><td>Excuse</td><td>One line of one file excused from one code, with a reason</td></tr>
-        <tr><th scope="row"><code>PIECE</code></th><td>Binding</td><td>A text bound to a style, a form and a subject</td></tr>
-        <tr><th scope="row"><code>READING</code></th><td>Judgment of a reader</td><td>A question put to a reader, and the folder of its records</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>STYLE</code></th><td data-label="Role">Groups rules</td><td data-label="What it declares">The voice of a house, or a set a house adopts</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>TERM</code></th><td data-label="Role">Rule</td><td data-label="What it declares">The house word for one thing, and the words refused in its place</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>WORDLIST</code></th><td data-label="Role">Rule</td><td data-label="What it declares">A list of refused words or phrases, with an optional budget</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>PATTERN</code></th><td data-label="Role">Rule</td><td data-label="What it declares">A refused construction, at a position when one is given</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>PROFILE</code></th><td data-label="Role">Rule</td><td data-label="What it declares">The measure of a voice, with bounds in both directions</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>FORM</code></th><td data-label="Role">Structure</td><td data-label="What it declares">The title, the first sentence, the headings and the close of a chapter, a page or a post</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>ZONE</code></th><td data-label="Role">Excuse</td><td data-label="What it declares">A region of a text excused from named codes, with a reason</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>ALLOW</code></th><td data-label="Role">Excuse</td><td data-label="What it declares">One line of one file excused from one code, with a reason</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>PIECE</code></th><td data-label="Role">Binding</td><td data-label="What it declares">A text bound to a style, a form and a subject</td></tr>
+        <tr><th scope="row" data-label="Kind"><code>READING</code></th><td data-label="Role">Judgment of a reader</td><td data-label="What it declares">A question put to a reader, and the folder of its records</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -69,159 +98,88 @@
 
 <section>
   <div class="narrow">
-    <h2>STYLE: a named set of rules</h2>
+    <h2 id="style-a-named-set-of-rules">STYLE: a named set of rules</h2>
     <p>A <code>STYLE</code> holds rules, adopts other styles and declines the rules it leaves out. A rule binds a text only through a style: a rule that stands outside every style judges nothing. The public style of AYOUNI Press adopts the book style and holds the affirmative rule.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">STYLE</span> ayouni_public (
-  <span class="k">ADOPTS</span> [ayouni],
-  <span class="k">HOLDS</span> [lack_listed, manque_liste]
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">STYLE</span> ayouni_public (</span><span class="ln" style="--ind:2">  <span class="k">ADOPTS</span> [ayouni],</span><span class="ln" style="--ind:2">  <span class="k">HOLDS</span> [lack_listed, manque_liste]</span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>TERM: one word for one thing</h2>
+    <h2 id="term-one-word-for-one-thing">TERM: one word for one thing</h2>
     <p>A <code>TERM</code> names the house word and refuses the others. With <code>MENTIONS skipped</code>, a short quotation of the refused word is a mention, and the court leaves it unjudged.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">TERM</span> programmer (
-  <span class="k">MEANS</span> <span class="s">"the person who writes programs"</span>,
-  <span class="k">REFUSES</span> [developer, developers],
-  <span class="k">LANGUAGE</span> en, <span class="k">MENTIONS</span> skipped,
-  <span class="k">EVIDENCE</span> <span class="s">"FRAMEWORK.md section 4: developer for programmer is a forbidden word"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">TERM</span> programmer (</span><span class="ln" style="--ind:2">  <span class="k">MEANS</span> <span class="s">"the person who writes programs"</span>,</span><span class="ln" style="--ind:2">  <span class="k">REFUSES</span> [developer, developers],</span><span class="ln" style="--ind:2">  <span class="k">LANGUAGE</span> en, <span class="k">MENTIONS</span> skipped,</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"FRAMEWORK.md section 4: developer for programmer is a forbidden word"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>WORDLIST: a list of refused words</h2>
+    <h2 id="wordlist-a-list-of-refused-words">WORDLIST: a list of refused words</h2>
     <p>A <code>WORDLIST</code> refuses each entry of its list, and the field <code>SAYS</code> gives the sentence the diagnostic shows. A list with a budget, <code>AT_MOST 4 PER_THOUSAND</code>, is judged as one measure over the whole piece.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">WORDLIST</span> hedges (
-  <span class="k">REFUSES</span> [<span class="s">"maybe, and probably"</span>, somehow, <span class="s">"kind of"</span>, <span class="s">"sort of"</span>, <span class="s">"a little bit"</span>, <span class="s">"more or less"</span>, <span class="s">"in a way"</span>, <span class="s">"I guess"</span>,
-           <span class="s">"I think that"</span>, <span class="s">"it seems that"</span>, <span class="s">"probably, and"</span>],
-  <span class="k">LANGUAGE</span> en,
-  <span class="k">CODE</span> <span class="k">HEDGE</span>, <span class="k">SEVERITY</span> warning,
-  <span class="k">SAYS</span> <span class="s">"State the claim at its true size."</span>,
-  <span class="k">EVIDENCE</span> <span class="s">"FRAMEWORK.md section 4, stacked hedges; checklists/noise.md"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">WORDLIST</span> hedges (</span><span class="ln" style="--ind:2">  <span class="k">REFUSES</span> [<span class="s">"maybe, and probably"</span>, somehow, <span class="s">"kind of"</span>, <span class="s">"sort of"</span>, <span class="s">"a little bit"</span>, <span class="s">"more or less"</span>, <span class="s">"in a way"</span>, <span class="s">"I guess"</span>,</span><span class="ln" style="--ind:11">           <span class="s">"I think that"</span>, <span class="s">"it seems that"</span>, <span class="s">"probably, and"</span>],</span><span class="ln" style="--ind:2">  <span class="k">LANGUAGE</span> en,</span><span class="ln" style="--ind:2">  <span class="k">CODE</span> <span class="k">HEDGE</span>, <span class="k">SEVERITY</span> warning,</span><span class="ln" style="--ind:2">  <span class="k">SAYS</span> <span class="s">"State the claim at its true size."</span>,</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"FRAMEWORK.md section 4, stacked hedges; checklists/noise.md"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>PATTERN: a refused construction with its own test</h2>
+    <h2 id="pattern-a-refused-construction-with-its-own-test">PATTERN: a refused construction with its own test</h2>
     <p>A <code>PATTERN</code> is written over words: a row of words, a group in brackets, a gap with <code>WITHIN</code>, and a position with <code>AT</code>. Its <code>REFUSED</code> and <code>WRITTEN</code> examples are the test of the rule: the court refuses a pattern that accepts its refused example or refuses its written one.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">PATTERN</span> lack_listed (
-  <span class="k">MATCHES</span> [
-    <span class="s">"not yet"</span>,
-    [<span class="s">"is not"</span>, <span class="s">"are not"</span>, <span class="s">"was not"</span>, <span class="s">"were not"</span>, <span class="s">"has not"</span>, <span class="s">"have not"</span>, <span class="s">"had not"</span>,
-     <span class="s">"isn't"</span>, <span class="s">"aren't"</span>, <span class="s">"wasn't"</span>, <span class="s">"weren't"</span>, <span class="s">"hasn't"</span>, <span class="s">"haven't"</span>, <span class="s">"hadn't"</span>] <span class="k">WITHIN</span> 7 <span class="s">"yet"</span>,
-    [nobody, <span class="s">"no one"</span>] [has, had, have],
-    <span class="s">"never"</span> [been, run, measured, shown, tested, perceived],
-    [<span class="s">"has not"</span>, <span class="s">"have not"</span>, <span class="s">"had not"</span>, <span class="s">"hasn't"</span>, <span class="s">"haven't"</span>, <span class="s">"hadn't"</span>] [been, measured, shown, tested, run],
-    [<span class="s">"Limit:"</span>, <span class="s">"Limits:"</span>],
-    [<span class="s">"not"</span>, <span class="s">"not been"</span>] [measured, shown, tested, perceived],
-    [<span class="s">"not run"</span>, <span class="s">"not been run"</span>],
-    [unmeasured, untested, unproven],
-    <span class="s">"yet to"</span>,
-    [<span class="s">"nothing runs"</span>, <span class="s">"nothing is measured"</span>]
-  ],
-  <span class="k">KEEPS</span> [<span class="s">"do not run"</span>, <span class="s">"to not run"</span>, <span class="s">"must not run"</span>, <span class="s">"should not run"</span>, <span class="s">"can not run"</span>, <span class="s">"will not run"</span>, <span class="s">"don't not run"</span>],
-  <span class="k">IN</span> [title, heading, lede, body, list],
-  <span class="k">LANGUAGE</span> en,
-  <span class="k">CODE</span> <span class="k">LACK_LISTED</span>, <span class="k">SEVERITY</span> error,
-  <span class="k">SAYS</span> <span class="s">"The line lists a lack. State what the thing is and does, at its true size."</span>,
-  <span class="k">REFUSED</span> <span class="s">"No instrument here checks the perception: this was not yet measured."</span>,
-  <span class="k">WRITTEN</span> <span class="s">"The verifier checks the declaration."</span>,
-  <span class="k">EVIDENCE</span> <span class="s">"HOUSE-21; AWF-14; the author, 2026-11-08: Avoid this role of transparency that hurts the project image"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">PATTERN</span> lack_listed (</span><span class="ln" style="--ind:2">  <span class="k">MATCHES</span> [</span><span class="ln" style="--ind:4">    <span class="s">"not yet"</span>,</span><span class="ln" style="--ind:4">    [<span class="s">"is not"</span>, <span class="s">"are not"</span>, <span class="s">"was not"</span>, <span class="s">"were not"</span>, <span class="s">"has not"</span>, <span class="s">"have not"</span>, <span class="s">"had not"</span>,</span><span class="ln" style="--ind:5">     <span class="s">"isn't"</span>, <span class="s">"aren't"</span>, <span class="s">"wasn't"</span>, <span class="s">"weren't"</span>, <span class="s">"hasn't"</span>, <span class="s">"haven't"</span>, <span class="s">"hadn't"</span>] <span class="k">WITHIN</span> 7 <span class="s">"yet"</span>,</span><span class="ln" style="--ind:4">    [nobody, <span class="s">"no one"</span>] [has, had, have],</span><span class="ln" style="--ind:4">    <span class="s">"never"</span> [been, run, measured, shown, tested, perceived],</span><span class="ln" style="--ind:4">    [<span class="s">"has not"</span>, <span class="s">"have not"</span>, <span class="s">"had not"</span>, <span class="s">"hasn't"</span>, <span class="s">"haven't"</span>, <span class="s">"hadn't"</span>] [been, measured, shown, tested, run],</span><span class="ln" style="--ind:4">    [<span class="s">"Limit:"</span>, <span class="s">"Limits:"</span>],</span><span class="ln" style="--ind:4">    [<span class="s">"not"</span>, <span class="s">"not been"</span>] [measured, shown, tested, perceived],</span><span class="ln" style="--ind:4">    [<span class="s">"not run"</span>, <span class="s">"not been run"</span>],</span><span class="ln" style="--ind:4">    [unmeasured, untested, unproven],</span><span class="ln" style="--ind:4">    <span class="s">"yet to"</span>,</span><span class="ln" style="--ind:4">    [<span class="s">"nothing runs"</span>, <span class="s">"nothing is measured"</span>]</span><span class="ln" style="--ind:2">  ],</span><span class="ln" style="--ind:2">  <span class="k">KEEPS</span> [<span class="s">"do not run"</span>, <span class="s">"to not run"</span>, <span class="s">"must not run"</span>, <span class="s">"should not run"</span>, <span class="s">"can not run"</span>, <span class="s">"will not run"</span>, <span class="s">"don't not run"</span>],</span><span class="ln" style="--ind:2">  <span class="k">IN</span> [title, heading, lede, body, list],</span><span class="ln" style="--ind:2">  <span class="k">LANGUAGE</span> en,</span><span class="ln" style="--ind:2">  <span class="k">CODE</span> <span class="k">LACK_LISTED</span>, <span class="k">SEVERITY</span> error,</span><span class="ln" style="--ind:2">  <span class="k">SAYS</span> <span class="s">"The line lists a lack. State what the thing is and does, at its true size."</span>,</span><span class="ln" style="--ind:2">  <span class="k">REFUSED</span> <span class="s">"No instrument here checks the perception: this was not yet measured."</span>,</span><span class="ln" style="--ind:2">  <span class="k">WRITTEN</span> <span class="s">"The verifier checks the declaration."</span>,</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"HOUSE-21; AWF-14; the author, 2026-11-08: Avoid this role of transparency that hurts the project image"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>PROFILE: the measure of a voice</h2>
+    <h2 id="profile-the-measure-of-a-voice">PROFILE: the measure of a voice</h2>
     <p>A <code>PROFILE</code> holds a text to bounds on its measures: the median sentence, the share of long and short sentences, and the marks per thousand words. Each measure outside its bound is one finding at level 4. The profile below belongs to the conformance suite.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">PROFILE</span> voice (
-  <span class="k">SENTENCES_OVER</span> 40 <span class="k">AT_MOST</span> 10 <span class="k">PER_HUNDRED</span>,
-  <span class="k">DASHES</span> <span class="k">AT_MOST</span> 4 <span class="k">PER_THOUSAND</span>,
-  <span class="k">SENTENCE_MEDIAN</span> 6 <span class="k">WITHIN</span> 4,
-  <span class="k">MIN_WORDS</span> 50,
-  <span class="k">EVIDENCE</span> <span class="s">"The author, 2026-11-26: a ruling written for this fixture"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">PROFILE</span> voice (</span><span class="ln" style="--ind:2">  <span class="k">SENTENCES_OVER</span> 40 <span class="k">AT_MOST</span> 10 <span class="k">PER_HUNDRED</span>,</span><span class="ln" style="--ind:2">  <span class="k">DASHES</span> <span class="k">AT_MOST</span> 4 <span class="k">PER_THOUSAND</span>,</span><span class="ln" style="--ind:2">  <span class="k">SENTENCE_MEDIAN</span> 6 <span class="k">WITHIN</span> 4,</span><span class="ln" style="--ind:2">  <span class="k">MIN_WORDS</span> 50,</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"The author, 2026-11-26: a ruling written for this fixture"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>FORM: the structure of a page, a chapter or a post</h2>
+    <h2 id="form-the-structure-of-a-page-a-chapter-or-a-post">FORM: the structure of a page, a chapter or a post</h2>
     <p>A <code>FORM</code> places the title, the subject, the first sentence, the fixed headings and the close. The form <code>governed_text</code> belongs to the constitution, and the form <code>page</code> of the first house extends it with a title of six words at most.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">FORM</span> governed_text (
-  <span class="k">TITLE_HOLDS</span> subject,
-  <span class="k">FIRST_SENTENCE_HOLDS</span> subject,
-  <span class="k">SAY_ONCE</span> <span class="k">FIRST</span> 150,
-  <span class="k">HOLES_CLOSED_AT</span> [review, published],
-  <span class="k">EVIDENCE</span> <span class="s">"zayn/doc/design/WRITING.md rules 1 and 2 (the author, 2026-11-05 and 2026-11-14); AYOUNI Writing Framework C4"</span>
-)</pre>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">FORM</span> page (
-  <span class="k">EXTENDS</span> governed_text,
-  <span class="k">TITLE_WORDS</span> <span class="k">AT_MOST</span> 6,
-  <span class="k">EVIDENCE</span> <span class="s">"zayn/doc/design/WRITING.md rule 1, amended 2026-11-14 (ZAYN-SITE-RETHINK-01 ruling 3)"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">FORM</span> governed_text (</span><span class="ln" style="--ind:2">  <span class="k">TITLE_HOLDS</span> subject,</span><span class="ln" style="--ind:2">  <span class="k">FIRST_SENTENCE_HOLDS</span> subject,</span><span class="ln" style="--ind:2">  <span class="k">SAY_ONCE</span> <span class="k">FIRST</span> 150,</span><span class="ln" style="--ind:2">  <span class="k">HOLES_CLOSED_AT</span> [review, published],</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"zayn/doc/design/WRITING.md rules 1 and 2 (the author, 2026-11-05 and 2026-11-14); AYOUNI Writing Framework C4"</span></span><span class="ln">)</span></pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">FORM</span> page (</span><span class="ln" style="--ind:2">  <span class="k">EXTENDS</span> governed_text,</span><span class="ln" style="--ind:2">  <span class="k">TITLE_WORDS</span> <span class="k">AT_MOST</span> 6,</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"zayn/doc/design/WRITING.md rule 1, amended 2026-11-14 (ZAYN-SITE-RETHINK-01 ruling 3)"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>ZONE: a region excused with a reason</h2>
+    <h2 id="zone-a-region-excused-with-a-reason">ZONE: a region excused with a reason</h2>
     <p>A <code>ZONE</code> excuses a region of a text from the codes it names. The region opens in the text at the comment <code>&lt;!-- prosa:zone record --&gt;</code> and closes at <code>&lt;!-- prosa:end --&gt;</code>.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">ZONE</span> record (
-  <span class="k">EXEMPT_FROM</span> [<span class="k">LACK_LISTED</span>],
-  <span class="k">REASON</span> <span class="s">"A zone that quotes the project record"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">ZONE</span> record (</span><span class="ln" style="--ind:2">  <span class="k">EXEMPT_FROM</span> [<span class="k">LACK_LISTED</span>],</span><span class="ln" style="--ind:2">  <span class="k">REASON</span> <span class="s">"A zone that quotes the project record"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>ALLOW: one line excused with a reason</h2>
+    <h2 id="allow-one-line-excused-with-a-reason">ALLOW: one line excused with a reason</h2>
     <p>An <code>ALLOW</code> excuses one line of one file from one code. The excuse lives as long as the line: the court refuses, as <code>ALLOW_STALE</code>, an excuse that matches no finding.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">ALLOW</span> quoted_record (
-  <span class="k">FILE</span> <span class="s">"allow-lawful.md"</span>,
-  <span class="k">LINE_HOLDS</span> <span class="s">"not yet signed"</span>,
-  <span class="k">EXCUSES</span> <span class="k">LACK_LISTED</span>,
-  <span class="k">REASON</span> <span class="s">"The line quotes the record"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">ALLOW</span> quoted_record (</span><span class="ln" style="--ind:2">  <span class="k">FILE</span> <span class="s">"allow-lawful.md"</span>,</span><span class="ln" style="--ind:2">  <span class="k">LINE_HOLDS</span> <span class="s">"not yet signed"</span>,</span><span class="ln" style="--ind:2">  <span class="k">EXCUSES</span> <span class="k">LACK_LISTED</span>,</span><span class="ln" style="--ind:2">  <span class="k">REASON</span> <span class="s">"The line quotes the record"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>PIECE: a text bound to its style</h2>
+    <h2 id="piece-a-text-bound-to-its-style">PIECE: a text bound to its style</h2>
     <p>A <code>PIECE</code> names one file or a set of files, the style they follow, their form and their subject term. The piece below governs the pages of this site: each page states its subject in its head, and the court asks for that term in the title and in the first sentence.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">PIECE</span> site_pages (
-  <span class="k">FILES</span> <span class="s">"*.html"</span>,
-  <span class="k">FOLLOWS</span> ayouni_public,
-  <span class="k">FORM</span> page,
-  <span class="k">SUBJECT_FROM</span> front_matter
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">PIECE</span> site_pages (</span><span class="ln" style="--ind:2">  <span class="k">FILES</span> <span class="s">"*.html"</span>,</span><span class="ln" style="--ind:2">  <span class="k">FOLLOWS</span> ayouni_public,</span><span class="ln" style="--ind:2">  <span class="k">FORM</span> page,</span><span class="ln" style="--ind:2">  <span class="k">SUBJECT_FROM</span> front_matter</span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>READING: a question that stays with a reader</h2>
+    <h2 id="reading-a-question-that-stays-with-a-reader">READING: a question that stays with a reader</h2>
     <p>A <code>READING</code> names a judgment the court leaves to a reader, a person or an AI model: it states the question and the folder of records. The command <code>prosa readings</code> lists each reading as recorded or due.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">READING</span> voice_reader (
-  <span class="k">ON</span> chapter,
-  <span class="k">ASKS</span> <span class="s">"Which three passages are most him, and which one is least him?"</span>,
-  <span class="k">RECORDS</span> <span class="s">"research/voice"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">READING</span> voice_reader (</span><span class="ln" style="--ind:2">  <span class="k">ON</span> chapter,</span><span class="ln" style="--ind:2">  <span class="k">ASKS</span> <span class="s">"Which three passages are most him, and which one is least him?"</span>,</span><span class="ln" style="--ind:2">  <span class="k">RECORDS</span> <span class="s">"research/voice"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>The files the ten examples are cut from</h2>
+    <h2 id="the-files-the-ten-examples-are-cut-from">The files the ten examples are cut from</h2>
     <p>Each example above is cut at build time from a file of the repository, so the page and the court read the same text.</p>
     <ul>
       <li>The examples of <code>STYLE</code>, <code>TERM</code>, <code>WORDLIST</code>, <code>PATTERN</code>, <code>FORM</code> and <code>READING</code> come from <code>styles/ayouni/ayouni.proz</code>, the style of the first house.</li>
@@ -232,11 +190,13 @@
   </div>
 </section>
 </main>
+</div>
 
 <footer class="site">
-  <div class="narrow">
-    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  <div class="wrap">
+    <p class="fine">Prosa, a <a href="https://mayouni.github.io/stzsite/index.html">Softanza ↗</a> language. © 2026 Mansour Ayouni, MIT licence. This site is judged by its own declaration, <a href="site.proz">site.proz</a>.</p>
   </div>
 </footer>
+<script src="site.js"></script>
 </body>
 </html>

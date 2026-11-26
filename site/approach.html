@@ -6,8 +6,9 @@
 <title>Commitments: the five principles of Prosa</title>
 <meta name="description" content="The five commitments of Prosa decide what the language declares and what its court refuses: a correction is made once, a voice is a measure, a style is held to itself, a rule enters on evidence, and undecidable is silence.">
 <meta name="prosa:subject" content="commitment">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1f1b'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23ff8c69'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="prosa.css">
+<script>try{var t=localStorage.getItem('prosa-theme');if(t==='vellum'||t==='lamplight')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a>
@@ -16,12 +17,21 @@
   <div class="wrap">
     <div class="menu">
       <a class="brand" href="index.html">Prosa</a>
+      <div class="entries">
       <a class="here" aria-current="true" href="approach.html">Approach</a>
       <a href="kinds.html">Language</a>
       <a href="try.html">Live court</a>
       <a href="commands.html">Use</a>
       <a href="book.html">Book</a>
-      <a href="softanza.html">Softanza</a>
+      </div>
+      <div class="end">
+        <select id="theme" aria-label="Colour theme">
+          <option value="system">System</option>
+          <option value="vellum">Vellum</option>
+          <option value="lamplight">Lamplight</option>
+        </select>
+        <a href="https://github.com/mayouni/prosa">GitHub ↗</a>
+      </div>
     </div>
   </div>
 </nav>
@@ -29,54 +39,45 @@
   <div class="wrap">
     <a aria-current="page" href="approach.html">Commitments</a>
     <a href="prior.html">Prior work</a>
+    <a href="softanza.html">The family</a>
   </div>
 </nav>
 </div>
+<nav class="vh" aria-label="Breadcrumb"><a href="index.html">Prosa</a><span class="sep"> › </span><a href="approach.html">Approach</a><span class="sep"> › </span><span class="here-crumb" aria-current="page">Commitments</span></nav>
 
 <header class="page">
-  <div class="narrow">
+  <div class="wrap">
     <div class="kicker">Approach</div>
     <h1>The five commitments of Prosa</h1>
     <p class="sub">The commitments of Prosa are the five principles that decide what the language declares and what its court refuses. They ensure that a style stays the author's own: each rule comes from a ruling or a measure, and the court holds every text to it.</p>
   </div>
 </header>
 
+<div class="layout with-outline">
+<nav class="outline" aria-label="On this page">
+  <p class="head">On this page</p>
+  <ul>
+    <li><a href="#commitment-1-a-correction-is-made-once">Commitment 1: a correction is made once</a></li>
+    <li><a href="#commitment-2-a-voice-is-a-measure-taken-from-the-author-s-pages">Commitment 2: a voice is a measure taken from the author's pages</a></li>
+    <li><a href="#commitment-3-a-style-is-held-to-itself">Commitment 3: a style is held to itself</a></li>
+    <li><a href="#commitment-4-a-rule-enters-on-evidence">Commitment 4: a rule enters on evidence</a></li>
+    <li><a href="#commitment-5-undecidable-is-silence">Commitment 5: undecidable is silence</a></li>
+    <li><a href="#the-five-effects-for-a-writer-who-works-with-ai-models">The five effects for a writer who works with AI models</a></li>
+  </ul>
+</nav>
 <main id="main">
 <section>
   <div class="narrow">
-    <h2>Commitment 1: a correction is made once</h2>
+    <h2 id="commitment-1-a-correction-is-made-once">Commitment 1: a correction is made once</h2>
     <p>Each remark of the author becomes a rule with a stable code, a refused example, a written example and the remark itself as evidence. From that day the court raises the remark on every text, and the author rules on new matters.</p>
     <p>The rule below is the affirmative rule of the public pages of AYOUNI Press, the first house. Its <code>EVIDENCE</code> field quotes the ruling that created it.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">PATTERN</span> lack_listed (
-  <span class="k">MATCHES</span> [
-    <span class="s">"not yet"</span>,
-    [<span class="s">"is not"</span>, <span class="s">"are not"</span>, <span class="s">"was not"</span>, <span class="s">"were not"</span>, <span class="s">"has not"</span>, <span class="s">"have not"</span>, <span class="s">"had not"</span>,
-     <span class="s">"isn't"</span>, <span class="s">"aren't"</span>, <span class="s">"wasn't"</span>, <span class="s">"weren't"</span>, <span class="s">"hasn't"</span>, <span class="s">"haven't"</span>, <span class="s">"hadn't"</span>] <span class="k">WITHIN</span> 7 <span class="s">"yet"</span>,
-    [nobody, <span class="s">"no one"</span>] [has, had, have],
-    <span class="s">"never"</span> [been, run, measured, shown, tested, perceived],
-    [<span class="s">"has not"</span>, <span class="s">"have not"</span>, <span class="s">"had not"</span>, <span class="s">"hasn't"</span>, <span class="s">"haven't"</span>, <span class="s">"hadn't"</span>] [been, measured, shown, tested, run],
-    [<span class="s">"Limit:"</span>, <span class="s">"Limits:"</span>],
-    [<span class="s">"not"</span>, <span class="s">"not been"</span>] [measured, shown, tested, perceived],
-    [<span class="s">"not run"</span>, <span class="s">"not been run"</span>],
-    [unmeasured, untested, unproven],
-    <span class="s">"yet to"</span>,
-    [<span class="s">"nothing runs"</span>, <span class="s">"nothing is measured"</span>]
-  ],
-  <span class="k">KEEPS</span> [<span class="s">"do not run"</span>, <span class="s">"to not run"</span>, <span class="s">"must not run"</span>, <span class="s">"should not run"</span>, <span class="s">"can not run"</span>, <span class="s">"will not run"</span>, <span class="s">"don't not run"</span>],
-  <span class="k">IN</span> [title, heading, lede, body, list],
-  <span class="k">LANGUAGE</span> en,
-  <span class="k">CODE</span> <span class="k">LACK_LISTED</span>, <span class="k">SEVERITY</span> error,
-  <span class="k">SAYS</span> <span class="s">"The line lists a lack. State what the thing is and does, at its true size."</span>,
-  <span class="k">REFUSED</span> <span class="s">"No instrument here checks the perception: this was not yet measured."</span>,
-  <span class="k">WRITTEN</span> <span class="s">"The verifier checks the declaration."</span>,
-  <span class="k">EVIDENCE</span> <span class="s">"HOUSE-21; AWF-14; the author, 2026-11-08: Avoid this role of transparency that hurts the project image"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">PATTERN</span> lack_listed (</span><span class="ln" style="--ind:2">  <span class="k">MATCHES</span> [</span><span class="ln" style="--ind:4">    <span class="s">"not yet"</span>,</span><span class="ln" style="--ind:4">    [<span class="s">"is not"</span>, <span class="s">"are not"</span>, <span class="s">"was not"</span>, <span class="s">"were not"</span>, <span class="s">"has not"</span>, <span class="s">"have not"</span>, <span class="s">"had not"</span>,</span><span class="ln" style="--ind:5">     <span class="s">"isn't"</span>, <span class="s">"aren't"</span>, <span class="s">"wasn't"</span>, <span class="s">"weren't"</span>, <span class="s">"hasn't"</span>, <span class="s">"haven't"</span>, <span class="s">"hadn't"</span>] <span class="k">WITHIN</span> 7 <span class="s">"yet"</span>,</span><span class="ln" style="--ind:4">    [nobody, <span class="s">"no one"</span>] [has, had, have],</span><span class="ln" style="--ind:4">    <span class="s">"never"</span> [been, run, measured, shown, tested, perceived],</span><span class="ln" style="--ind:4">    [<span class="s">"has not"</span>, <span class="s">"have not"</span>, <span class="s">"had not"</span>, <span class="s">"hasn't"</span>, <span class="s">"haven't"</span>, <span class="s">"hadn't"</span>] [been, measured, shown, tested, run],</span><span class="ln" style="--ind:4">    [<span class="s">"Limit:"</span>, <span class="s">"Limits:"</span>],</span><span class="ln" style="--ind:4">    [<span class="s">"not"</span>, <span class="s">"not been"</span>] [measured, shown, tested, perceived],</span><span class="ln" style="--ind:4">    [<span class="s">"not run"</span>, <span class="s">"not been run"</span>],</span><span class="ln" style="--ind:4">    [unmeasured, untested, unproven],</span><span class="ln" style="--ind:4">    <span class="s">"yet to"</span>,</span><span class="ln" style="--ind:4">    [<span class="s">"nothing runs"</span>, <span class="s">"nothing is measured"</span>]</span><span class="ln" style="--ind:2">  ],</span><span class="ln" style="--ind:2">  <span class="k">KEEPS</span> [<span class="s">"do not run"</span>, <span class="s">"to not run"</span>, <span class="s">"must not run"</span>, <span class="s">"should not run"</span>, <span class="s">"can not run"</span>, <span class="s">"will not run"</span>, <span class="s">"don't not run"</span>],</span><span class="ln" style="--ind:2">  <span class="k">IN</span> [title, heading, lede, body, list],</span><span class="ln" style="--ind:2">  <span class="k">LANGUAGE</span> en,</span><span class="ln" style="--ind:2">  <span class="k">CODE</span> <span class="k">LACK_LISTED</span>, <span class="k">SEVERITY</span> error,</span><span class="ln" style="--ind:2">  <span class="k">SAYS</span> <span class="s">"The line lists a lack. State what the thing is and does, at its true size."</span>,</span><span class="ln" style="--ind:2">  <span class="k">REFUSED</span> <span class="s">"No instrument here checks the perception: this was not yet measured."</span>,</span><span class="ln" style="--ind:2">  <span class="k">WRITTEN</span> <span class="s">"The verifier checks the declaration."</span>,</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"HOUSE-21; AWF-14; the author, 2026-11-08: Avoid this role of transparency that hurts the project image"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>Commitment 2: a voice is a measure taken from the author's pages</h2>
+    <h2 id="commitment-2-a-voice-is-a-measure-taken-from-the-author-s-pages">Commitment 2: a voice is a measure taken from the author's pages</h2>
     <p>The reference book of the house gives a profile: a median sentence of 16 words, 15 colons and 0.5 dashes per thousand words. Prosa holds a text to that distribution in both directions.</p>
     <ul>
       <li>An upper bound, <code>AT_MOST</code>, refuses noise: the long sentence, the dash, the cold exclamation.</li>
@@ -88,49 +89,34 @@
 
 <section>
   <div class="narrow">
-    <h2>Commitment 3: a style is held to itself</h2>
+    <h2 id="commitment-3-a-style-is-held-to-itself">Commitment 3: a style is held to itself</h2>
     <p>A rule binds a text only when the style adopts it, so the same pattern is noise in one house and voice in another. The author of the first house writes: "The bottleneck of our age is not writing. It is admission." A generic list of AI habits refuses that sentence, and his own style keeps it.</p>
     <p>A style takes the rules of another with <code>ADOPTS</code> and leaves one out with <code>DECLINES</code>. The public style of the first house adopts its book style and adds one rule:</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">STYLE</span> ayouni_public (
-  <span class="k">ADOPTS</span> [ayouni],
-  <span class="k">HOLDS</span> [lack_listed, manque_liste]
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">STYLE</span> ayouni_public (</span><span class="ln" style="--ind:2">  <span class="k">ADOPTS</span> [ayouni],</span><span class="ln" style="--ind:2">  <span class="k">HOLDS</span> [lack_listed, manque_liste]</span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>Commitment 4: a rule enters on evidence</h2>
+    <h2 id="commitment-4-a-rule-enters-on-evidence">Commitment 4: a rule enters on evidence</h2>
     <p>Evidence is a dated ruling of the author or a measure on a named corpus. The court refuses a rule that carries none, under the code <code>RULE_WITHOUT_EVIDENCE</code>: fashion has no way into a style.</p>
-    <pre class="shot"><span class="c">// Expected: RULE_WITHOUT_EVIDENCE</span>
-<span class="k">DEFINE</span> <span class="k">TERM</span> programmer (
-  <span class="k">MEANS</span> <span class="s">"the person who writes programs"</span>,
-  <span class="k">REFUSES</span> [developer]
-)</pre>
-    <pre class="term"><span class="dim">$ prosa check conformance/fixtures/rule-without-evidence.proz</span>
-conformance/fixtures/rule-without-evidence.proz:2  <span class="bad">error</span>  <span class="bad">RULE_WITHOUT_EVIDENCE</span>  programmer
-<span class="dim">    This TERM carries no EVIDENCE: a rule enters on a dated ruling or a measure.</span>
-
-1 error(s), 0 warning(s) across 1 file(s) at level 4</pre>
+    <pre class="shot"><span class="ln"><span class="c">// Expected: RULE_WITHOUT_EVIDENCE</span></span><span class="ln"><span class="k">DEFINE</span> <span class="k">TERM</span> programmer (</span><span class="ln" style="--ind:2">  <span class="k">MEANS</span> <span class="s">"the person who writes programs"</span>,</span><span class="ln" style="--ind:2">  <span class="k">REFUSES</span> [developer]</span><span class="ln">)</span></pre>
+    <pre class="term"><span class="ln"><span class="dim">$ prosa check conformance/fixtures/rule-without-evidence.proz</span></span><span class="ln">conformance/fixtures/rule-without-evidence.proz:2  <span class="bad">error</span>  <span class="bad">RULE_WITHOUT_EVIDENCE</span>  programmer</span><span class="ln" style="--ind:4"><span class="dim">    This TERM carries no EVIDENCE: a rule enters on a dated ruling or a measure.</span></span><span class="ln"></span><span class="ln">1 error(s), 0 warning(s) across 1 file(s) at level 4</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>Commitment 5: undecidable is silence</h2>
+    <h2 id="commitment-5-undecidable-is-silence">Commitment 5: undecidable is silence</h2>
     <p>The court decides words, patterns, positions and counts, and it raises a finding only where the specification makes the answer the same on every machine. Whether a sentence is a riddle, or whether a paragraph sounds like its author, belongs to a reading by the author or by an AI model under a declared question.</p>
     <p>Prosa names the reading, records its answer and keeps it apart from the verdict. A reading carries no code and leaves the exit code of the court unchanged.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">READING</span> voice_reader (
-  <span class="k">ON</span> chapter,
-  <span class="k">ASKS</span> <span class="s">"Which three passages are most him, and which one is least him?"</span>,
-  <span class="k">RECORDS</span> <span class="s">"research/voice"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">READING</span> voice_reader (</span><span class="ln" style="--ind:2">  <span class="k">ON</span> chapter,</span><span class="ln" style="--ind:2">  <span class="k">ASKS</span> <span class="s">"Which three passages are most him, and which one is least him?"</span>,</span><span class="ln" style="--ind:2">  <span class="k">RECORDS</span> <span class="s">"research/voice"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>The five effects for a writer who works with AI models</h2>
+    <h2 id="the-five-effects-for-a-writer-who-works-with-ai-models">The five effects for a writer who works with AI models</h2>
     <ul>
       <li>The author stops repeating himself: a remark costs one rule.</li>
       <li>The voice stays the author's: the measure comes from his pages, so a draft is pulled toward him and away from the average.</li>
@@ -141,11 +127,13 @@ conformance/fixtures/rule-without-evidence.proz:2  <span class="bad">error</span
   </div>
 </section>
 </main>
+</div>
 
 <footer class="site">
-  <div class="narrow">
-    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  <div class="wrap">
+    <p class="fine">Prosa, a <a href="https://mayouni.github.io/stzsite/index.html">Softanza ↗</a> language. © 2026 Mansour Ayouni, MIT licence. This site is judged by its own declaration, <a href="site.proz">site.proz</a>.</p>
   </div>
 </footer>
+<script src="site.js"></script>
 </body>
 </html>

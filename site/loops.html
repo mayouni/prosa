@@ -6,8 +6,9 @@
 <title>Loops: the author, the AI agent and the court</title>
 <meta name="description" content="A loop of Prosa is the cycle in which a remark or a draft meets the court: the author turns a remark into a rule, and the AI agent turns a finding into a repair.">
 <meta name="prosa:subject" content="loop">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1f1b'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23ff8c69'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="prosa.css">
+<script>try{var t=localStorage.getItem('prosa-theme');if(t==='vellum'||t==='lamplight')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a>
@@ -16,12 +17,21 @@
   <div class="wrap">
     <div class="menu">
       <a class="brand" href="index.html">Prosa</a>
+      <div class="entries">
       <a href="approach.html">Approach</a>
       <a href="kinds.html">Language</a>
       <a href="try.html">Live court</a>
       <a class="here" aria-current="true" href="commands.html">Use</a>
       <a href="book.html">Book</a>
-      <a href="softanza.html">Softanza</a>
+      </div>
+      <div class="end">
+        <select id="theme" aria-label="Colour theme">
+          <option value="system">System</option>
+          <option value="vellum">Vellum</option>
+          <option value="lamplight">Lamplight</option>
+        </select>
+        <a href="https://github.com/mayouni/prosa">GitHub ↗</a>
+      </div>
     </div>
   </div>
 </nav>
@@ -32,19 +42,31 @@
   </div>
 </nav>
 </div>
+<nav class="vh" aria-label="Breadcrumb"><a href="index.html">Prosa</a><span class="sep"> › </span><a href="commands.html">Use</a><span class="sep"> › </span><span class="here-crumb" aria-current="page">Loops</span></nav>
 
 <header class="page">
-  <div class="narrow">
+  <div class="wrap">
     <div class="kicker">Use</div>
     <h1>The two loops of Prosa</h1>
     <p class="sub">A loop of Prosa is the cycle in which a remark or a draft meets the court: the author's loop turns a remark into a rule, and the AI agent's loop turns a finding into a repair. The two loops ensure that the author rules once and that the AI agent meets each refusal at the moment of writing.</p>
   </div>
 </header>
 
+<div class="layout with-outline">
+<nav class="outline" aria-label="On this page">
+  <p class="head">On this page</p>
+  <ul>
+    <li><a href="#the-author-s-loop-from-a-remark-to-a-rule">The author's loop: from a remark to a rule</a></li>
+    <li><a href="#the-ai-agent-s-loop-from-a-brief-to-a-silent-court">The AI agent's loop: from a brief to a silent court</a></li>
+    <li><a href="#the-claude-code-hook">The Claude Code hook</a></li>
+    <li><a href="#the-mcp-surface">The MCP surface</a></li>
+    <li><a href="#what-each-party-does-in-the-two-cycles">What each party does in the two cycles</a></li>
+  </ul>
+</nav>
 <main id="main">
 <section>
   <div class="narrow">
-    <h2>The author's loop: from a remark to a rule</h2>
+    <h2 id="the-author-s-loop-from-a-remark-to-a-rule">The author's loop: from a remark to a rule</h2>
     <ol>
       <li>The author reads a draft and makes a remark.</li>
       <li>The AI agent writes the remark as a rule: the quote as <code>EVIDENCE</code>, the faulty sentence as <code>REFUSED</code>, the corrected one as <code>WRITTEN</code>.</li>
@@ -53,21 +75,13 @@
       <li>The court enforces the rule on every book and every site that follows the style.</li>
     </ol>
     <p>The rule below, from the constitution, has this shape: its evidence cites the framework of the first house, and its two examples are its test.</p>
-    <pre class="shot"><span class="k">DEFINE</span> <span class="k">PATTERN</span> typed_hole_filler (
-  <span class="k">MATCHES</span> [<span class="s">"lorem ipsum"</span>, <span class="s">"TODO"</span>, <span class="s">"TBD"</span>, <span class="s">"XXX"</span>, <span class="s">"insert"</span> <span class="k">WITHIN</span> 3 <span class="s">"here"</span>],
-  <span class="k">IN</span> [title, heading, lede, body, list],
-  <span class="k">CODE</span> <span class="k">PLACEHOLDER_LEFT</span>, <span class="k">SEVERITY</span> error,
-  <span class="k">SAYS</span> <span class="s">"A placeholder stands where a fact belongs. Mark it [AUTHOR: what is needed] or state the fact."</span>,
-  <span class="k">REFUSED</span> <span class="s">"The study covered TBD participants."</span>,
-  <span class="k">WRITTEN</span> <span class="s">"The study covered [AUTHOR: number of participants] participants."</span>,
-  <span class="k">EVIDENCE</span> <span class="s">"AYOUNI Writing Framework C4: a hole is marked, it is never filled by an agent with a plausible particular"</span>
-)</pre>
+    <pre class="shot"><span class="ln"><span class="k">DEFINE</span> <span class="k">PATTERN</span> typed_hole_filler (</span><span class="ln" style="--ind:2">  <span class="k">MATCHES</span> [<span class="s">"lorem ipsum"</span>, <span class="s">"TODO"</span>, <span class="s">"TBD"</span>, <span class="s">"XXX"</span>, <span class="s">"insert"</span> <span class="k">WITHIN</span> 3 <span class="s">"here"</span>],</span><span class="ln" style="--ind:2">  <span class="k">IN</span> [title, heading, lede, body, list],</span><span class="ln" style="--ind:2">  <span class="k">CODE</span> <span class="k">PLACEHOLDER_LEFT</span>, <span class="k">SEVERITY</span> error,</span><span class="ln" style="--ind:2">  <span class="k">SAYS</span> <span class="s">"A placeholder stands where a fact belongs. Mark it [AUTHOR: what is needed] or state the fact."</span>,</span><span class="ln" style="--ind:2">  <span class="k">REFUSED</span> <span class="s">"The study covered TBD participants."</span>,</span><span class="ln" style="--ind:2">  <span class="k">WRITTEN</span> <span class="s">"The study covered [AUTHOR: number of participants] participants."</span>,</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"AYOUNI Writing Framework C4: a hole is marked, it is never filled by an agent with a plausible particular"</span></span><span class="ln">)</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>The AI agent's loop: from a brief to a silent court</h2>
+    <h2 id="the-ai-agent-s-loop-from-a-brief-to-a-silent-court">The AI agent's loop: from a brief to a silent court</h2>
     <ol>
       <li>The AI agent receives the contract of <code>prosa brief</code> before it drafts.</li>
       <li>The AI agent drafts the text.</li>
@@ -76,54 +90,45 @@
       <li>The cycle ends when the court prints zero errors.</li>
     </ol>
     <p>A reading of level 5 comes last, on a text already clean of what a machine decides.</p>
-    <pre class="term"><span class="dim">$ prosa brief conformance/fixtures/term-synonym.proz --piece the_page</span>
-# The writing contract of the piece the_page
-
-This contract states the declared style house for a text in language `en`. The Prosa court judges the text against it after every write.
-
-## One thing, one word
-
-- Write "programmer" for the person who writes programs (in place of: developer, developers).
-
-## The loop
-
-Draft, run `prosa check &lt;file&gt; --json`, and repair each finding by its code until the court is silent. A finding names the rule, the written form and the ruling it comes from.</pre>
+    <pre class="term"><span class="ln"><span class="dim">$ prosa brief conformance/fixtures/term-synonym.proz --piece the_page</span></span><span class="ln"># The writing contract of the piece the_page</span><span class="ln"></span><span class="ln">This contract states the declared style house for a text in language `en`. The Prosa court judges the text against it after every write.</span><span class="ln"></span><span class="ln">## One thing, one word</span><span class="ln"></span><span class="ln">- Write "programmer" for the person who writes programs (in place of: developer, developers).</span><span class="ln"></span><span class="ln">## The loop</span><span class="ln"></span><span class="ln">Draft, run `prosa check &lt;file&gt; --json`, and repair each finding by its code until the court is silent. A finding names the rule, the written form and the ruling it comes from.</span></pre>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>The Claude Code hook</h2>
+    <h2 id="the-claude-code-hook">The Claude Code hook</h2>
     <p>The hook runs the court on every write to a governed file. The AI agent meets the refusal at the moment of writing, with the code and the written form, and repairs the line before it moves on.</p>
   </div>
 </section>
 
 <section>
   <div class="narrow">
-    <h2>The MCP surface</h2>
+    <h2 id="the-mcp-surface">The MCP surface</h2>
     <p>The MCP surface serves check, brief and measure to AI tools. An AI tool that speaks the protocol asks the court for a verdict, a contract or a profile as it asks any other tool.</p>
   </div>
 </section>
 
 <section class="alt">
   <div class="narrow">
-    <h2>What each party does in the two cycles</h2>
-    <div class="scroll" role="region" aria-label="The parties and their work" tabindex="0"><table>
+    <h2 id="what-each-party-does-in-the-two-cycles">What each party does in the two cycles</h2>
+    <div class="table"><table>
       <thead><tr><th scope="col">Party</th><th scope="col">What it does</th></tr></thead>
       <tbody>
-        <tr><th scope="row">The author</th><td>Makes a remark once, rules on each rule, and answers the readings.</td></tr>
-        <tr><th scope="row">The AI agent</th><td>Writes rules from remarks, drafts under the brief, and repairs findings by code.</td></tr>
-        <tr><th scope="row">The court</th><td>Refuses by name what the declaration forbids, with the same verdict on every machine.</td></tr>
+        <tr><th scope="row" data-label="Party">The author</th><td data-label="What it does">Makes a remark once, rules on each rule, and answers the readings.</td></tr>
+        <tr><th scope="row" data-label="Party">The AI agent</th><td data-label="What it does">Writes rules from remarks, drafts under the brief, and repairs findings by code.</td></tr>
+        <tr><th scope="row" data-label="Party">The court</th><td data-label="What it does">Refuses by name what the declaration forbids, with the same verdict on every machine.</td></tr>
       </tbody>
     </table></div>
   </div>
 </section>
 </main>
+</div>
 
 <footer class="site">
-  <div class="narrow">
-    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  <div class="wrap">
+    <p class="fine">Prosa, a <a href="https://mayouni.github.io/stzsite/index.html">Softanza ↗</a> language. © 2026 Mansour Ayouni, MIT licence. This site is judged by its own declaration, <a href="site.proz">site.proz</a>.</p>
   </div>
 </footer>
+<script src="site.js"></script>
 </body>
 </html>

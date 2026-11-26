@@ -17,7 +17,7 @@
   <div class="narrow">
     <h2>The six zones a rule reads</h2>
     <p>Each block stands in one zone, and a rule names the zones it reads with the field <code>IN</code>.</p>
-    <div class="scroll" role="region" aria-label="The six zones" tabindex="0"><table>
+    <div class="table"><table>
       <thead><tr><th scope="col">Zone</th><th scope="col">What stands in it</th></tr></thead>
       <tbody>
         <tr><th scope="row"><code>title</code></th><td>The first heading of level 1, or the title of the front matter</td></tr>
@@ -44,7 +44,7 @@
   <div class="narrow">
     <h2>The eleven measures of a profile</h2>
     <p>The measures read the prose blocks only. Their definitions are those of the style lint of the first house, so a profile measured by one program is judged by the other.</p>
-    <div class="scroll" role="region" aria-label="The measures of a profile" tabindex="0"><table>
+    <div class="table"><table>
       <thead><tr><th scope="col">Measure</th><th scope="col">Definition</th></tr></thead>
       <tbody>
         <tr><th scope="row"><code>SENTENCE_MEDIAN</code></th><td>The sentence lengths in order; the value at the middle index</td></tr>

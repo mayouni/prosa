@@ -47,7 +47,7 @@
 <section class="alt">
   <div class="narrow">
     <h2>What each party does in the two cycles</h2>
-    <div class="scroll" role="region" aria-label="The parties and their work" tabindex="0"><table>
+    <div class="table"><table>
       <thead><tr><th scope="col">Party</th><th scope="col">What it does</th></tr></thead>
       <tbody>
         <tr><th scope="row">The author</th><td>Makes a remark once, rules on each rule, and answers the readings.</td></tr>

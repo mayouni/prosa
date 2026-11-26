@@ -14,7 +14,7 @@ figure on this page comes from a command anyone can run again.
 | M5. The Haro twin and the Zig binary | Built | Zig: 185 of 185 cases identical. Twin: 56 of 66 fixtures, 10 named seams |
 | M6. The drift measure | Built | 36.5 colons per thousand words in the 2026 drafts, 15.1 in the Ring book |
 | M7. A second house | Example only | `styles/plain_manual` passes on 4 files |
-| M8. The website | Built, open for review | 12 pages, 0 findings across 15 files |
+| M8. The website | Built | 12 pages, 0 findings across 15 files; Zayn's UI audit passes K01 to K37 at six widths |
 | M9. The book | Draft | 11 chapters, about 10,000 words, 0 findings across 14 files |
 
 ## What remains
@@ -50,8 +50,8 @@ figure on this page comes from a command anyone can run again.
 
 **For the site and the repository.**
 
-- The site waits for a visual review in a browser, dark theme included.
-- The folder is a plain folder. `git init` and the first commit wait for the author's word.
+- Zayn's UI audit raises one finding per page on the trail: it takes the root of the Zayn repository as the site's root. The
+  trail of each page starts at the Prosa front page.
 - The three house checkers stay in service in their own repositories. Their retirement is the author's decision.
 - M7 becomes real when a house outside Softanza writes its own `.proz`.
 

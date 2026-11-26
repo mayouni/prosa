@@ -5,7 +5,7 @@
     <h2>The grammar every declaration shares</h2>
     <p>A declaration is written <code>DEFINE KIND name ( FIELD value, ... )</code>. A keyword is UPPER_SNAKE, a name is lower_snake, a string stands between two double quotes on one line, and <code>//</code> opens a comment. The list of kinds is closed, and each one has a closed list of fields.</p>
     <p>A <code>USE "path.proz"</code> line reads another file, and <code>USE "prosa:reader_rights"</code> reads the constitution shipped with the language. A name is declared once across all the files read together.</p>
-    <div class="scroll" role="region" aria-label="The ten kinds and their roles" tabindex="0"><table>
+    <div class="table"><table>
       <thead><tr><th scope="col">Kind</th><th scope="col">Role</th><th scope="col">What it declares</th></tr></thead>
       <tbody>
         <tr><th scope="row"><code>STYLE</code></th><td>Groups rules</td><td>The voice of a house, or a set a house adopts</td></tr>

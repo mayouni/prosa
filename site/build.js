@@ -18,13 +18,14 @@ const die = m => { console.error('build: ' + m); process.exit(1); };
 // ---------------------------------------------------------------- the menu, declared once
 
 const SECTIONS = [
-  { id: 'approach', label: 'Approach', pages: ['approach', 'prior'] },
+  { id: 'approach', label: 'Approach', pages: ['approach', 'prior', 'softanza'] },
   { id: 'language', label: 'Language', pages: ['kinds', 'levels', 'diagnostics', 'text'] },
   { id: 'try', label: 'Live court', pages: ['try'] },
   { id: 'use', label: 'Use', pages: ['commands', 'loops'] },
   { id: 'book', label: 'Book', pages: ['book'] },
-  { id: 'softanza', label: 'Softanza', pages: ['softanza'] },
 ];
+// five entries a bar at most (the Zayn design system, component "bar"); the family page stands under Approach
+const REPO = 'https://github.com/mayouni/prosa';
 // subject: the stem of the menu's word, which the court asks for in the h1 and in the first sentence.
 const PAGES = {
   index: { subject: 'prosa', kicker: 'A Softanza language for written text', h1: 'Prosa: a correction is made once.',
@@ -61,7 +62,7 @@ const PAGES = {
   book: { subject: 'book', h1: 'The book: Prose Under Law',
     title: 'Book: Prose Under Law',
     description: 'The book of Prosa has the working title Prose Under Law. It teaches the language to a writer who works with AI models, and its own chapters are governed by a .proz declaration.' },
-  softanza: { subject: 'softanza', h1: 'Prosa in the Softanza family',
+  softanza: { label: 'The family', subject: 'softanza', h1: 'Prosa in the Softanza family',
     title: 'Softanza: the family of Prosa, Zayn and Haro',
     description: 'Softanza is the family of languages Prosa belongs to. Prosa governs written text, Zayn governs interfaces, and Haro is the language of languages.' },
 };
@@ -118,11 +119,55 @@ function diagnosticsTables() {
   let out = '';
   for (const lv of [1, 2, 3, 4]) {
     const rows = Object.keys(contract.violations).filter(c => contract.violations[c].level === lv);
-    out += '<h3>' + names[lv] + '</h3>\n<div class="scroll" role="region" aria-label="' + names[lv] + '" tabindex="0"><table>\n<thead><tr><th scope="col">Code</th><th scope="col">Severity</th><th scope="col">What the court says</th><th scope="col">The invariant</th></tr></thead>\n<tbody>\n';
+    out += '<h3>' + names[lv] + '</h3>\n<div class="table"><table>\n<thead><tr><th scope="col">Code</th><th scope="col">Severity</th><th scope="col">What the court says</th><th scope="col">The invariant</th></tr></thead>\n<tbody>\n';
     for (const c of rows) { const v = contract.violations[c]; out += '<tr><th scope="row"><code>' + c + '</code></th><td>' + v.severity + '</td><td><code class="msg">' + esc(v.summary) + '</code></td><td>' + esc(v.invariant) + '</td></tr>\n'; }
     out += '</tbody></table></div>\n';
   }
   return out;
+}
+
+// ---------------------------------------------------------------- the painted page, under the Zayn design system
+
+const slug = t => t.replace(/<[^>]+>/g, '').toLowerCase().replace(/&[a-z#0-9]+;/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function ids(html) { // every h2 of the main column has an id, so the outline can name it
+  const used = new Set();
+  return html.replace(/<h2(\s[^>]*)?>([\s\S]*?)<\/h2>/g, (m, at, t) => {
+    if (at && /\bid=/.test(at)) return m;
+    let id = slug(t) || 'section'; while (used.has(id)) id += '-2'; used.add(id);
+    return '<h2' + (at || '') + ' id="' + id + '">' + t + '</h2>';
+  });
+}
+function outline(html) { // "On this page": a side list of one level, on every page of three or more sections
+  const hs = [...html.matchAll(/<h2[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)];
+  if (hs.length < 3) return '';
+  return '<nav class="outline" aria-label="On this page">\n  <p class="head">On this page</p>\n  <ul>\n' +
+    hs.map(h => '    <li><a href="#' + h[1] + '">' + h[2].replace(/<[^>]+>/g, '') + '</a></li>').join('\n') + '\n  </ul>\n</nav>\n';
+}
+function hang(html) { // each source line of a code block wraps under its own indentation, two columns further (K27)
+  return html.replace(/(<pre\b[^>]*>)([\s\S]*?)(<\/pre>)/g, (m, a, b, c) => a + b.split('\n').map(l => {
+    const t = l.replace(/<[^>]+>/g, '').replace(/&[a-z#0-9]+;/g, 'x'); const i = t.length - t.replace(/^ +/, '').length;
+    return '<span class="ln"' + (i ? ' style="--ind:' + i + '"' : '') + '>' + l + '</span>';
+  }).join('') + c);
+}
+function labels(html) { // each cell of a table carries its column's name, read on a phone where the rows stack
+  return html.replace(/<table>([\s\S]*?)<\/table>/g, (m, t) => {
+    const head = /<thead>([\s\S]*?)<\/thead>/.exec(t); if (!head) return m;
+    const names = [...head[1].matchAll(/<th[^>]*>([\s\S]*?)<\/th>/g)].map(x => x[1].replace(/<[^>]+>/g, '').replace(/"/g, '&quot;'));
+    return '<table>' + t.replace(/<tr>([\s\S]*?)<\/tr>/g, (r, cells) => {
+      if (/<th scope="col"/.test(cells)) return r;
+      let k = 0; return '<tr>' + cells.replace(/<(td|th)(\s[^>]*)?>/g, (c, tag, at) => '<' + tag + (at || '') + ' data-label="' + (names[k++] || '') + '">') + '</tr>';
+    }) + '</table>';
+  });
+}
+function typeset(html) { // outside code: a link that leaves the site ends in the arrow up and to the right, and no line starts with a sign
+  const all = html.split(/(<pre[\s\S]*?<\/pre>|<code[\s\S]*?<\/code>|<script[\s\S]*?<\/script>|<[^>]+>)/);
+  let link = null; // the opening tag of the link the text is in
+  return all.map((part, k) => {
+    if (k % 2) { if (/^<a\s/.test(part)) link = part; else if (part === '</a>') link = null; return part; }
+    let out = part.replace(/(\S) ([%;!?»])/g, '$1 $2');
+    if (link && all[k + 1] === '</a>' && /href="https?:/.test(link) && !/↗\s*$/.test(out)) out = out.replace(/\s*$/, ' ↗');
+    return out;
+  }).join('');
 }
 
 // ---------------------------------------------------------------- the shell
@@ -131,11 +176,18 @@ function shell(name) {
   const p = PAGES[name]; const sec = SECTIONS.find(s => s.pages.includes(name)); const front = name === 'index';
   const body = fs.readFileSync(path.join(SRC, name + '.part'), 'utf8').replace(/\r\n?/g, '\n');
   const cutAt = body.indexOf('<!--main-->'); if (cutAt === -1) die(name + '.part has no <!--main-->');
-  const lede = fill(body.slice(0, cutAt).trim(), name), main = fill(body.slice(cutAt + 11).trim(), name);
+  const lede = fill(body.slice(0, cutAt).trim(), name), main = ids(fill(body.slice(cutAt + 11).trim(), name));
+  const side = outline(main);
   const menu = SECTIONS.map(s => '      <a' + (s === sec ? ' class="here" aria-current="true"' : '') + ' href="' + s.pages[0] + '.html">' + s.label + '</a>').join('\n');
   const band = sec && sec.pages.length > 1 ? '<nav class="band" aria-label="Pages of the section">\n  <div class="wrap">\n' +
     sec.pages.map(q => '    <a' + (q === name ? ' aria-current="page"' : '') + ' href="' + q + '.html">' + PAGES[q].label + '</a>').join('\n') + '\n  </div>\n</nav>\n' : '';
-  return `<!DOCTYPE html>
+  // the path, for assistive technology: the bars show it to the eye (Zayn, Rule 108)
+  const here = t => '<span class="here-crumb" aria-current="page">' + t + '</span>';
+  const crumbs = [front ? here('Prosa') : '<a href="index.html">Prosa</a>'];
+  if (sec && sec.pages.length === 1) crumbs.push(here(sec.label));
+  if (sec && sec.pages.length > 1) crumbs.push('<a href="' + sec.pages[0] + '.html">' + sec.label + '</a>', here(p.label));
+  const trail = '<nav class="vh" aria-label="Breadcrumb">' + crumbs.join('<span class="sep"> › </span>') + '</nav>';
+  const page = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -143,8 +195,9 @@ function shell(name) {
 <title>${esc(p.title)}</title>
 <meta name="description" content="${esc(p.description)}">
 <meta name="prosa:subject" content="${p.subject}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1f1b'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23ff8c69'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="prosa.css">
+<script>try{var t=localStorage.getItem('prosa-theme');if(t==='vellum'||t==='lamplight')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body${front ? ' class="front"' : ''}>
 <a class="skip" href="#main">Skip to the content</a>
@@ -153,32 +206,46 @@ function shell(name) {
   <div class="wrap">
     <div class="menu">
       <a class="brand"${front ? ' aria-current="page"' : ''} href="index.html">Prosa</a>
+      <div class="entries">
 ${menu}
+      </div>
+      <div class="end">
+        <select id="theme" aria-label="Colour theme">
+          <option value="system">System</option>
+          <option value="vellum">Vellum</option>
+          <option value="lamplight">Lamplight</option>
+        </select>
+        <a href="${REPO}">GitHub</a>
+      </div>
     </div>
   </div>
 </nav>
 ${band}</div>
+${trail}
 
 <header class="${front ? 'hero' : 'page'}">
-  <div class="narrow">
+  <div class="wrap">
     <div class="kicker">${p.kicker || sec.label}</div>
     <h1>${p.h1}</h1>
     ${lede}
   </div>
 </header>
 
-<main id="main">
+<div class="layout${side ? ' with-outline' : ''}">
+${side}<main id="main">
 ${main}
 </main>
+</div>
 
 <footer class="site">
-  <div class="narrow">
-    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  <div class="wrap">
+    <p class="fine">Prosa, a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> language. © 2026 Mansour Ayouni, MIT licence. This site is judged by its own declaration, <a href="site.proz">site.proz</a>.</p>
   </div>
 </footer>
-${(p.scripts || []).map(s => '<script src="' + s + '"></script>\n').join('')}</body>
+${(p.scripts || []).concat(['site.js']).map(s => '<script src="' + s + '"></script>\n').join('')}</body>
 </html>
 `;
+  return typeset(hang(labels(page)));
 }
 
 // ---------------------------------------------------------------- the live court's data

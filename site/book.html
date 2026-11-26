@@ -6,8 +6,9 @@
 <title>Book: Prose Under Law</title>
 <meta name="description" content="The book of Prosa has the working title Prose Under Law. It teaches the language to a writer who works with AI models, and its own chapters are governed by a .proz declaration.">
 <meta name="prosa:subject" content="book">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1f1b'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23ff8c69'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="prosa.css">
+<script>try{var t=localStorage.getItem('prosa-theme');if(t==='vellum'||t==='lamplight')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the content</a>
@@ -16,39 +17,52 @@
   <div class="wrap">
     <div class="menu">
       <a class="brand" href="index.html">Prosa</a>
+      <div class="entries">
       <a href="approach.html">Approach</a>
       <a href="kinds.html">Language</a>
       <a href="try.html">Live court</a>
       <a href="commands.html">Use</a>
       <a class="here" aria-current="true" href="book.html">Book</a>
-      <a href="softanza.html">Softanza</a>
+      </div>
+      <div class="end">
+        <select id="theme" aria-label="Colour theme">
+          <option value="system">System</option>
+          <option value="vellum">Vellum</option>
+          <option value="lamplight">Lamplight</option>
+        </select>
+        <a href="https://github.com/mayouni/prosa">GitHub ↗</a>
+      </div>
     </div>
   </div>
 </nav>
 </div>
+<nav class="vh" aria-label="Breadcrumb"><a href="index.html">Prosa</a><span class="sep"> › </span><span class="here-crumb" aria-current="page">Book</span></nav>
 
 <header class="page">
-  <div class="narrow">
+  <div class="wrap">
     <div class="kicker">Book</div>
     <h1>The book: Prose Under Law</h1>
     <p class="sub">The book of Prosa carries the working title "Prose Under Law": it teaches the language to a writer who works with AI models. It lets a reader go from a first remark on a draft to a style the court keeps on every page.</p>
   </div>
 </header>
 
+<div class="layout">
 <main id="main">
 <section>
   <div class="narrow">
-    <h2>What the manuscript holds and how it is governed</h2>
+    <h2 id="what-the-manuscript-holds-and-how-it-is-governed">What the manuscript holds and how it is governed</h2>
     <p>The manuscript opens on a style held by a promise and on the reason it drifts back, then teaches the ten declarations one at a time. Its chapters are Markdown files, and a declaration, <code>book.proz</code>, binds them to the style of AYOUNI Press: the court of Prosa judges every chapter of the manuscript against the law the chapters teach.</p>
     <p>The chapters, their examples and the declaration stand in <a href="../book/">the folder of the book</a>.</p>
   </div>
 </section>
 </main>
+</div>
 
 <footer class="site">
-  <div class="narrow">
-    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  <div class="wrap">
+    <p class="fine">Prosa, a <a href="https://mayouni.github.io/stzsite/index.html">Softanza ↗</a> language. © 2026 Mansour Ayouni, MIT licence. This site is judged by its own declaration, <a href="site.proz">site.proz</a>.</p>
   </div>
 </footer>
+<script src="site.js"></script>
 </body>
 </html>

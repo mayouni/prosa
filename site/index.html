@@ -6,8 +6,9 @@
 <title>Prosa: a declarative language that governs written text</title>
 <meta name="description" content="Prosa is a declarative language that governs written text by compilation: a writing style is declared in .proz files, and a court refuses, by name, every sentence the declaration forbids.">
 <meta name="prosa:subject" content="prosa">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1f1b'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23ff8c69'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="prosa.css">
+<script>try{var t=localStorage.getItem('prosa-theme');if(t==='vellum'||t==='lamplight')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body class="front">
 <a class="skip" href="#main">Skip to the content</a>
@@ -16,33 +17,54 @@
   <div class="wrap">
     <div class="menu">
       <a class="brand" aria-current="page" href="index.html">Prosa</a>
+      <div class="entries">
       <a href="approach.html">Approach</a>
       <a href="kinds.html">Language</a>
       <a href="try.html">Live court</a>
       <a href="commands.html">Use</a>
       <a href="book.html">Book</a>
-      <a href="softanza.html">Softanza</a>
+      </div>
+      <div class="end">
+        <select id="theme" aria-label="Colour theme">
+          <option value="system">System</option>
+          <option value="vellum">Vellum</option>
+          <option value="lamplight">Lamplight</option>
+        </select>
+        <a href="https://github.com/mayouni/prosa">GitHub ↗</a>
+      </div>
     </div>
   </div>
 </nav>
 </div>
+<nav class="vh" aria-label="Breadcrumb"><span class="here-crumb" aria-current="page">Prosa</span></nav>
 
 <header class="hero">
-  <div class="narrow">
+  <div class="wrap">
     <div class="kicker">A Softanza language for written text</div>
     <h1>Prosa: a correction is made once.</h1>
     <p class="sub">Prosa is a declarative language that governs written text by compilation: a writing style is declared in <code>.proz</code> files, and a court refuses, by name, every sentence the declaration forbids. It ensures that a remark an author makes about a draft becomes a rule the court raises on every later draft.</p>
 <div class="actions">
-  <a class="primary" href="try.html">Open the court in this browser</a>
+  <a href="try.html">Open the court in this browser</a>
   <a href="kinds.html">Read the ten declarations</a>
 </div>
   </div>
 </header>
 
+<div class="layout with-outline">
+<nav class="outline" aria-label="On this page">
+  <p class="head">On this page</p>
+  <ul>
+    <li><a href="#the-three-layers-of-a-governed-text">The three layers of a governed text</a></li>
+    <li><a href="#why-a-style-written-in-a-prompt-drifts-back">Why a style written in a prompt drifts back</a></li>
+    <li><a href="#a-declaration-a-text-and-the-verdict-of-the-court">A declaration, a text and the verdict of the court</a></li>
+    <li><a href="#the-figures-of-the-reference-court">The figures of the reference court</a></li>
+    <li><a href="#four-entry-points-into-the-site">Four entry points into the site</a></li>
+  </ul>
+</nav>
 <main id="main">
 <section>
   <div class="narrow">
-    <h2>The three layers of a governed text</h2>
+    <h2 id="the-three-layers-of-a-governed-text">The three layers of a governed text</h2>
     <p>The prose stays in Markdown or HTML, and a <code>.proz</code> file beside it declares what the prose must be. A declaration has three layers. Each lower layer constrains the one above it.</p>
     <ul>
       <li>The reader's rights are a small constitution shipped with the language: a title names its subject, a statement stands once per screen, and a placeholder left in place of a fact is refused.</li>
@@ -55,13 +77,13 @@
 
 <section class="alt">
   <div class="narrow">
-    <h2>Why a style written in a prompt drifts back</h2>
+    <h2 id="why-a-style-written-in-a-prompt-drifts-back">Why a style written in a prompt drifts back</h2>
     <p>A style that lives in a promise drifts back: the author makes the same remark on the next draft. The cause is measured. An AI model writes toward the average of what it read, and an instruction in a prompt is one weak signal against that average.</p>
     <ul>
-      <li>The pull is statistical: instruction-tuned AI models use present participial clauses two to five times more often than people do, and nominalizations one and a half to two times more often (<a href="https://arxiv.org/abs/2410.16107">Reinhart et al., PNAS 2025</a>).</li>
-      <li>The pull reaches published science: at least 13.5 % of the biomedical abstracts of 2024 carry the excess vocabulary of AI models (<a href="https://arxiv.org/abs/2406.07016">Kobak et al., Science Advances 2025</a>).</li>
-      <li>The pull flattens voices: essays written with an instruction-tuned AI model are closer to each other than essays written alone (<a href="https://arxiv.org/abs/2309.05196">Padmakumar and He, ICLR 2024</a>), and AI suggestions move Indian writers toward Western styles (<a href="https://arxiv.org/abs/2409.11360">Agarwal, Naaman and Vashistha, CHI 2025</a>).</li>
-      <li>A prohibition in a prompt is unreliable: on one open AI model, naming a forbidden word can raise its chance of appearing (<a href="https://arxiv.org/abs/2601.08070">Rana, 2026 preprint</a>), and negated prompts are a documented weakness of AI models (<a href="https://arxiv.org/abs/2209.12711">Jang et al., 2022</a>).</li>
+      <li>The pull is statistical: instruction-tuned AI models use present participial clauses two to five times more often than people do, and nominalizations one and a half to two times more often (<a href="https://arxiv.org/abs/2410.16107">Reinhart et al., PNAS 2025 ↗</a>).</li>
+      <li>The pull reaches published science: at least 13.5 % of the biomedical abstracts of 2024 carry the excess vocabulary of AI models (<a href="https://arxiv.org/abs/2406.07016">Kobak et al., Science Advances 2025 ↗</a>).</li>
+      <li>The pull flattens voices: essays written with an instruction-tuned AI model are closer to each other than essays written alone (<a href="https://arxiv.org/abs/2309.05196">Padmakumar and He, ICLR 2024 ↗</a>), and AI suggestions move Indian writers toward Western styles (<a href="https://arxiv.org/abs/2409.11360">Agarwal, Naaman and Vashistha, CHI 2025 ↗</a>).</li>
+      <li>A prohibition in a prompt is unreliable: on one open AI model, naming a forbidden word can raise its chance of appearing (<a href="https://arxiv.org/abs/2601.08070">Rana, 2026 preprint ↗</a>), and negated prompts are a documented weakness of AI models (<a href="https://arxiv.org/abs/2209.12711">Jang et al., 2022 ↗</a>).</li>
     </ul>
     <p>Prosa moves the law out of the prompt and into a court that sits outside the AI model: a defect is refused before the text reaches a reader.</p>
   </div>
@@ -69,40 +91,20 @@
 
 <section>
   <div class="narrow">
-    <h2>A declaration, a text and the verdict of the court</h2>
-    <p>The declaration below gives one thing one word: the person who writes programs is a programmer. The text beside it uses another word. The court refuses the line.</p>
+    <h2 id="a-declaration-a-text-and-the-verdict-of-the-court">A declaration, a text and the verdict of the court</h2>
+    <p>The declaration below gives one thing one word: the person who writes programs is a programmer. The text under it uses another word. The court refuses the line.</p>
     <div class="three">
       <div>
         <div class="lbl">The declaration: term-synonym.proz</div>
-        <pre class="shot"><span class="c">// Expected: TERM_SYNONYM</span>
-<span class="k">DEFINE</span> <span class="k">STYLE</span> house (
-  <span class="k">HOLDS</span> [programmer]
-)
-<span class="k">DEFINE</span> <span class="k">TERM</span> programmer (
-  <span class="k">MEANS</span> <span class="s">"the person who writes programs"</span>,
-  <span class="k">REFUSES</span> [developer, developers],
-  <span class="k">MENTIONS</span> skipped,
-  <span class="k">EVIDENCE</span> <span class="s">"The author, 2026-11-26: a ruling written for this fixture"</span>
-)
-<span class="k">DEFINE</span> <span class="k">PIECE</span> the_page (
-  <span class="k">FILE</span> <span class="s">"term-synonym.md"</span>,
-  <span class="k">FOLLOWS</span> house
-)</pre>
+        <pre class="shot"><span class="ln"><span class="c">// Expected: TERM_SYNONYM</span></span><span class="ln"><span class="k">DEFINE</span> <span class="k">STYLE</span> house (</span><span class="ln" style="--ind:2">  <span class="k">HOLDS</span> [programmer]</span><span class="ln">)</span><span class="ln"><span class="k">DEFINE</span> <span class="k">TERM</span> programmer (</span><span class="ln" style="--ind:2">  <span class="k">MEANS</span> <span class="s">"the person who writes programs"</span>,</span><span class="ln" style="--ind:2">  <span class="k">REFUSES</span> [developer, developers],</span><span class="ln" style="--ind:2">  <span class="k">MENTIONS</span> skipped,</span><span class="ln" style="--ind:2">  <span class="k">EVIDENCE</span> <span class="s">"The author, 2026-11-26: a ruling written for this fixture"</span></span><span class="ln">)</span><span class="ln"><span class="k">DEFINE</span> <span class="k">PIECE</span> the_page (</span><span class="ln" style="--ind:2">  <span class="k">FILE</span> <span class="s">"term-synonym.md"</span>,</span><span class="ln" style="--ind:2">  <span class="k">FOLLOWS</span> house</span><span class="ln">)</span></pre>
       </div>
       <div>
         <div class="lbl">The text: term-synonym.md</div>
-        <pre class="shot"># The court of Prosa
-
-A developer writes the rule once.</pre>
+        <pre class="shot"><span class="ln"># The court of Prosa</span><span class="ln"></span><span class="ln">A developer writes the rule once.</span></pre>
       </div>
       <div class="wide">
         <div class="lbl">The verdict</div>
-        <pre class="term"><span class="dim">$ prosa check conformance/fixtures/term-synonym.proz</span>
-conformance/fixtures/term-synonym.md:3  <span class="bad">error</span>  <span class="bad">TERM_SYNONYM</span>  programmer
-<span class="dim">    "developer" stands for the person who writes programs: the house word is "programmer".</span>
-<span class="dim">    Rule programmer · The author, 2026-11-26: a ruling written for this fixture</span>
-
-1 error(s), 0 warning(s) across 2 file(s) at level 4</pre>
+        <pre class="term"><span class="ln"><span class="dim">$ prosa check conformance/fixtures/term-synonym.proz</span></span><span class="ln">conformance/fixtures/term-synonym.md:3  <span class="bad">error</span>  <span class="bad">TERM_SYNONYM</span>  programmer</span><span class="ln" style="--ind:4"><span class="dim">    "developer" stands for the person who writes programs: the house word is "programmer".</span></span><span class="ln" style="--ind:4"><span class="dim">    Rule programmer · The author, 2026-11-26: a ruling written for this fixture</span></span><span class="ln"></span><span class="ln">1 error(s), 0 warning(s) across 2 file(s) at level 4</span></pre>
       </div>
     </div>
     <p>The verdict names the file and the line, the code, the refused word, the house word, the rule and the ruling the rule comes from. The same text gives the same verdict on every machine: the court uses no AI model to judge words, positions and measures.</p>
@@ -111,7 +113,7 @@ conformance/fixtures/term-synonym.md:3  <span class="bad">error</span>  <span cl
 
 <section class="alt">
   <div class="narrow">
-    <h2>The figures of the reference court</h2>
+    <h2 id="the-figures-of-the-reference-court">The figures of the reference court</h2>
     <p>The reference court is version 0.1.0 of language 0.1. It is one JavaScript file that runs under Node and in a browser.</p>
     <ul>
       <li>The conformance suite holds 66 fixtures, each a refused case or its lawful twin, and the court passes 66 of 66.</li>
@@ -123,8 +125,8 @@ conformance/fixtures/term-synonym.md:3  <span class="bad">error</span>  <span cl
 
 <section>
   <div class="narrow">
-    <h2>Four entry points into the site</h2>
-    <ul class="cards">
+    <h2 id="four-entry-points-into-the-site">Four entry points into the site</h2>
+    <ul>
       <li><a href="approach.html">The five commitments</a> state the principles that decide what the language declares.</li>
       <li><a href="levels.html">The five levels</a> show a real refusal at each stage of the judgment.</li>
       <li><a href="commands.html">The eight commands</a> give the syntax of the program and the output of a run.</li>
@@ -133,11 +135,13 @@ conformance/fixtures/term-synonym.md:3  <span class="bad">error</span>  <span cl
   </div>
 </section>
 </main>
+</div>
 
 <footer class="site">
-  <div class="narrow">
-    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  <div class="wrap">
+    <p class="fine">Prosa, a <a href="https://mayouni.github.io/stzsite/index.html">Softanza ↗</a> language. © 2026 Mansour Ayouni, MIT licence. This site is judged by its own declaration, <a href="site.proz">site.proz</a>.</p>
   </div>
 </footer>
+<script src="site.js"></script>
 </body>
 </html>

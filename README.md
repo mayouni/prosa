@@ -4,6 +4,8 @@ Prosa is a declarative language that governs written text by compilation: a writ
 court refuses, by name, every sentence the declaration forbids. It lets a writer who works with AI models make a correction
 once.
 
+The site of Prosa, with a live court that runs in the browser: <https://mayouni.github.io/prosa/>.
+
 ```
 DEFINE TERM programmer (
   MEANS "the person who writes programs",
@@ -64,7 +66,7 @@ Softanza family envelope.
 | `tools/prosa/` | The reference court, the command, the Claude Code hook and the MCP surface |
 | `tools/parity/` | The three harnesses that compare the court with the house's earlier checkers |
 | `zig/`, `haro/` | The binary and the Haro declaration of the language |
-| `site/`, `book/` | The website and the book |
+| `site/`, `book/` | The website, published at <https://mayouni.github.io/prosa/>, and the book |
 
 ## Where to read next
 

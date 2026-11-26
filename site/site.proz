@@ -1,0 +1,20 @@
+// site.proz : the declaration of the Prosa site. Each page is judged against the public style of the first house.
+//   node tools/prosa/cli.js check site/site.proz
+// A page names its subject term in <meta name="prosa:subject">; the court asks for it in the h1 and in the first sentence.
+
+USE "../styles/ayouni/ayouni.proz"
+
+DEFINE PIECE site_pages (
+  FILES "*.html",
+  FOLLOWS ayouni_public,
+  FORM page,
+  SUBJECT_FROM front_matter
+)
+
+// The contract's own invariant on HOLE_OPEN uses the framework's word for an [AUTHOR: ...] marker.
+DEFINE ALLOW hole_invariant (
+  FILE "diagnostics.html",
+  LINE_HOLDS "A hole is closed by the author",
+  EXCUSES CALQUE,
+  REASON "hole is the framework's term for an author's marker, and no misspelling of whole"
+)

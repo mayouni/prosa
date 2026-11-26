@@ -1,0 +1,4 @@
+DEFINE PATTERN lack_listed (
+  MATCHES ["not yet", "nobody has"],
+  CODE LACK_LISTED
+)

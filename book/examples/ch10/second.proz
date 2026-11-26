@@ -1,0 +1,21 @@
+// second.proz : a second house. It adopts the first, declines two rules and holds one of its own.
+
+USE "../../../styles/ayouni/ayouni.proz"
+
+DEFINE STYLE second_house (
+  ADOPTS [ayouni],
+  DECLINES [programmer, ring_presence],
+  HOLDS [developer]
+)
+
+DEFINE TERM developer (
+  MEANS "the person who writes programs",
+  REFUSES [programmer, programmers, coder, coders],
+  MENTIONS skipped,
+  EVIDENCE "A ruling written for this example, in the name of the second house"
+)
+
+DEFINE PIECE notice (
+  FILE "notice.md",
+  FOLLOWS second_house
+)

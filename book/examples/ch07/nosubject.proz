@@ -1,0 +1,14 @@
+DEFINE STYLE house (
+  HOLDS []
+)
+
+DEFINE FORM chapter (
+  TITLE_HOLDS subject,
+  EVIDENCE "zayn/doc/design/WRITING.md rule 1"
+)
+
+DEFINE PIECE grid_chapter (
+  FILE "grid.md",
+  FOLLOWS house,
+  FORM chapter
+)

@@ -1,0 +1,72 @@
+<p class="sub">The text model of Prosa is the set of definitions that turn a Markdown or HTML file into blocks, zones, sentences, words and measures. It ensures that two implementations of the court give the same findings, byte for byte.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>The blocks the court reads, and the blocks it skips</h2>
+    <p>The court cuts a Markdown file into paragraphs at blank lines and gives each one a kind.</p>
+    <ul>
+      <li>A prose block is a paragraph, a list item or a quotation: the rules judge it.</li>
+      <li>A code block is a fence or an indented paragraph: the rules skip it.</li>
+      <li>A skipped block is a heading line, a table, a comment, an image or a caption: the heading is kept and the rest is left.</li>
+    </ul>
+    <p>The front matter at the top of a file gives the title, the subject, the language and the status of the text. An HTML file gives the same blocks: <code>h1</code> to <code>h6</code> are headings, <code>p</code> and <code>blockquote</code> are prose, <code>li</code> and the cells of a table are list items, and <code>pre</code> is code. The court leaves the content of <code>script</code>, <code>style</code>, <code>code</code>, <code>template</code> and <code>nav</code> unread.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The six zones a rule reads</h2>
+    <p>Each block stands in one zone, and a rule names the zones it reads with the field <code>IN</code>.</p>
+    <div class="scroll" role="region" aria-label="The six zones" tabindex="0"><table>
+      <thead><tr><th scope="col">Zone</th><th scope="col">What stands in it</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><code>title</code></th><td>The first heading of level 1, or the title of the front matter</td></tr>
+        <tr><th scope="row"><code>heading</code></th><td>Every other heading</td></tr>
+        <tr><th scope="row"><code>lede</code></th><td>The first prose block of the text</td></tr>
+        <tr><th scope="row"><code>body</code></th><td>Every other paragraph</td></tr>
+        <tr><th scope="row"><code>list</code></th><td>A list item</td></tr>
+        <tr><th scope="row"><code>quote</code></th><td>A quotation</td></tr>
+      </tbody>
+    </table></div>
+    <p>A rule reads the lede, the body, the lists and the quotations by default. A declared <code>ZONE</code> adds a region of its own, opened and closed by two comments in the text.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>How a word and a sentence are bounded</h2>
+    <p>A word is a run of letters and digits, which may hold an apostrophe or a hyphen between two such runs: <code>decision-maker</code> is one word. Matching compares words in lower case, and inline code is blanked before a rule reads a block: a name in code is outside the prose.</p>
+    <p>A sentence ends at a space that follows a full stop, an exclamation mark, a question mark or an ellipsis and precedes a capital letter or an opening mark. The length of a sentence is its count of runs of characters between spaces.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The eleven measures of a profile</h2>
+    <p>The measures read the prose blocks only. Their definitions are those of the style lint of the first house, so a profile measured by one program is judged by the other.</p>
+    <div class="scroll" role="region" aria-label="The measures of a profile" tabindex="0"><table>
+      <thead><tr><th scope="col">Measure</th><th scope="col">Definition</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><code>SENTENCE_MEDIAN</code></th><td>The sentence lengths in order; the value at the middle index</td></tr>
+        <tr><th scope="row"><code>SENTENCES_OVER N</code></th><td>Sentences longer than N words, outside list items</td></tr>
+        <tr><th scope="row"><code>SENTENCES_UNDER N</code></th><td>Sentences shorter than N words</td></tr>
+        <tr><th scope="row"><code>DASHES</code></th><td>The count of long dashes and of hyphens set between two spaces</td></tr>
+        <tr><th scope="row"><code>COLONS</code>, <code>QUESTIONS</code></th><td>The count of colons and of question marks</td></tr>
+        <tr><th scope="row"><code>EXCLAMATIONS</code></th><td>The count of exclamation marks</td></tr>
+        <tr><th scope="row"><code>COLD_EXCLAMATIONS</code></th><td>The exclamation marks of a block that follows no run of code and names no result</td></tr>
+        <tr><th scope="row"><code>ELLIPSES</code></th><td>Prose blocks that end on an ellipsis</td></tr>
+        <tr><th scope="row"><code>COLON_LEADS</code></th><td>Prose blocks that end on a colon and are followed by a prose block</td></tr>
+        <tr><th scope="row"><code>ONE_SENTENCE_PARAGRAPHS</code></th><td>Prose blocks of one sentence and more than three words</td></tr>
+      </tbody>
+    </table></div>
+    <p>A rate per thousand is the count times 1000 over the prose words, rounded to one decimal. A corpus is measured as one pool: every sentence of every page enters one median.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>A profile taken from a page by the court</h2>
+    <p>The command <code>prosa measure</code> applies these definitions to approved pages and writes the result as a <code>PROFILE</code> declaration, with the corpus as its evidence.</p>
+    <!--run: measure conformance/fixtures/on-profile-lawful.md-->
+  </div>
+</section>

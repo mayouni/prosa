@@ -1,0 +1,35 @@
+// words.proz : one thing, one word.
+
+DEFINE STYLE house (
+  HOLDS [programmer, crafter, forbidden_words]
+)
+
+DEFINE TERM programmer (
+  MEANS "the person who writes programs",
+  REFUSES [developer, developers],
+  MENTIONS skipped,
+  EVIDENCE "FRAMEWORK.md section 4: developer for programmer is a forbidden word"
+)
+
+DEFINE TERM crafter (
+  MEANS "the person who builds software",
+  REFUSES [maker, makers],
+  KEEPS ["decision maker", "decision makers"],
+  MENTIONS skipped,
+  EVIDENCE "ayouni/CLAUDE.md: crafter is the person, never maker; FRAMEWORK.md section 4"
+)
+
+DEFINE WORDLIST forbidden_words (
+  REFUSES [
+    substrate,
+    leverage WRITE "use",
+    [stakeholder, stakeholders] WRITE "the people concerned, by name"
+  ],
+  CODE FORBIDDEN_WORD, SEVERITY error,
+  EVIDENCE "FRAMEWORK.md section 4, the AYOUNI forbidden words"
+)
+
+DEFINE PIECE note (
+  FILE "land.md",
+  FOLLOWS house
+)

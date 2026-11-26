@@ -1,0 +1,9 @@
+<p class="sub">The book of Prosa carries the working title "Prose Under Law": it teaches the language to a writer who works with AI models. It lets a reader go from a first remark on a draft to a style the court keeps on every page.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>What the manuscript holds and how it is governed</h2>
+    <p>The manuscript opens on a style held by a promise and on the reason it drifts back, then teaches the ten declarations one at a time. Its chapters are Markdown files, and a declaration, <code>book.proz</code>, binds them to the style of AYOUNI Press: the court of Prosa judges every chapter of the manuscript against the law the chapters teach.</p>
+    <p>The chapters, their examples and the declaration stand in <a href="../book/">the folder of the book</a>.</p>
+  </div>
+</section>

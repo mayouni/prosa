@@ -1,0 +1,34 @@
+<p class="sub">A diagnostic of Prosa is a finding of the court: it names the file and the line, the code, the rule and the ruling the rule comes from. It lets the user, a person or an AI agent, repair a text by its code and learn the house from each refusal.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>The eight parts of a finding</h2>
+    <p>A finding has six parts in the envelope C2 of the Softanza family: <code>code</code>, <code>severity</code>, <code>message</code>, <code>span</code>, <code>cites</code> and <code>language</code>. The Prosa court adds <code>level</code> and <code>subject</code>. The option <code>--json</code> prints the findings as data:</p>
+    <!--run: check conformance/fixtures/term-synonym.proz --json-->
+    <p>A code is a stable UPPER_SNAKE name, and a code is used for one meaning for the whole life of the language. The field <code>cites</code> holds the name of the rule and its evidence.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The {{codes}} codes the court raises by itself, by level</h2>
+    <p>The tables below are written at build time from <code>conformance/violations.json</code>, contract {{contract}}: the page and the court read the same file.</p>
+    <!--diagnostics-->
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The codes a style declares for its own rules</h2>
+    <p>A <code>TERM</code>, a <code>WORDLIST</code>, a <code>PATTERN</code> or a <code>PROFILE</code> raises the code its declaration names. <code>TERM_SYNONYM</code> and <code>OFF_PROFILE</code> are the defaults of <code>TERM</code> and <code>PROFILE</code>. The style of the first house declares these codes:</p>
+    <ul>
+      <li><code>FORBIDDEN_WORD</code> refuses a word of the forbidden list and shows the written form.</li>
+      <li><code>CALQUE</code> refuses a calque or a homophone and shows the intended word.</li>
+      <li><code>INTENSIFIER</code>, <code>HEDGE</code> and <code>SUPERLATIVE</code> warn on the three lists of noise.</li>
+      <li><code>EMOJI_IN_TEXT</code> refuses an emoji in text a reader sees.</li>
+      <li><code>LACK_LISTED</code> refuses a line of a public page that lists a lack.</li>
+      <li><code>VOICE_ABSENT</code> warns when a long text stands below the lower bounds of the voice.</li>
+    </ul>
+    <p>The constitution declares <code>PLACEHOLDER_LEFT</code>: a placeholder that stands where a fact belongs is refused in every governed text.</p>
+  </div>
+</section>

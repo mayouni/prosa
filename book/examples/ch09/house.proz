@@ -1,0 +1,44 @@
+// house.proz : a small house, to show the contract an AI agent receives.
+
+DEFINE STYLE house (
+  HOLDS [programmer, lack_listed, voice]
+)
+
+DEFINE TERM programmer (
+  MEANS "the person who writes programs",
+  REFUSES [developer, developers],
+  MENTIONS skipped,
+  EVIDENCE "FRAMEWORK.md section 4: developer for programmer is a forbidden word"
+)
+
+DEFINE PATTERN lack_listed (
+  MATCHES ["not yet", "nobody has"],
+  CODE LACK_LISTED,
+  SAYS "The line lists a lack. State what the thing is and does, at its true size.",
+  REFUSED "The project has not yet shown a study.",
+  WRITTEN "The verifier checks the declaration.",
+  EVIDENCE "The author, 2026-11-08: Avoid this role of transparency that hurts the project image"
+)
+
+DEFINE PROFILE voice (
+  DASHES AT_MOST 4 PER_THOUSAND,
+  COLONS AT_LEAST 5 PER_THOUSAND,
+  MIN_WORDS 20,
+  EVIDENCE "AWF-04: the colon is the book's mark; the em dash is rare"
+)
+
+DEFINE FORM chapter (
+  TITLE_WORDS AT_MOST 6,
+  TITLE_HOLDS subject,
+  FIRST_SENTENCE_HOLDS subject,
+  CLOSES_WITHOUT ["summary", "in summary"],
+  EVIDENCE "books/zayn-book/CLAUDE.md: a title is six words at most and names its subject"
+)
+
+DEFINE PIECE court_chapter (
+  FILE "court.md",
+  FOLLOWS house,
+  FORM chapter,
+  SUBJECT "court",
+  READER programmer
+)

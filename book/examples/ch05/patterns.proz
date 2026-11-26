@@ -1,0 +1,34 @@
+// patterns.proz : three refused constructions.
+
+DEFINE STYLE house (
+  HOLDS [never_run, narrative, colon_lead]
+)
+
+DEFINE PATTERN never_run (
+  MATCHES ["never" WITHIN 3 "run"],
+  CODE LACK_LISTED,
+  REFUSED "The audit was never once run.",
+  WRITTEN "The audit runs on the painted page.",
+  EVIDENCE "zayn/doc/design/WRITING.md section 4: never followed within three words by run"
+)
+
+DEFINE PATTERN narrative (
+  MATCHES ["we found", "the story of", "so it was measured"],
+  CODE NARRATIVE_REGISTER,
+  REFUSED "So it was measured, and we found the gap.",
+  WRITTEN "The grid has 35 empty cells.",
+  EVIDENCE "zayn/doc/design/WRITING.md rule 4; the author, 2026-11-05: avoid the narrative, succinct, non declarative style of writing"
+)
+
+DEFINE PATTERN colon_lead (
+  MATCHES ["like this:", "Result:"],
+  AT paragraph_end,
+  CODE COLON_LEAD, SEVERITY warning,
+  SAYS "Name what the colon introduces.",
+  EVIDENCE "writing-framework/checklists/noise.md: colon lead-ins that end a paragraph"
+)
+
+DEFINE PIECE grid (
+  FILE "grid.md",
+  FOLLOWS house
+)

@@ -1,0 +1,36 @@
+<p class="sub">Softanza is the family of languages Prosa belongs to: each one declares a world as data and gives it a court that refuses by name. The family lets a house govern its texts, its interfaces and its own languages with one grammar and one form of diagnostic.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>Prosa governs written text</h2>
+    <p>Prosa declares a writing style in <code>.proz</code> files, and its court refuses every sentence the declaration forbids. It holds the texts of a house, written by a person or by an AI agent, to the rulings of its author.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Zayn governs interfaces</h2>
+    <p>Zayn is the sister language of Prosa for user interfaces: it declares what a user is doing on an interface, with no widget in the declaration. Its verifier refuses by name what its law forbids before anything is drawn. Prosa takes its surface from Zayn: the form <code>DEFINE KIND name ( FIELD value )</code>, the keywords in UPPER_SNAKE and the names in lower_snake.</p>
+    <p><a href="https://github.com/mayouni/zayn">The repository of Zayn</a> holds its language, its law and its verifier.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Haro is the language of languages</h2>
+    <p>Haro is the foundational language of the family: a world is declared in it, a court generated from that declaration judges every sentence, and every refusal is named. Zayn is declared in Haro, and a court for Zayn is forged from that declaration. The design of Prosa follows the same path: a declaration of the language in Haro gives a second court for <code>.proz</code> files and a grammar that holds an AI model to their shape.</p>
+    <p><a href="https://github.com/mayouni/haro">The repository of Haro</a> holds the language and its virtual machine.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>What the three languages share</h2>
+    <ul>
+      <li>The law is data: a declaration states it, and a program reads it.</li>
+      <li>The court sits outside the AI model: a grammar gives a text its shape, and the court refuses its meaning.</li>
+      <li>A finding travels in one envelope, C2: code, severity, message, span, cites and language.</li>
+      <li>A rule enters on evidence: a dated ruling or a measure on a named corpus.</li>
+    </ul>
+  </div>
+</section>

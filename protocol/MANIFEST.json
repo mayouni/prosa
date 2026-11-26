@@ -1,0 +1,18 @@
+{
+ "standard": "prosa",
+ "language": "0.1",
+ "contract": "0.1",
+ "court": "0.1.0",
+ "files": {
+  "doc/language/README.md": "811a595870930241faf68e7a9da00150d1b9fcccbba936e27194806ee04c090d",
+  "doc/language/GRAMMAR.md": "f0a3768fbf905619828aee61e8ed50f0bb396cd615108eb9db945ba3edaa571d",
+  "doc/language/DECLARATIONS.md": "3514774a21c5b111c859e11fef20251531a8ff19fdfb2b839b111db82fdddfd4",
+  "doc/language/VIOLATIONS.md": "8c793624422b83d975b8bb7bc09a03edd1f16e7a23b2e7609b557110625fb2c8",
+  "doc/language/TEXT.md": "25d0f585324c0482f7e404f908cceada8e4eb806dddeb41655ad24b3fe2176e4",
+  "conformance/violations.json": "8f48d8319b21361261bfcef8b1d01d2db290f9ea5cfb34a65a92945019355ccb",
+  "conformance/manifest.json": "ca0156dfd77e978f94114a7b59534d35e56dbf8df6ec24c252fe6b1f8181b447",
+  "constitution/reader_rights.proz": "1c6d3d17ad402798018b964441181cc542dc538f11db78cb8ba6a55d0944f333",
+  "tools/prosa/prosa.js": "57cb619f3cfba96c24682a0b33647e40d5d805566ebf629ee17446213ad52e09",
+  "haro/prosa.stzu": "b46cdd280e5feca562b1f610b67f7870229ce95718e31f09670ae35de5522979"
+ }
+}

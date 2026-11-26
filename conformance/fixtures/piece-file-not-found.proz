@@ -1,0 +1,8 @@
+// Expected: PIECE_FILE_NOT_FOUND
+DEFINE STYLE house (
+  HOLDS []
+)
+DEFINE PIECE the_page (
+  FILE "no-such-page.md",
+  FOLLOWS house
+)

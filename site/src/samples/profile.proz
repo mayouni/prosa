@@ -1,0 +1,18 @@
+// A profile holds a text to the measure of a voice, in both directions:
+// AT_MOST refuses the long sentence, and AT_LEAST asks for the colon.
+
+DEFINE STYLE voiced_house (
+  HOLDS [short_and_marked]
+)
+
+DEFINE PROFILE short_and_marked (
+  SENTENCES_OVER 25 AT_MOST 10 PER_HUNDRED,
+  COLONS AT_LEAST 8 PER_THOUSAND,
+  MIN_WORDS 40,
+  EVIDENCE "The house, 2026-11-26: an example written for the live court"
+)
+
+DEFINE PIECE letter (
+  FILE "profile.md",
+  FOLLOWS voiced_house
+)

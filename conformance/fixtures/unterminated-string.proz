@@ -1,0 +1,4 @@
+// Expected: UNTERMINATED_STRING
+DEFINE STYLE house (
+  MEASURED_FROM "books/ring
+)

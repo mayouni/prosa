@@ -1,0 +1,13 @@
+# baseline: the Haro spike at haro commit 989d6e6, run on vm/zig-out/bin/haro.exe, 2026-11-26. 10 differences on the 66 fixtures judged at level 2: 5 refused under the court's own code, 5 judged clean.
+# reproduce: node haro/gen-prosa-stzu.js, then HARO=<haro.exe> HARO_SPIKE=<haro/spike> node haro/judge-prosa-court.js
+fixture,prosajs_says,court_says,seam,class
+unexpected-token.proz,UNEXPECTED_TOKEN,PARSE,S7,other-code
+unterminated-string.proz,UNTERMINATED_STRING,PARSE,S7,other-code
+unknown-field.proz,UNKNOWN_FIELD,UNKNOWN_CLAUSE,S7,other-code
+duplicate-field.proz,DUPLICATE_FIELD,PARSE,S7,other-code
+duplicate-declaration.proz,DUPLICATE_DECLARATION,DUPLICATE_NAME,S7,other-code
+bad-value.proz,BAD_VALUE,(clean),S2,not-refused
+bound-inverted.proz,BOUND_INVERTED,(clean),S3,not-refused
+example-not-refused.proz,EXAMPLE_NOT_REFUSED,(clean),S4,not-refused
+example-not-lawful.proz,EXAMPLE_NOT_LAWFUL,(clean),S4,not-refused
+term-refused-and-required.proz,TERM_REFUSED_AND_REQUIRED,(clean),S5,not-refused

@@ -1,0 +1,49 @@
+// prosa.proz : the Prosa repository under its own court. Each page of the specification is a piece of FORM page.
+// The site and the book carry their own declarations: site/site.proz and book/book.proz.
+
+USE "styles/ayouni/ayouni.proz"
+
+// A page of the specification is a reference page. It follows the house's words and forms. It declines the measure of the
+// book's voice, and the hedge list, whose entry "kind of" is the name of a thing here: a kind of declaration.
+DEFINE STYLE prosa_docs (
+  ADOPTS [ayouni],
+  DECLINES [ring_voice, ring_presence, hedges]
+)
+
+DEFINE ALLOW hole_is_the_word (
+  FILE "doc/PROPOSAL.md",
+  LINE_HOLDS "is marked as a hole",
+  EXCUSES CALQUE,
+  REASON "The line names the hole of commitment C4, the thing itself"
+)
+
+DEFINE PIECE readme (
+  FILE "README.md", FOLLOWS prosa_docs, FORM page, SUBJECT "Prosa"
+)
+DEFINE PIECE roadmap (
+  FILE "ROADMAP.md", FOLLOWS prosa_docs, FORM page, SUBJECT "roadmap"
+)
+DEFINE PIECE spec_overview (
+  FILE "doc/language/README.md", FOLLOWS prosa_docs, FORM page, SUBJECT "language"
+)
+DEFINE PIECE spec_grammar (
+  FILE "doc/language/GRAMMAR.md", FOLLOWS prosa_docs, FORM page, SUBJECT "grammar"
+)
+DEFINE PIECE spec_declarations (
+  FILE "doc/language/DECLARATIONS.md", FOLLOWS prosa_docs, FORM page, SUBJECT "declaration"
+)
+DEFINE PIECE spec_text (
+  FILE "doc/language/TEXT.md", FOLLOWS prosa_docs, FORM page, SUBJECT "text"
+)
+DEFINE PIECE spec_violations (
+  FILE "doc/language/VIOLATIONS.md", FOLLOWS prosa_docs, FORM page, SUBJECT "diagnostic"
+)
+DEFINE PIECE agents_guide (
+  FILE "doc/AGENTS.md", FOLLOWS prosa_docs, FORM page, SUBJECT "agent"
+)
+DEFINE PIECE parity_findings (
+  FILE "doc/findings/PARITY.md", FOLLOWS prosa_docs, FORM page, SUBJECT "parity"
+)
+DEFINE PIECE proposal (
+  FILE "doc/PROPOSAL.md", FOLLOWS prosa_docs, FORM page, SUBJECT "Prosa"
+)

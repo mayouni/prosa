@@ -1,0 +1,62 @@
+<p class="sub">The commitments of Prosa are the five principles that decide what the language declares and what its court refuses. They ensure that a style stays the author's own: each rule comes from a ruling or a measure, and the court holds every text to it.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>Commitment 1: a correction is made once</h2>
+    <p>Each remark of the author becomes a rule with a stable code, a refused example, a written example and the remark itself as evidence. From that day the court raises the remark on every text, and the author rules on new matters.</p>
+    <p>The rule below is the affirmative rule of the public pages of AYOUNI Press, the first house. Its <code>EVIDENCE</code> field quotes the ruling that created it.</p>
+    <!--proz: styles/ayouni/ayouni.proz lack_listed-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Commitment 2: a voice is a measure taken from the author's pages</h2>
+    <p>The reference book of the house gives a profile: a median sentence of 16 words, 15 colons and 0.5 dashes per thousand words. Prosa holds a text to that distribution in both directions.</p>
+    <ul>
+      <li>An upper bound, <code>AT_MOST</code>, refuses noise: the long sentence, the dash, the cold exclamation.</li>
+      <li>A lower bound, <code>AT_LEAST</code>, asks for what makes the voice present: the short verdict and the colon.</li>
+    </ul>
+    <p>A court that only forbids produces a disciplined and colder text. The lower bounds keep the warmth of the measured pages in the drafts that follow them.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Commitment 3: a style is held to itself</h2>
+    <p>A rule binds a text only when the style adopts it, so the same pattern is noise in one house and voice in another. The author of the first house writes: "The bottleneck of our age is not writing. It is admission." A generic list of AI habits refuses that sentence, and his own style keeps it.</p>
+    <p>A style takes the rules of another with <code>ADOPTS</code> and leaves one out with <code>DECLINES</code>. The public style of the first house adopts its book style and adds one rule:</p>
+    <!--proz: styles/ayouni/ayouni.proz ayouni_public-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Commitment 4: a rule enters on evidence</h2>
+    <p>Evidence is a dated ruling of the author or a measure on a named corpus. The court refuses a rule that carries none, under the code <code>RULE_WITHOUT_EVIDENCE</code>: fashion has no way into a style.</p>
+    <!--file: conformance/fixtures/rule-without-evidence.proz-->
+    <!--run: check conformance/fixtures/rule-without-evidence.proz-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Commitment 5: undecidable is silence</h2>
+    <p>The court decides words, patterns, positions and counts, and it raises a finding only where the specification makes the answer the same on every machine. Whether a sentence is a riddle, or whether a paragraph sounds like its author, belongs to a reading by the author or by an AI model under a declared question.</p>
+    <p>Prosa names the reading, records its answer and keeps it apart from the verdict. A reading carries no code and leaves the exit code of the court unchanged.</p>
+    <!--proz: styles/ayouni/ayouni.proz voice_reader-->
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The five effects for a writer who works with AI models</h2>
+    <ul>
+      <li>The author stops repeating himself: a remark costs one rule.</li>
+      <li>The voice stays the author's: the measure comes from his pages, so a draft is pulled toward him and away from the average.</li>
+      <li>A style becomes an asset: it is versioned, tested by fixtures, reviewed in a pull request and shared between books, sites and posts.</li>
+      <li>Every refusal explains itself: it names the rule, shows the written form and cites the ruling, so a new collaborator or a new AI agent learns the house from its diagnostics.</li>
+      <li>The house states its style to others: a publisher, a documentation team or a brand writes its own <code>.proz</code> file and holds every contributor, a person or an AI agent, to the same law.</li>
+    </ul>
+  </div>
+</section>

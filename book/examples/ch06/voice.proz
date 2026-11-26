@@ -1,0 +1,21 @@
+// voice.proz : the measure of a voice, in both directions.
+
+DEFINE STYLE house (
+  HOLDS [ring_noise, ring_presence]
+)
+
+DEFINE PROFILE ring_noise (
+  SENTENCES_OVER 40 AT_MOST 6 PER_HUNDRED,
+  EXCLAMATIONS AT_MOST 4 PER_THOUSAND,
+  DASHES AT_MOST 4 PER_THOUSAND,
+  CODE OFF_PROFILE, SEVERITY error,
+  EVIDENCE "AWF-04, the colon is the book's mark and the dash is rare; measured on the Ring book, chapters 1 to 9"
+)
+
+DEFINE PROFILE ring_presence (
+  SENTENCE_MEDIAN 16 WITHIN 5,
+  SENTENCES_UNDER 10 AT_LEAST 12 PER_HUNDRED,
+  COLONS AT_LEAST 5 PER_THOUSAND,
+  CODE VOICE_ABSENT, SEVERITY warning,
+  EVIDENCE "Measured on the Ring book, chapters 1 to 9: median 16, colons 15.2 per thousand words"
+)

@@ -1,0 +1,4 @@
+// Expected: MISSING_FIELD
+DEFINE ZONE hero (
+  EXEMPT_FROM [SAY_ONCE]
+)

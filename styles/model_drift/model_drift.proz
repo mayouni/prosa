@@ -1,0 +1,81 @@
+// model_drift.proz : an adoptable set of the habits AI models show in prose, each with the study or the catalogue it comes from.
+// A house takes it with ADOPTS [model_drift] and leaves out what is its own voice with DECLINES.
+// Every rule here is a warning: the set proposes, and the house rules.
+
+DEFINE STYLE model_drift (
+  HOLDS [model_vocabulary, model_phrases, negative_parallelism, participial_tail, closing_formula, dash_habit]
+)
+
+DEFINE WORDLIST model_vocabulary (
+  REFUSES ["delv*", "showcas*", "underscor*", pivotal, intricate, "intricac*", "meticulous*", tapestry, testament, multifaceted,
+           "seamless*", "foster*", "leverag*", "bolster*", "garner*", "realm", "ever-evolving", "fast-paced"],
+  AT_MOST 1 PER_THOUSAND,
+  LANGUAGE en,
+  CODE MODEL_VOCABULARY, SEVERITY warning,
+  SAYS "Name the fact in the plain word.",
+  EVIDENCE "Kobak et al., Science Advances 2025: excess vocabulary of 2024 abstracts; Wikipedia, WikiProject AI Cleanup: Signs of AI writing"
+)
+
+DEFINE PATTERN model_phrases (
+  MATCHES [
+    ["it is", "it's"] [important, worth, crucial, essential] WITHIN 2 [note, noting, mention, mentioning, remember, remembering],
+    [stands, serves, stand, serve] "as a testament",
+    [plays, play, played, playing] [a, an] [vital, crucial, pivotal, significant, key, important] "role",
+    "rich" [tapestry, heritage, history],
+    [navigate, navigating] "the" [complexities, landscape, intricacies],
+    "in today's" WITHIN 3 [world, landscape, age, era]
+  ],
+  LANGUAGE en,
+  CODE MODEL_PHRASE, SEVERITY warning,
+  SAYS "The phrase carries no fact. State the fact.",
+  REFUSED "It is important to note that the court plays a crucial role.",
+  WRITTEN "The court refuses the sentence and names the rule.",
+  EVIDENCE "Wikipedia, WikiProject AI Cleanup: Signs of AI writing, the catalogue of phrases"
+)
+
+// The construction that sets up a point by denying another. A house whose author writes it by hand declines this rule.
+DEFINE PATTERN negative_parallelism (
+  MATCHES [
+    "not only" WITHIN 9 "but",
+    ["not just", "not merely", "not simply"] WITHIN 9 "but",
+    ["it's not about", "it is not about", "isn't about"] WITHIN 9 ["it's about", "it is about"]
+  ],
+  LANGUAGE en,
+  AT_MOST 1 PER_THOUSAND,
+  CODE NEGATIVE_PARALLELISM, SEVERITY warning,
+  SAYS "State the point directly.",
+  REFUSED "The court is not only a linter but a judge.",
+  WRITTEN "The court judges a text against its declared style.",
+  EVIDENCE "Wikipedia, WikiProject AI Cleanup: Signs of AI writing, parallel constructions involving not"
+)
+
+// A sentence that ends on a comma and a present participle which comments on what came before.
+DEFINE PATTERN participial_tail (
+  MATCHES ["," [highlighting, underscoring, emphasizing, showcasing, reflecting, ensuring, demonstrating, illustrating,
+                signaling, cementing, solidifying, fostering, enabling, allowing, making, creating, providing, offering,
+                paving, marking, contributing]],
+  AT_MOST 2 PER_THOUSAND,
+  LANGUAGE en,
+  CODE PARTICIPIAL_TAIL, SEVERITY warning,
+  SAYS "Give the comment its own sentence, with its own subject and verb.",
+  REFUSED "The court names the rule, ensuring that the writer learns the house.",
+  WRITTEN "The court names the rule. The writer learns the house from it.",
+  EVIDENCE "Reinhart et al., PNAS 2025: instruction-tuned models use present participial clauses two to five times more often than people"
+)
+
+DEFINE PATTERN closing_formula (
+  MATCHES ["In conclusion,", "In summary,", "Overall,", "Ultimately,", "To sum up,", "All in all,", "In essence,"],
+  AT paragraph_start,
+  LANGUAGE en,
+  CODE CLOSING_FORMULA, SEVERITY warning,
+  SAYS "Open the paragraph on its own fact.",
+  REFUSED "In conclusion, the court is useful.",
+  WRITTEN "The court ran on 81 pages.",
+  EVIDENCE "Wikipedia, WikiProject AI Cleanup: Signs of AI writing, section summaries and closing formulas"
+)
+
+DEFINE PROFILE dash_habit (
+  DASHES AT_MOST 2 PER_THOUSAND,
+  CODE DASH_HABIT, SEVERITY warning,
+  EVIDENCE "Wikipedia, WikiProject AI Cleanup: Signs of AI writing: AI models use em dashes more often than nonprofessional writers of the same genre"
+)

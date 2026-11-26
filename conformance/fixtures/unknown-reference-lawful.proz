@@ -1,0 +1,10 @@
+// Expected: none
+DEFINE STYLE house (
+  HOLDS [programmer]
+)
+DEFINE TERM programmer (
+  MEANS "the person who writes programs",
+  REFUSES [developer, developers],
+  MENTIONS skipped,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)

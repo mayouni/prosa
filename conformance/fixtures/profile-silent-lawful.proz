@@ -1,0 +1,15 @@
+// Expected: none
+DEFINE STYLE house (
+  HOLDS [voice]
+)
+DEFINE PROFILE voice (
+  SENTENCES_OVER 40 AT_MOST 10 PER_HUNDRED,
+  DASHES AT_MOST 4 PER_THOUSAND,
+  SENTENCE_MEDIAN 6 WITHIN 4,
+  MIN_WORDS 50,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "profile-silent-lawful.md",
+  FOLLOWS house
+)

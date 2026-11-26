@@ -1,0 +1,61 @@
+// plain_manual.proz : a second house, written to show that a style belongs to its house.
+// It is the style of a maintenance manual, after the principles of Simplified Technical English (ASD-STE100): one word for
+// one thing, short sentences, the active voice. The bounds below are this example's own; a real house measures its own.
+
+USE "prosa:reader_rights"
+USE "../model_drift/model_drift.proz"
+
+DEFINE STYLE plain_manual (
+  LANGUAGES [en],
+  ADOPTS [reader_rights, model_drift],
+  DECLINES [dash_habit],
+  HOLDS [valve, start_word, vague_quantity, manual_voice]
+)
+
+DEFINE TERM valve (
+  MEANS "the part that opens and closes the flow",
+  REFUSES [tap, taps, faucet, faucets, stopcock, stopcocks],
+  EVIDENCE "The manual's glossary, entry 12; after ASD-STE100: one word has one meaning"
+)
+
+DEFINE TERM start_word (
+  MEANS "to put the pump in operation",
+  WRITES "start",
+  REFUSES [activate, activates, initiate, initiates, "fire up", "power up", "switch on"],
+  EVIDENCE "The manual's glossary, entry 3; after ASD-STE100: one word has one meaning"
+)
+
+DEFINE WORDLIST vague_quantity (
+  REFUSES [several, various, numerous, "a number of", "a few", approximately WRITE "the measured value", roughly WRITE "the measured value"],
+  CODE VAGUE_QUANTITY, SEVERITY error,
+  SAYS "A manual gives the number.",
+  EVIDENCE "The manual's review of 2026-11-26: a technician acts on a number"
+)
+
+DEFINE PROFILE manual_voice (
+  SENTENCE_MEDIAN 10 WITHIN 4,
+  SENTENCES_OVER 20 AT_MOST 10 PER_HUNDRED,
+  DASHES AT_MOST 0,
+  EXCLAMATIONS AT_MOST 0,
+  QUESTIONS AT_MOST 0,
+  MIN_WORDS 60,
+  CODE OFF_MANUAL_VOICE, SEVERITY error,
+  EVIDENCE "After ASD-STE100: short sentences in procedures; the bounds are this example's own"
+)
+
+DEFINE FORM procedure (
+  TITLE_WORDS AT_MOST 8,
+  TITLE_HOLDS subject,
+  FIRST_SENTENCE_HOLDS subject,
+  HEADINGS ["Before you start", "Procedure", "After the procedure"],
+  HEADING_CASE sentence,
+  EVIDENCE "The manual's template, revision 2"
+)
+
+DEFINE PIECE pump_start (
+  FILE "pump-start.md",
+  FOLLOWS plain_manual,
+  FORM procedure,
+  SUBJECT "pump",
+  READER technician
+)

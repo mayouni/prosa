@@ -1,0 +1,7 @@
+// Expected: DUPLICATE_DECLARATION
+DEFINE STYLE house (
+  LANGUAGES [en]
+)
+DEFINE STYLE house (
+  LANGUAGES [fr]
+)

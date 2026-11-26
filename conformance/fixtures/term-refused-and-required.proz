@@ -1,0 +1,15 @@
+// Expected: TERM_REFUSED_AND_REQUIRED
+DEFINE STYLE house (
+  HOLDS [programmer, plain_words]
+)
+DEFINE TERM programmer (
+  MEANS "the person who writes programs",
+  REFUSES [developer, developers],
+  MENTIONS skipped,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE WORDLIST plain_words (
+  REFUSES [programmer, coder],
+  CODE PLAIN_WORD,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)

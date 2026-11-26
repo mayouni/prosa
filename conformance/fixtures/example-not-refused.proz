@@ -1,0 +1,8 @@
+// Expected: EXAMPLE_NOT_REFUSED
+DEFINE PATTERN lack_listed (
+  MATCHES ["not yet", "never" WITHIN 3 "run"],
+  CODE LACK_LISTED,
+  REFUSED "The verifier checks the declaration.",
+  WRITTEN "The verifier checks the declaration.",
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)

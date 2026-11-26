@@ -1,0 +1,35 @@
+# The book's contents as data.
+#
+# Everything in this file is a working proposal until the author rules: the title, the subtitle, the outline, every chapter
+# title (a title is the author's call) and every subject term. Nothing here was ruled by him. Drafted 2026-11-26.
+# A title is six words at most and names its subject; the subject term stands in the title and in the first sentence
+# of the chapter, and the court checks both (book.proz, FORM book_chapter).
+
+title: Prose Under Law                # proposed, after the sister book "Interfaces Under Law"
+subtitle: Writing governance for people and AI agents, using the Prosa language   # proposed
+tagline: ""                           # the author's to write
+author: Mansour Ayouni
+imprint: AYOUNI Press
+language: en
+status: draft                         # every page is draft; only the author moves a page (AWF-13)
+framework: AYOUNI Writing Framework 0.6
+court: book.proz                      # node tools/prosa/cli.js check book/book.proz
+
+# [number, file, title, subject term]; the order is proposed.
+chapters:
+  - [0,  00-preface.md,                              Preface,                              preface]
+  - [1,  01-a-style-held-by-a-promise.md,            A style held by a promise,            style]
+  - [2,  02-what-the-field-already-built.md,         What the field already built,         field]
+  - [3,  03-a-correction-made-once.md,               A correction made once,               correction]
+  - [4,  04-one-thing-one-word.md,                   "One thing, one word",                word]
+  - [5,  05-the-pattern-that-refuses-a-sentence.md,  The pattern that refuses a sentence,  pattern]
+  - [6,  06-the-measure-of-a-voice.md,               The measure of a voice,               measure]
+  - [7,  07-the-form-of-a-text.md,                   The form of a text,                   form]
+  - [8,  08-the-reading-beside-the-court.md,         The reading beside the court,         reading]
+  - [9,  09-the-ai-agent-under-the-court.md,         The AI agent under the court,         agent]
+  - [10, 10-a-house-writes-its-law.md,               A house writes its law,               house]
+
+# Titles changed from the outline the drafter was given, to keep the six-word rule or to hold the subject term:
+#   1  "A style that lives in a promise" (seven words)     -> "A style held by a promise"
+#   5  "The refused sentence"                              -> "The pattern that refuses a sentence" (the subject is the pattern)
+#   8  "What the court leaves to a reader" (seven words)   -> "The reading beside the court" (the subject is the reading)

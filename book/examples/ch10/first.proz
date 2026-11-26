@@ -1,0 +1,8 @@
+// first.proz : the same notice, judged by the first house.
+
+USE "../../../styles/ayouni/ayouni.proz"
+
+DEFINE PIECE notice (
+  FILE "notice.md",
+  FOLLOWS ayouni
+)

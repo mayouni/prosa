@@ -1,0 +1,145 @@
+/* prosa.css : the Prosa site. It belongs to the visual family of its sister site (a bar with the main menu, a band of the
+   section's pages, a page head with kicker, title and lede, terminals as pre.term) and carries Prosa's own accent: pine green,
+   with amber for the brand. Every colour and size is a token below. Light and dark follow the reader's system. The site makes
+   no external request and holds no animation. */
+:root {
+  --size-small: 1rem; --size-reading: 1.1875rem; --size-lead: 1.375rem; --size-section: 1.625rem; --size-title: 2.125rem; --size-hero: 2.75rem;
+  --space-1: .5rem; --space-2: 1rem; --space-3: 2rem; --space-4: 3.5rem; --gutter: 1.25rem;
+  --radius: 8px; --target: 44px;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --mono: ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+  --paper: #f7f5ef; --surface: #fffdf8; --tint: #ece9df; --ink: #1b2421; --ink-2: #47524e; --line: #d5d1c3; --edge: #7b857f;
+  --link: #0b5d52; --action: #0b5d52; --on-action: #ffffff; --focus: #c2410c;
+  --bar: #12332e; --on-bar: #ffffff; --brand: #f2c66d; --band: #e3efe9;
+  --term: #101c19; --on-term: #e4ece8; --term-dim: #a3b5ae; --term-bad: #ff9d8a; --term-warn: #f2c66d; --term-good: #7ee2ae;
+  --c-comment: #5a6661; --c-key: #0b5d52; --c-str: #7a3e12;
+  --danger: #8e1f13; --success: #145036;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0f1614; --surface: #17211e; --tint: #141d1a; --ink: #dfe8e3; --ink-2: #aebbb5; --line: #2c3b36; --edge: #6f837b;
+    --link: #74d8c2; --action: #74d8c2; --on-action: #0b1513; --focus: #ffb37a;
+    --bar: #091210; --on-bar: #dfe8e3; --brand: #f2c66d; --band: #17211e;
+    --term: #070d0c; --on-term: #dfe8e3;
+    --c-comment: #9aa8a2; --c-key: #74d8c2; --c-str: #f0b78a;
+    --danger: #ff9d8a; --success: #7ee2ae;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: var(--size-reading)/1.65 var(--sans); text-wrap: pretty; overflow-wrap: break-word; }
+a { color: var(--link); text-decoration: underline; text-decoration-thickness: from-font; text-underline-offset: .18em; }
+nav a { text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+button, input, select, textarea { font: inherit; color: inherit; }
+code, pre, kbd, textarea.code { font-family: var(--mono); }
+code { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0 .3em; font-size: .92em; overflow-wrap: anywhere; }
+.wrap, .narrow { max-width: 70rem; margin: 0 auto; padding: 0 var(--gutter); }
+.skip { position: absolute; left: .6rem; top: -5rem; background: var(--surface); color: var(--ink); border: 3px solid var(--focus);
+  border-radius: var(--radius); padding: .5rem .9rem; z-index: 20; }
+.skip:focus { top: .6rem; }
+
+/* ---- the bars: the main menu, and the band of the section's pages ---- */
+nav.site { background: var(--bar); color: var(--on-bar); }
+nav.site .menu { display: flex; align-items: center; flex-wrap: wrap; gap: 0 1.3rem; padding: .25rem 0; }
+nav.site a { color: var(--on-bar); display: inline-flex; align-items: center; min-height: var(--target); }
+nav.site .brand { color: var(--brand); font-weight: 800; letter-spacing: .04em; margin-right: 1rem; }
+nav.site a.here { font-weight: 800; box-shadow: inset 0 -3px 0 var(--brand); }
+nav.band { background: var(--band); border-bottom: 1px solid var(--line); }
+nav.band .wrap { display: flex; flex-wrap: wrap; gap: 0 1.4rem; }
+nav.band a { color: var(--ink); display: inline-flex; align-items: center; min-height: var(--target); font-size: var(--size-small); }
+nav.band a[aria-current] { font-weight: 800; box-shadow: inset 0 -3px 0 var(--link); }
+@media (min-width: 48rem) { .bars { position: sticky; top: 0; z-index: 10; } h2[id], h3[id], section[id] { scroll-margin-top: 7rem; } }
+
+/* ---- the page head: kicker, title, lede ---- */
+header.page { background: var(--tint); padding: 2.4rem 0 2.2rem; border-bottom: 1px solid var(--line); }
+.kicker { font: var(--size-small) var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--ink-2); margin: 0 0 .7rem; }
+h1 { margin: 0; font-weight: 800; font-size: var(--size-title); line-height: 1.2; max-width: 46rem; text-wrap: balance; }
+.sub { font-size: var(--size-lead); line-height: 1.5; max-width: 46rem; margin: 1.1rem 0 0; }
+
+/* ---- the front page's hero: the claim on the bar's ground ---- */
+header.hero { background: var(--bar); color: var(--on-bar); padding: 3.5rem 0 3.2rem; }
+header.hero .kicker { color: var(--brand); }
+header.hero h1 { font-size: var(--size-hero); line-height: 1.12; }
+header.hero .sub { color: var(--on-bar); }
+header.hero code { background: transparent; border-color: color-mix(in srgb, var(--on-bar) 40%, transparent); color: var(--on-bar); }
+.actions { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1.8rem 0 0; }
+.actions a { display: inline-flex; align-items: center; min-height: var(--target); padding: .35rem 1.1rem; border-radius: var(--radius);
+  font-weight: 700; text-decoration: none; border: 2px solid var(--brand); color: var(--on-bar); }
+.actions a.primary { background: var(--brand); color: #1b2421; }
+.actions a:hover { text-decoration: underline; }
+
+/* ---- the sections ---- */
+main section { padding: var(--space-4) 0 0; }
+main section:last-child { padding-bottom: var(--space-4); }
+main section.alt { background: var(--tint); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-bottom: var(--space-4); margin-top: var(--space-4); }
+h2 { font-size: var(--size-section); line-height: 1.25; font-weight: 800; margin: 0 0 1rem; max-width: 46rem; text-wrap: balance; }
+h3 { font-size: var(--size-lead); line-height: 1.3; font-weight: 800; margin: 2rem 0 .6rem; max-width: 46rem; }
+main p, main ul, main ol { max-width: 44rem; margin: 0 0 1rem; }
+main ul, main ol { padding-left: 1.3rem; }
+main li { margin: 0 0 .5rem; }
+.lbl { font-weight: 800; font-size: var(--size-small); color: var(--ink-2); margin: 1.4rem 0 .4rem; }
+.caption { font-size: var(--size-small); color: var(--ink-2); }
+
+/* ---- code: a declaration (pre.shot) and a terminal (pre.term) ---- */
+pre { margin: 0 0 1.2rem; padding: 1rem 1.1rem; border-radius: var(--radius); font-size: .95rem; line-height: 1.55; overflow-x: auto; max-width: 100%; tab-size: 2; }
+pre.shot { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--link); color: var(--ink); }
+pre.shot .c { color: var(--c-comment); font-style: italic; }
+pre.shot .k { color: var(--c-key); font-weight: 700; }
+pre.shot .s { color: var(--c-str); }
+pre.term { background: var(--term); color: var(--on-term); border: 1px solid var(--line); }
+pre.term .dim { color: var(--term-dim); }
+pre.term .bad { color: var(--term-bad); font-weight: 700; }
+pre.term .warn { color: var(--term-warn); font-weight: 700; }
+pre.term .good { color: var(--term-good); font-weight: 700; }
+.three { display: grid; gap: 0 1.4rem; grid-template-columns: minmax(0, 1fr); margin: 1.2rem 0 0; }
+.three > div { min-width: 0; }
+@media (min-width: 62rem) { .three { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .three > .wide { grid-column: 1 / -1; } }
+
+/* ---- tables scroll inside their own region on a narrow screen ---- */
+.scroll { overflow-x: auto; margin: 0 0 1.4rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: var(--size-small); line-height: 1.5; }
+th, td { text-align: left; vertical-align: top; padding: .6rem .8rem; border-bottom: 1px solid var(--line); }
+thead th { background: var(--tint); font-weight: 800; white-space: nowrap; }
+tbody tr:last-child > * { border-bottom: 0; }
+tbody th { font-weight: 700; }
+td code, th code { overflow-wrap: normal; white-space: nowrap; }
+td code.msg { white-space: normal; border: 0; background: transparent; padding: 0; }
+
+/* ---- the entry points of the front page ---- */
+.cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); list-style: none; padding: 0; max-width: none; }
+.cards li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; margin: 0; }
+.cards a { font-weight: 800; }
+
+/* ---- the live court ---- */
+.court-bar { display: flex; flex-wrap: wrap; align-items: end; gap: .8rem 1.4rem; margin: 0 0 1.2rem; }
+.field { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
+.field label, .editor label { font-weight: 800; font-size: var(--size-small); }
+.field select { min-height: var(--target); padding: .3rem .6rem; background: var(--surface); border: 1px solid var(--edge); border-radius: var(--radius); max-width: 100%; }
+.editors { display: grid; gap: 1.2rem; grid-template-columns: minmax(0, 1fr); margin: 0 0 1.2rem; }
+@media (min-width: 62rem) { .editors { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.editor { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+.editor .hint { font-size: var(--size-small); color: var(--ink-2); margin: 0; }
+textarea.code { width: 100%; min-height: 22rem; resize: vertical; padding: .8rem .9rem; font-size: .95rem; line-height: 1.55; tab-size: 2;
+  background: var(--surface); border: 1px solid var(--edge); border-radius: var(--radius); white-space: pre; overflow: auto; }
+textarea.code.wraps { white-space: pre-wrap; }
+#verdict { min-height: 6rem; white-space: pre-wrap; }
+#brief { white-space: pre-wrap; }
+.state { font-weight: 800; }
+.state.refused { color: var(--danger); }
+.state.lawful { color: var(--success); }
+
+/* ---- the footer ---- */
+footer.site { background: var(--bar); color: var(--on-bar); padding: 1.6rem 0; margin-top: 0; }
+footer.site .fine { margin: 0; font-size: var(--size-small); max-width: 46rem; }
+footer.site a { color: var(--brand); }
+footer.site code { background: transparent; border-color: color-mix(in srgb, var(--on-bar) 40%, transparent); color: inherit; }
+
+@media (max-width: 30rem) {
+  :root { --size-title: 1.75rem; --size-hero: 2.1rem; --size-lead: 1.25rem; --size-section: 1.4rem; }
+  nav.site .menu { gap: 0 1rem; }
+  pre { font-size: .85rem; padding: .8rem; }
+}
+@media print { .bars, .skip, .actions { display: none; } }

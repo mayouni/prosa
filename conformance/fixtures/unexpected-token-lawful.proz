@@ -1,0 +1,4 @@
+// Expected: none
+DEFINE STYLE house (
+  LANGUAGES [en]
+)

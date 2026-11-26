@@ -1,0 +1,33 @@
+// The affirmative rule: a public page states what a thing is and does.
+// The style adopts the reader's rights, and the form asks for the subject
+// in the title and in the first sentence.
+
+USE "prosa:reader_rights"
+
+DEFINE STYLE public_house (
+  ADOPTS [reader_rights],
+  HOLDS [lack_listed]
+)
+
+DEFINE PATTERN lack_listed (
+  MATCHES ["not yet", "nobody has", "never been" [run, measured, shown, tested]],
+  IN [title, heading, lede, body, list],
+  CODE LACK_LISTED, SEVERITY error,
+  SAYS "The line lists a lack. State what the thing is and does, at its true size.",
+  REFUSED "This was not yet measured.",
+  WRITTEN "The verifier checks the declaration.",
+  EVIDENCE "The house, 2026-11-26: an example written for the live court"
+)
+
+DEFINE FORM page (
+  EXTENDS governed_text,
+  TITLE_WORDS AT_MOST 6,
+  EVIDENCE "The house, 2026-11-26: an example written for the live court"
+)
+
+DEFINE PIECE court_page (
+  FILE "affirmative.md",
+  FOLLOWS public_house,
+  FORM page,
+  SUBJECT "court"
+)

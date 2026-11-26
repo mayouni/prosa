@@ -1,0 +1,42 @@
+// site.proz : the writing style of the Softanza public sites, declared from zayn/doc/design/WRITING.md.
+// A site adopts it and binds each page with a PIECE of FORM page, whose subject is the page's menu term.
+
+USE "../ayouni/ayouni.proz"
+
+DEFINE STYLE softanza_site (
+  ADOPTS [ayouni_public],
+  HOLDS [site_lack_listed, narrative_register]
+)
+
+// WRITING.md section 4 lists more phrases than the house gate; the site style adds them.
+DEFINE PATTERN site_lack_listed (
+  MATCHES [
+    "no person has", "not run yet", "not built", [unverified, unproved], "not proved", "no study", "no user",
+    "cannot yet", "not verified", "nobody looked", "not written", "never" WITHIN 3 "run"
+  ],
+  IN [title, heading, lede, body, list],
+  LANGUAGE en,
+  CODE LACK_LISTED, SEVERITY error,
+  SAYS "The page lists a lack. State what the thing is and does, at its true size.",
+  REFUSED "No instrument here is verified, and no study covers it.",
+  WRITTEN "Tested on Windows and Linux; built for macOS.",
+  EVIDENCE "zayn/doc/design/WRITING.md section 4; the author, 2026-11-08 (ZANE-AFFIRM-01)"
+)
+
+// WRITING.md rule 4 refuses the narrative register. The court decides the phrases the rule names; reading does the rest.
+DEFINE PATTERN narrative_register (
+  MATCHES ["we found", "the story of", "so it was" ANY],
+  IN [title, heading, lede, body, list],
+  LANGUAGE en,
+  CODE NARRATIVE_REGISTER, SEVERITY error,
+  SAYS "The sentence tells a story. Write subject, verb and object, in the present tense.",
+  REFUSED "We found that the grid has empty cells, so it was measured.",
+  WRITTEN "The grid has 35 empty cells.",
+  EVIDENCE "zayn/doc/design/WRITING.md rule 4; the author, 2026-11-05: avoid the narrative, succinct, non declarative style of writing"
+)
+
+DEFINE READING register_reader (
+  ON page,
+  ASKS "Does a sentence tease, clip, or state an aphorism? Does a title make sense only after the page is read?",
+  RECORDS "research/register"
+)

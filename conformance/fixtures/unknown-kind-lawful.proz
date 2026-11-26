@@ -1,0 +1,4 @@
+// Expected: none
+DEFINE STYLE loud (
+  LANGUAGES [en]
+)

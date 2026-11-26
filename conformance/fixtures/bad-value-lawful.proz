@@ -1,0 +1,5 @@
+// Expected: none
+DEFINE PROFILE voice (
+  DASHES AT_MOST 4 PER_THOUSAND,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)

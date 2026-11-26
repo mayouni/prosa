@@ -1,0 +1,14 @@
+// Expected: none
+DEFINE STYLE house (
+  HOLDS []
+)
+DEFINE FORM page (
+  TITLE_HOLDS subject,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "title-with-subject-lawful.md",
+  FOLLOWS house,
+  FORM page,
+  SUBJECT "court"
+)

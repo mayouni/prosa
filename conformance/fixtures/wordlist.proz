@@ -1,0 +1,13 @@
+// Expected: FORBIDDEN_WORD
+DEFINE STYLE house (
+  HOLDS [forbidden_words]
+)
+DEFINE WORDLIST forbidden_words (
+  REFUSES [leverage WRITE "use", "in order to" WRITE "to", "utili*" WRITE "use"],
+  CODE FORBIDDEN_WORD, SEVERITY error,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "wordlist.md",
+  FOLLOWS house
+)

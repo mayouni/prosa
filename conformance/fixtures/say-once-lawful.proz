@@ -1,0 +1,14 @@
+// Expected: none
+DEFINE STYLE house (
+  HOLDS []
+)
+DEFINE FORM page (
+  SAY_ONCE FIRST 150,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "say-once-lawful.md",
+  FOLLOWS house,
+  FORM page,
+  SUBJECT "court"
+)

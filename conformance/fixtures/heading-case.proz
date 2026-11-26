@@ -1,0 +1,13 @@
+// Expected: HEADING_NOT_SENTENCE_CASE
+DEFINE STYLE house (
+  HOLDS []
+)
+DEFINE FORM page (
+  HEADING_CASE sentence,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "heading-case.md",
+  FOLLOWS house,
+  FORM page
+)

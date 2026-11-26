@@ -1,0 +1,5 @@
+zig/zig-out/
+zig/.zig-cache/
+.zig-cache/
+node_modules/
+.claude/settings.local.json

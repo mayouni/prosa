@@ -1,0 +1,4 @@
+// Expected: none
+DEFINE STYLE house (
+  MEASURED_FROM "books/ring"
+)

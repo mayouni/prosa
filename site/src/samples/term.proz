@@ -1,0 +1,18 @@
+// A term gives one thing one word.
+// Change "developer" to "programmer" in the text, and the court is silent.
+
+DEFINE STYLE small_house (
+  HOLDS [programmer]
+)
+
+DEFINE TERM programmer (
+  MEANS "the person who writes programs",
+  REFUSES [developer, developers],
+  MENTIONS skipped,
+  EVIDENCE "The house, 2026-11-26: an example written for the live court"
+)
+
+DEFINE PIECE note (
+  FILE "term.md",
+  FOLLOWS small_house
+)

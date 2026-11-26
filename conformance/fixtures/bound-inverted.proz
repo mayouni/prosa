@@ -1,0 +1,5 @@
+// Expected: BOUND_INVERTED
+DEFINE PROFILE voice (
+  EXCLAMATIONS BETWEEN 4 AND 1 PER_THOUSAND,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)

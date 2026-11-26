@@ -1,0 +1,13 @@
+// Expected: HOLE_OPEN
+DEFINE STYLE house (
+  HOLDS []
+)
+DEFINE FORM page (
+  HOLES_CLOSED_AT [review, published],
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "hole-open.md",
+  FOLLOWS house,
+  FORM page
+)

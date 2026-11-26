@@ -1,0 +1,14 @@
+// Expected: INTENSIFIER
+DEFINE STYLE house (
+  HOLDS [intensifiers]
+)
+DEFINE WORDLIST intensifiers (
+  REFUSES [very, really, simply],
+  AT_MOST 4 PER_THOUSAND,
+  CODE INTENSIFIER,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "budget-over.md",
+  FOLLOWS house
+)

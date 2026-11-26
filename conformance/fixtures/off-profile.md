@@ -1,0 +1,5 @@
+# The court of Prosa
+
+The court reads the page and then it reads the page again and then it reads every other page of the book and then it reads the site and the posts and the letters and the notes and every line that a reader may one day meet in print. The court reads the page and then it reads the page again and then it reads every other page of the book and then it reads the site and the posts and the letters and the notes and every line that a reader may one day meet in print. The court reads. It judges. It names the rule.
+
+The court — the judge — reads — and names — the rule — every time.

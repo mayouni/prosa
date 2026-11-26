@@ -1,0 +1,41 @@
+{
+  "contract": "0.1",
+  "language": "prosa",
+  "note": "Every diagnostic the court can raise by itself. A code is never reused. The codes of TERM, WORDLIST, PATTERN and PROFILE rules belong to the style that declares them.",
+  "violations": {
+    "UNEXPECTED_TOKEN": { "severity": "error", "level": 1, "summary": "Unexpected {token}.", "invariant": "A .proz file is a sequence of USE lines and DEFINE declarations." },
+    "UNTERMINATED_STRING": { "severity": "error", "level": 1, "summary": "A quoted string is not closed on its line.", "invariant": "A string opens and closes on one line." },
+    "UNKNOWN_KIND": { "severity": "error", "level": 1, "summary": "{kind} is not a kind of declaration.", "invariant": "The kinds are closed: STYLE, TERM, WORDLIST, PATTERN, PROFILE, FORM, ZONE, PIECE, ALLOW, READING." },
+    "UNKNOWN_FIELD": { "severity": "error", "level": 1, "summary": "{field} is not a field of {kind}.", "invariant": "Each kind has a closed list of fields." },
+    "DUPLICATE_FIELD": { "severity": "error", "level": 1, "summary": "The field {field} stands twice.", "invariant": "A field stands once in a declaration." },
+    "DUPLICATE_DECLARATION": { "severity": "error", "level": 1, "summary": "The name {name} is already declared at line {first}.", "invariant": "A name is declared once across all kinds." },
+    "MISSING_FIELD": { "severity": "error", "level": 1, "summary": "{kind} needs the field {field}.", "invariant": "A declaration carries its required fields." },
+    "BAD_VALUE": { "severity": "error", "level": 1, "summary": "The value of {field} is not lawful: {why}.", "invariant": "A field's value has the shape its kind declares." },
+
+    "RULE_WITHOUT_EVIDENCE": { "severity": "error", "level": 2, "summary": "This {kind} carries no EVIDENCE: a rule enters on a dated ruling or a measure.", "invariant": "Every rule cites the ruling or the measure it comes from." },
+    "UNKNOWN_REFERENCE": { "severity": "error", "level": 2, "summary": "{field} names {name}, which is not a declared {kinds}.", "invariant": "A reference names a declaration of the right kind." },
+    "ADOPTION_CYCLE": { "severity": "error", "level": 2, "summary": "{field} leads back to this declaration.", "invariant": "Adoption and extension form no cycle." },
+    "TERM_REFUSED_AND_REQUIRED": { "severity": "error", "level": 2, "summary": "The style {style} asks for \"{word}\" and refuses it in {rule}.", "invariant": "A style never refuses the word it asks for." },
+    "EXAMPLE_NOT_REFUSED": { "severity": "error", "level": 2, "summary": "The REFUSED example is not refused by its own pattern: \"{text}\".", "invariant": "A pattern refuses its own refused example." },
+    "EXAMPLE_NOT_LAWFUL": { "severity": "error", "level": 2, "summary": "The WRITTEN example is refused by its own pattern: \"{text}\".", "invariant": "A pattern accepts its own written example." },
+    "PIECE_WITHOUT_SUBJECT": { "severity": "error", "level": 2, "summary": "The form {form} places the subject, and the piece declares no SUBJECT.", "invariant": "A piece whose form places the subject declares it." },
+    "BOUND_INVERTED": { "severity": "error", "level": 2, "summary": "The bound of {field} has its lower end above its upper end.", "invariant": "A bound's lower end is at most its upper end." },
+
+    "TITLE_TOO_LONG": { "severity": "error", "level": 3, "summary": "The title holds {n} words; the form allows {max}.", "invariant": "A title names its subject in few words." },
+    "TITLE_MISSING": { "severity": "error", "level": 3, "summary": "The piece has no title.", "invariant": "A governed text has a title." },
+    "TITLE_WITHOUT_SUBJECT": { "severity": "error", "level": 3, "summary": "The title does not name the subject \"{subject}\".", "invariant": "A title names its subject." },
+    "LEDE_WITHOUT_SUBJECT": { "severity": "error", "level": 3, "summary": "The first sentence does not name the subject \"{subject}\".", "invariant": "The first sentence names the subject and says what it is." },
+    "SUBJECT_NOT_FOUND": { "severity": "error", "level": 3, "summary": "The piece takes its subject from the front matter, and the page declares none.", "invariant": "A page declares its subject." },
+    "SAY_ONCE": { "severity": "error", "level": 3, "summary": "\"{pair}\" stands twice in the first {limit} words (first at line {first}).", "invariant": "A statement is made once per screen." },
+    "HEADING_MISSING": { "severity": "error", "level": 3, "summary": "The form's heading \"{heading}\" is missing.", "invariant": "A form's fixed headings are all present." },
+    "HEADING_OUT_OF_ORDER": { "severity": "error", "level": 3, "summary": "The heading \"{heading}\" stands before a heading the form places ahead of it.", "invariant": "A form's fixed headings keep their order." },
+    "HEADING_NOT_SENTENCE_CASE": { "severity": "warning", "level": 3, "summary": "The heading \"{heading}\" capitalizes every word.", "invariant": "A heading is written in sentence case." },
+    "CLOSES_ON_SUMMARY": { "severity": "error", "level": 3, "summary": "The text closes on \"{phrase}\".", "invariant": "A text closes on something new for its reader." },
+    "HOLE_OPEN": { "severity": "error", "level": 3, "summary": "A hole is still open at status {status}: {hole}", "invariant": "A hole is closed by the author before the text is reviewed." },
+    "ALLOW_STALE": { "severity": "error", "level": 3, "summary": "This ALLOW excuses {code} on a line holding \"{holds}\", and no such finding stands.", "invariant": "An excuse lives as long as the line it excuses." },
+    "PIECE_FILE_NOT_FOUND": { "severity": "error", "level": 3, "summary": "The piece names {path}, and no such file stands.", "invariant": "A piece names a text that exists." },
+
+    "TERM_SYNONYM": { "severity": "error", "level": 3, "summary": "A refused word stands for a declared term.", "invariant": "One thing has one word." },
+    "OFF_PROFILE": { "severity": "warning", "level": 4, "summary": "A measure of the text stands outside the declared profile.", "invariant": "A text keeps the measure of its voice." }
+  }
+}

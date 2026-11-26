@@ -1,0 +1,73 @@
+<p class="sub">A command of Prosa is one verb of the <code>prosa</code> program: check, measure, brief, drift, readings, conformance, pack and version. The commands let a user, a person or an AI agent, judge a text, take a profile from approved pages and hand a writing contract to an AI agent.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>The syntax of the eight verbs</h2>
+    <p>The program prints its own syntax when it runs with no argument. The reference court runs under Node as <code>node tools/prosa/cli.js</code>, and this page writes it <code>prosa</code>.</p>
+    <!--run: --->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa check judges a declaration and its texts</h2>
+    <p>The verb <code>check</code> takes <code>.proz</code> files, texts or folders. It judges each declaration, then each text a <code>PIECE</code> names, and prints one finding per refusal with a closing count. The option <code>--level N</code> stops the court at a stage, and <code>--json</code> prints the findings as data.</p>
+    <!--run: check conformance/fixtures/term-synonym.proz-->
+    <!--run: check conformance/fixtures/term-synonym-lawful.proz-->
+    <p>A text with no declared piece is judged with <code>--style</code>, <code>--form</code>, <code>--subject</code> and <code>--lang</code>, and <code>--proz</code> names the file that declares the style.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa measure takes a profile from approved pages</h2>
+    <p>The verb <code>measure</code> reads a corpus as one pool and writes its measures as a <code>PROFILE</code> declaration. The author adjusts the bounds and rules on them, and the profile enters the style with the corpus as its evidence.</p>
+    <!--run: measure conformance/fixtures/on-profile-lawful.md-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa brief writes the contract of an AI agent</h2>
+    <p>The verb <code>brief</code> turns a declared piece or style into the contract an AI agent receives before it drafts: the form, the terms, the written forms and the measure of the voice. The contract states what to write, which is the form of instruction AI models follow best.</p>
+    <!--run: brief conformance/fixtures/term-synonym.proz --piece the_page-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa drift compares drafts with the pages of the author</h2>
+    <p>The verb <code>drift</code> measures a set of drafts against a corpus and lists what the drafts over-use. Each line is a candidate: it becomes a rule when the author rules on it.</p>
+    <!--run: drift conformance/fixtures/off-profile.md --against conformance/fixtures/on-profile-lawful.md-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa readings lists the judgments of level 5</h2>
+    <p>The verb <code>readings</code> lists each declared reading of each piece as recorded or due, with its question and the path of its record. It always exits with 0: a reading is a record, and the verdict belongs to the court.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa conformance runs every fixture and its lawful twin</h2>
+    <p>The verb <code>conformance</code> runs the suite of the standard. Each refused fixture names the code it expects on its first line, and its lawful twin expects silence.</p>
+    <!--run: conformance-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa pack and prosa version state what a court runs</h2>
+    <p>The verb <code>pack</code> compiles a <code>.proz</code> file and every file it uses into one JSON pack: the declarations as data, with the SHA-256 sum of each source. The form <code>prosa pack --check</code> compares the versions of the court with the manifest of the protocol. The verb <code>version</code> prints the three versions a verdict depends on.</p>
+    <!--run: version-->
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The exit codes a script reads</h2>
+    <p>Every verb that judges exits with 0 when no error stands, with 1 on an error and with 2 on a usage or read error. A warning leaves the exit code at 0, so a build fails on errors alone.</p>
+  </div>
+</section>

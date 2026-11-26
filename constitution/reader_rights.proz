@@ -1,0 +1,28 @@
+// reader_rights.proz : the constitution of Prosa. It states what a reader is owed by any governed text.
+// A house style adopts it with ADOPTS [reader_rights]; a form takes its structure with EXTENDS governed_text.
+
+DEFINE STYLE reader_rights (
+  HOLDS [typed_hole_filler]
+)
+
+// Right 1, the subject: the title names the subject and the first sentence says what it is.
+// Right 2, once: a statement is made once per screen.
+// Right 3, the hole: a particular only the author knows is marked, and the author closes it before review.
+DEFINE FORM governed_text (
+  TITLE_HOLDS subject,
+  FIRST_SENTENCE_HOLDS subject,
+  SAY_ONCE FIRST 150,
+  HOLES_CLOSED_AT [review, published],
+  EVIDENCE "zayn/doc/design/WRITING.md rules 1 and 2 (the author, 2026-11-05 and 2026-11-14); AYOUNI Writing Framework C4"
+)
+
+// Right 4, the source: a placeholder an agent left in place of a fact is refused wherever it stands.
+DEFINE PATTERN typed_hole_filler (
+  MATCHES ["lorem ipsum", "TODO", "TBD", "XXX", "insert" WITHIN 3 "here"],
+  IN [title, heading, lede, body, list],
+  CODE PLACEHOLDER_LEFT, SEVERITY error,
+  SAYS "A placeholder stands where a fact belongs. Mark it [AUTHOR: what is needed] or state the fact.",
+  REFUSED "The study covered TBD participants.",
+  WRITTEN "The study covered [AUTHOR: number of participants] participants.",
+  EVIDENCE "AYOUNI Writing Framework C4: a hole is marked, it is never filled by an agent with a plausible particular"
+)

@@ -1,0 +1,7 @@
+DEFINE PATTERN never_run (
+  MATCHES ["never run"],
+  CODE LACK_LISTED,
+  REFUSED "The audit was never once run.",
+  WRITTEN "The audit runs on the painted page.",
+  EVIDENCE "zayn/doc/design/WRITING.md section 4: never followed within three words by run"
+)

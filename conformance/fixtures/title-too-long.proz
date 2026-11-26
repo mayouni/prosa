@@ -1,0 +1,13 @@
+// Expected: TITLE_TOO_LONG
+DEFINE STYLE house (
+  HOLDS []
+)
+DEFINE FORM page (
+  TITLE_WORDS AT_MOST 6,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "title-too-long.md",
+  FOLLOWS house,
+  FORM page
+)

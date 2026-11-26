@@ -1,0 +1,38 @@
+<p class="sub">The prior work of Prosa is the set of linters, controlled languages and studies that already govern or measure written text. This page lets a reader see what each one gives and what the new language contributes, with a link to each source.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>Seven lines of earlier work, and the addition of Prosa to each</h2>
+    <div class="scroll" role="region" aria-label="Earlier work compared with Prosa" tabindex="0"><table>
+      <thead><tr><th scope="col">Earlier work</th><th scope="col">What it gives</th><th scope="col">What Prosa adds</th><th scope="col">Source</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Vale, textlint, proselint</th><td>Rules as files in the repository, markup-aware matching and checks in continuous integration.</td><td>A typed language in place of YAML and regular expressions, the declaration of each piece, measures and evidence.</td><td><a href="https://vale.sh/docs/styles">Vale, styles and rules</a></td></tr>
+        <tr><th scope="row">ASD-STE100 and the languages surveyed by Kuhn</th><td>Proof that a restricted lexicon with one meaning per word works at industrial scale.</td><td>The house chooses its own lexicon, and the natural language stays whole.</td><td><a href="https://asd-ste100.org/about_STE.html">ASD-STE100</a>; <a href="https://arxiv.org/abs/1507.01701">Kuhn, Computational Linguistics 2014</a></td></tr>
+        <tr><th scope="row">Stylometry: Mosteller and Wallace, Burrows, Biber</th><td>A voice is measurable as a distribution of small features.</td><td>The measure becomes a contract a draft must meet.</td><td><a href="https://arxiv.org/abs/2410.16107">Reinhart et al., PNAS 2025</a>, a study of grammatical and rhetorical styles</td></tr>
+        <tr><th scope="row">Wikipedia's "Signs of AI writing" and the excess-vocabulary studies</th><td>A catalogue of what AI models overuse.</td><td>A style adopts a catalogue as a set of rules, amends it or declines it.</td><td><a href="https://techcrunch.com/2025/11/20/the-best-guide-to-spotting-ai-writing-comes-from-wikipedia/">TechCrunch on the Wikipedia guide</a>; <a href="https://arxiv.org/abs/2406.07016">Kobak et al., Science Advances 2025</a></td></tr>
+        <tr><th scope="row">Antislop</th><td>A sampler that backtracks on banned phrases, and a profiler that finds over-used patterns against a human baseline.</td><td>The same profiling against the author's own corpus: <code>prosa drift</code> lists candidates for the author to rule on.</td><td><a href="https://arxiv.org/abs/2510.15061">Paech et al., ICLR 2026</a></td></tr>
+        <tr><th scope="row">LintMe and the PostHog handbook</th><td>Deterministic checks joined to the judgment of an AI model: a linter detects, an AI model repairs.</td><td>The split is part of the language: levels 1 to 4 belong to the court, and level 5 to a declared reading.</td><td><a href="https://arxiv.org/abs/2603.00331">LintMe, CHI 2026</a>; <a href="https://posthog.com/handbook/docs-and-wizard/vale">PostHog handbook</a></td></tr>
+        <tr><th scope="row">Swales's move analysis</th><td>A genre is a fixed sequence of rhetorical moves.</td><td>The <code>FORM</code> declaration: the title, the first sentence, the fixed headings and the close of a chapter or a page.</td><td><a href="https://arxiv.org/abs/2403.15872">RAAMove, a corpus of moves after Swales</a></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The three things Prosa joins in one language</h2>
+    <p>Each line of the table solves one part of the problem, and a house that wants all the parts runs several tools with several formats. Prosa joins three of them in one declaration that one court reads.</p>
+    <ul>
+      <li>Prosa binds a rule to the ruling that created it: the <code>EVIDENCE</code> field is required, and the diagnostic cites it.</li>
+      <li>Prosa measures a draft against the profile of its own author: <code>prosa measure</code> takes the profile from approved pages.</li>
+      <li>Prosa declares what a text is about, so a rule of position becomes a test the court decides: the title names the subject term.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The three checkers of the first house, stated as one law</h2>
+    <p>AYOUNI Press already carries its rules in three programs: a style lint for its books, a voice check for its public files and a shell check for a site. Prosa states the same rules in one language, and one court reads them. On 81 pages of three books in English and 42 pages in French, the twelve measures of the court equal those of the style lint on every page.</p>
+  </div>
+</section>

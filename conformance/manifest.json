@@ -1,0 +1,339 @@
+{
+ "contract": "0.1",
+ "fixtures": [
+  {
+   "file": "conformance/fixtures/adoption-cycle-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/adoption-cycle.proz",
+   "expect_ids": [
+    "ADOPTION_CYCLE"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/allow-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/allow-stale.proz",
+   "expect_ids": [
+    "ALLOW_STALE"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/bad-value-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/bad-value.proz",
+   "expect_ids": [
+    "BAD_VALUE"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/bound-inverted-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/bound-inverted.proz",
+   "expect_ids": [
+    "BOUND_INVERTED"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/budget-over.proz",
+   "expect_ids": [
+    "INTENSIFIER"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/budget-under-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/closes-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/closes-on-summary.proz",
+   "expect_ids": [
+    "CLOSES_ON_SUMMARY"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/duplicate-declaration.proz",
+   "expect_ids": [
+    "DUPLICATE_DECLARATION"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/duplicate-field-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/duplicate-field.proz",
+   "expect_ids": [
+    "DUPLICATE_FIELD"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/example-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/example-not-lawful.proz",
+   "expect_ids": [
+    "EXAMPLE_NOT_LAWFUL"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/example-not-refused.proz",
+   "expect_ids": [
+    "EXAMPLE_NOT_REFUSED"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/heading-case-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/heading-case.proz",
+   "expect_ids": [
+    "HEADING_NOT_SENTENCE_CASE"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/heading-missing.proz",
+   "expect_ids": [
+    "HEADING_MISSING"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/heading-out-of-order.proz",
+   "expect_ids": [
+    "HEADING_OUT_OF_ORDER"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/headings-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/hole-draft-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/hole-open.proz",
+   "expect_ids": [
+    "HOLE_OPEN"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/lede-with-subject-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/lede-without-subject.proz",
+   "expect_ids": [
+    "LEDE_WITHOUT_SUBJECT"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/missing-field-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/missing-field.proz",
+   "expect_ids": [
+    "MISSING_FIELD"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/off-profile.proz",
+   "expect_ids": [
+    "OFF_PROFILE"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/on-profile-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/pattern-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/pattern-position-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/pattern-position.proz",
+   "expect_ids": [
+    "OPENS_ON_HOWEVER"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/pattern.proz",
+   "expect_ids": [
+    "LACK_LISTED"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/piece-file-not-found.proz",
+   "expect_ids": [
+    "PIECE_FILE_NOT_FOUND"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/piece-with-subject-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/piece-without-subject.proz",
+   "expect_ids": [
+    "PIECE_WITHOUT_SUBJECT"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/profile-silent-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/rule-without-evidence-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/rule-without-evidence.proz",
+   "expect_ids": [
+    "RULE_WITHOUT_EVIDENCE"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/say-once-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/say-once.proz",
+   "expect_ids": [
+    "SAY_ONCE"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/subject-found-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/subject-not-found.proz",
+   "expect_ids": [
+    "SUBJECT_NOT_FOUND"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/term-refused-and-required-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/term-refused-and-required.proz",
+   "expect_ids": [
+    "TERM_REFUSED_AND_REQUIRED"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/term-synonym-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/term-synonym.proz",
+   "expect_ids": [
+    "TERM_SYNONYM"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/title-too-long-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/title-too-long.proz",
+   "expect_ids": [
+    "TITLE_TOO_LONG"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/title-with-subject-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/title-without-subject.proz",
+   "expect_ids": [
+    "TITLE_WITHOUT_SUBJECT"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/unexpected-token-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/unexpected-token.proz",
+   "expect_ids": [
+    "UNEXPECTED_TOKEN"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/unknown-field.proz",
+   "expect_ids": [
+    "UNKNOWN_FIELD"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/unknown-kind-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/unknown-kind.proz",
+   "expect_ids": [
+    "UNKNOWN_KIND"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/unknown-reference-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/unknown-reference.proz",
+   "expect_ids": [
+    "UNKNOWN_REFERENCE"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/unterminated-string-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/unterminated-string.proz",
+   "expect_ids": [
+    "UNTERMINATED_STRING"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/wordlist-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/wordlist.proz",
+   "expect_ids": [
+    "FORBIDDEN_WORD"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/zone-ended.proz",
+   "expect_ids": [
+    "LACK_LISTED"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/zone-lawful.proz",
+   "expect_ids": []
+  }
+ ]
+}

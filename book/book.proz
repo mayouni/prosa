@@ -1,0 +1,78 @@
+// book.proz : the declaration of this book. The court of Prosa judges every chapter of src/en against it.
+// The form and the piece are proposals for the author's ruling, like the title and the outline.
+
+USE "../styles/ayouni/ayouni.proz"
+
+DEFINE FORM book_chapter (
+  EXTENDS titled_chapter,
+  TITLE_HOLDS subject,
+  FIRST_SENTENCE_HOLDS subject,
+  EVIDENCE "books/zayn-book/CLAUDE.md: a title names its subject; the first sentence under a title says what the thing is"
+)
+
+DEFINE PIECE prosa_book (
+  FILES "src/en/*.md",
+  FOLLOWS ayouni,
+  FORM book_chapter,
+  SUBJECT_FROM front_matter
+)
+
+// ---------------------------------------------------------------- the excuses
+// Each ALLOW excuses one line the court refused and a reader accepts: a false positive of the first verdict,
+// recorded in research/trial/first-verdicts.json under false_positives. An excuse that excuses nothing is refused (ALLOW_STALE).
+
+DEFINE ALLOW preface_kind_of (
+  FILE "src/en/00-preface.md",
+  LINE_HOLDS "one kind of declaration at a time",
+  EXCUSES HEDGE,
+  REASON "kind is the noun here: Prosa has ten kinds of declaration"
+)
+
+DEFINE ALLOW preface_a_hole (
+  FILE "src/en/00-preface.md",
+  LINE_HOLDS "is marked as a hole until I fill it",
+  EXCUSES CALQUE,
+  REASON "hole is the framework's own term for an [AUTHOR] marker, and no misspelling of whole"
+)
+
+DEFINE ALLOW field_kind_of (
+  FILE "src/en/02-what-the-field-already-built.md",
+  LINE_HOLDS "each for one kind of text",
+  EXCUSES HEDGE,
+  REASON "kind is the noun here: a book, a public page and a site are three kinds of text"
+)
+
+DEFINE ALLOW form_kind_of (
+  FILE "src/en/07-the-form-of-a-text.md",
+  LINE_HOLDS "the declared structure of a kind of text",
+  EXCUSES HEDGE,
+  REASON "kind is the noun here: a chapter, a page and a post are kinds of text"
+)
+
+DEFINE ALLOW form_the_hole (
+  FILE "src/en/07-the-form-of-a-text.md",
+  LINE_HOLDS "A hole is lawful in a draft",
+  EXCUSES CALQUE,
+  REASON "hole is the framework's own term for an [AUTHOR] marker, and no misspelling of whole"
+)
+
+DEFINE ALLOW reading_the_hole (
+  FILE "src/en/08-the-reading-beside-the-court.md",
+  LINE_HOLDS "where I meant the whole one",
+  EXCUSES CALQUE,
+  REASON "the line quotes the calque of 2020 to explain the rule, and uses hole as the framework's term"
+)
+
+DEFINE ALLOW house_the_hole (
+  FILE "src/en/10-a-house-writes-its-law.md",
+  LINE_HOLDS "A particular that only the author knows is marked, and the author closes it before review",
+  EXCUSES CALQUE,
+  REASON "hole is the name of the third right of the reader, and no misspelling of whole"
+)
+
+DEFINE ALLOW house_kind_of (
+  FILE "src/en/10-a-house-writes-its-law.md",
+  LINE_HOLDS "what kind of pages that makes",
+  EXCUSES HEDGE,
+  REASON "kind is the noun here: the sentence asks which pages, and hedges nothing"
+)

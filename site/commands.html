@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commands: the eight verbs of the prosa program</title>
+<meta name="description" content="A command of Prosa is one verb of the prosa program: check, measure, brief, drift, readings, conformance, pack and version. The page gives the syntax of each and the output of a real run.">
+<meta name="prosa:subject" content="command">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="prosa.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+      <a class="brand" href="index.html">Prosa</a>
+      <a href="approach.html">Approach</a>
+      <a href="kinds.html">Language</a>
+      <a href="try.html">Live court</a>
+      <a class="here" aria-current="true" href="commands.html">Use</a>
+      <a href="book.html">Book</a>
+      <a href="softanza.html">Softanza</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <div class="wrap">
+    <a aria-current="page" href="commands.html">Commands</a>
+    <a href="loops.html">Loops</a>
+  </div>
+</nav>
+</div>
+
+<header class="page">
+  <div class="narrow">
+    <div class="kicker">Use</div>
+    <h1>The commands of Prosa</h1>
+    <p class="sub">A command of Prosa is one verb of the <code>prosa</code> program: check, measure, brief, drift, readings, conformance, pack and version. The commands let a user, a person or an AI agent, judge a text, take a profile from approved pages and hand a writing contract to an AI agent.</p>
+  </div>
+</header>
+
+<main id="main">
+<section>
+  <div class="narrow">
+    <h2>The syntax of the eight verbs</h2>
+    <p>The program prints its own syntax when it runs with no argument. The reference court runs under Node as <code>node tools/prosa/cli.js</code>, and this page writes it <code>prosa</code>.</p>
+    <pre class="term"><span class="dim">$ prosa</span>
+prosa 0.1.0 (language 0.1)
+
+  prosa check &lt;path&gt;... [--level N] [--style S --form F --subject T --lang L] [--proz F]... [--json] [--quiet]
+  prosa measure &lt;path&gt;... [--as NAME] [--json]
+  prosa brief &lt;file.proz&gt; [--piece P | --style S [--form F] [--lang L]]
+  prosa drift &lt;drafts&gt;... --against &lt;corpus&gt; [--lang L] [--json]
+  prosa readings &lt;path&gt;...
+  prosa conformance [dir]
+  prosa pack &lt;file.proz&gt; [-o out.json]      prosa pack --check
+  prosa version
+
+Exit codes: 0 no error (warnings allowed), 1 an error, 2 a usage or read error.</pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa check judges a declaration and its texts</h2>
+    <p>The verb <code>check</code> takes <code>.proz</code> files, texts or folders. It judges each declaration, then each text a <code>PIECE</code> names, and prints one finding per refusal with a closing count. The option <code>--level N</code> stops the court at a stage, and <code>--json</code> prints the findings as data.</p>
+    <pre class="term"><span class="dim">$ prosa check conformance/fixtures/term-synonym.proz</span>
+conformance/fixtures/term-synonym.md:3  <span class="bad">error</span>  <span class="bad">TERM_SYNONYM</span>  programmer
+<span class="dim">    "developer" stands for the person who writes programs: the house word is "programmer".</span>
+<span class="dim">    Rule programmer · The author, 2026-11-26: a ruling written for this fixture</span>
+
+1 error(s), 0 warning(s) across 2 file(s) at level 4</pre>
+    <pre class="term"><span class="dim">$ prosa check conformance/fixtures/term-synonym-lawful.proz</span>
+<span class="good">0 error(s), 0 warning(s) across 2 file(s) at level 4</span></pre>
+    <p>A text with no declared piece is judged with <code>--style</code>, <code>--form</code>, <code>--subject</code> and <code>--lang</code>, and <code>--proz</code> names the file that declares the style.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa measure takes a profile from approved pages</h2>
+    <p>The verb <code>measure</code> reads a corpus as one pool and writes its measures as a <code>PROFILE</code> declaration. The author adjusts the bounds and rules on them, and the profile enters the style with the corpus as its evidence.</p>
+    <pre class="term"><span class="dim">$ prosa measure conformance/fixtures/on-profile-lawful.md</span>
+// Measured by prosa measure on 1 page(s), 121 prose words, 25 sentences.
+// median 3 (quartiles 2 and 4) | over 40 words 4 % | under 10 words 96 %
+// per thousand words: colons 0, dashes 0, exclamations 0, questions 0
+// paragraphs of one sentence 0 %
+
+DEFINE PROFILE measured_voice (
+  SENTENCE_MEDIAN 3 WITHIN 1,
+  SENTENCES_OVER 40 AT_MOST 8 PER_HUNDRED,
+  SENTENCES_UNDER 10 AT_LEAST 48 PER_HUNDRED,
+  DASHES AT_MOST 1 PER_THOUSAND,
+  COLONS AT_LEAST 1 PER_THOUSAND,
+  EXCLAMATIONS AT_MOST 1 PER_THOUSAND,
+  MIN_WORDS 300,
+  EVIDENCE "Measured on conformance/fixtures/on-profile-lawful.md: 121 words"
+)</pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa brief writes the contract of an AI agent</h2>
+    <p>The verb <code>brief</code> turns a declared piece or style into the contract an AI agent receives before it drafts: the form, the terms, the written forms and the measure of the voice. The contract states what to write, which is the form of instruction AI models follow best.</p>
+    <pre class="term"><span class="dim">$ prosa brief conformance/fixtures/term-synonym.proz --piece the_page</span>
+# The writing contract of the piece the_page
+
+This contract states the declared style house for a text in language `en`. The Prosa court judges the text against it after every write.
+
+## One thing, one word
+
+- Write "programmer" for the person who writes programs (in place of: developer, developers).
+
+## The loop
+
+Draft, run `prosa check &lt;file&gt; --json`, and repair each finding by its code until the court is silent. A finding names the rule, the written form and the ruling it comes from.</pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa drift compares drafts with the pages of the author</h2>
+    <p>The verb <code>drift</code> measures a set of drafts against a corpus and lists what the drafts over-use. Each line is a candidate: it becomes a rule when the author rules on it.</p>
+    <pre class="term"><span class="dim">$ prosa drift conformance/fixtures/off-profile.md --against conformance/fixtures/on-profile-lawful.md</span>
+// prosa drift: 118 draft words against 121 corpus words.
+// Each candidate is a measure, offered to the author's ruling. A candidate becomes a rule when the author rules on it.
+
+// measure            drafts   corpus
+// DASHES               42.4        0   per thousand words
+// COLONS                  0        0   per thousand words
+// EXCLAMATIONS            0        0   per thousand words
+// QUESTIONS               0        0   per thousand words
+// SENTENCE_MEDIAN        16        3   words</pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa readings lists the judgments of level 5</h2>
+    <p>The verb <code>readings</code> lists each declared reading of each piece as recorded or due, with its question and the path of its record. It always exits with 0: a reading is a record, and the verdict belongs to the court.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa conformance runs every fixture and its lawful twin</h2>
+    <p>The verb <code>conformance</code> runs the suite of the standard. Each refused fixture names the code it expects on its first line, and its lawful twin expects silence.</p>
+    <pre class="term"><span class="dim">$ prosa conformance</span>
+<span class="good">66 of 66 fixtures pass</span></pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>prosa pack and prosa version state what a court runs</h2>
+    <p>The verb <code>pack</code> compiles a <code>.proz</code> file and every file it uses into one JSON pack: the declarations as data, with the SHA-256 sum of each source. The form <code>prosa pack --check</code> compares the versions of the court with the manifest of the protocol. The verb <code>version</code> prints the three versions a verdict depends on.</p>
+    <pre class="term"><span class="dim">$ prosa version</span>
+prosa 0.1.0 (language 0.1, contract 0.1)</pre>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The exit codes a script reads</h2>
+    <p>Every verb that judges exits with 0 when no error stands, with 1 on an error and with 2 on a usage or read error. A warning leaves the exit code at 0, so a build fails on errors alone.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="narrow">
+    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  </div>
+</footer>
+</body>
+</html>

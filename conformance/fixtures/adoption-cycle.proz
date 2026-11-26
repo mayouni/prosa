@@ -1,0 +1,7 @@
+// Expected: ADOPTION_CYCLE
+DEFINE STYLE house (
+  ADOPTS [press]
+)
+DEFINE STYLE press (
+  ADOPTS [house]
+)

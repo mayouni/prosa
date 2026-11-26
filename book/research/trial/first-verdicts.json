@@ -1,0 +1,251 @@
+[
+ {
+  "chapter": "00-preface.md",
+  "words": 540,
+  "findings": [
+   {
+    "code": "HEDGE",
+    "severity": "warning",
+    "subject": "hedges",
+    "line": 31,
+    "message": "\"kind of\" is on the list hedges. State the claim at its true size."
+   },
+   {
+    "code": "CALQUE",
+    "severity": "error",
+    "subject": "calques",
+    "line": 41,
+    "message": "\"a hole\" is on the list calques. Write \"whole\"."
+   }
+  ],
+  "rounds": 1,
+  "false_positives": [
+   {
+    "code": "HEDGE",
+    "line": 31,
+    "reason": "\"kind of\" is the noun kind followed by of (a kind of declaration, a kind of text), and hedges nothing; excused by an ALLOW in book.proz"
+   },
+   {
+    "code": "CALQUE",
+    "line": 41,
+    "reason": "\"hole\" is the framework's term for an [AUTHOR] marker (or a quotation of the 2020 calque), and no misspelling of whole; excused by an ALLOW in book.proz"
+   }
+  ],
+  "words_at_silence": 540
+ },
+ {
+  "chapter": "01-a-style-held-by-a-promise.md",
+  "words": 1016,
+  "findings": [],
+  "rounds": 0,
+  "false_positives": []
+ },
+ {
+  "chapter": "02-what-the-field-already-built.md",
+  "words": 1067,
+  "findings": [
+   {
+    "code": "HEDGE",
+    "severity": "warning",
+    "subject": "hedges",
+    "line": 58,
+    "message": "\"kind of\" is on the list hedges. State the claim at its true size."
+   }
+  ],
+  "rounds": 1,
+  "false_positives": [
+   {
+    "code": "HEDGE",
+    "line": 58,
+    "reason": "\"kind of\" is the noun kind followed by of (a kind of declaration, a kind of text), and hedges nothing; excused by an ALLOW in book.proz"
+   }
+  ],
+  "words_at_silence": 1038
+ },
+ {
+  "chapter": "03-a-correction-made-once.md",
+  "words": 870,
+  "findings": [],
+  "rounds": 0,
+  "false_positives": []
+ },
+ {
+  "chapter": "04-one-thing-one-word.md",
+  "words": 708,
+  "findings": [
+   {
+    "code": "VOICE_ABSENT",
+    "severity": "warning",
+    "subject": "SENTENCE_MEDIAN",
+    "line": 1,
+    "message": "The measure SENTENCE_MEDIAN is 10; the profile ring_presence asks 16 within 5."
+   }
+  ],
+  "rounds": 1,
+  "false_positives": [],
+  "words_at_silence": 862
+ },
+ {
+  "chapter": "05-the-pattern-that-refuses-a-sentence.md",
+  "words": 859,
+  "findings": [],
+  "rounds": 0,
+  "false_positives": []
+ },
+ {
+  "chapter": "06-the-measure-of-a-voice.md",
+  "words": 885,
+  "findings": [
+   {
+    "code": "VOICE_ABSENT",
+    "severity": "warning",
+    "subject": "SENTENCE_MEDIAN",
+    "line": 1,
+    "message": "The measure SENTENCE_MEDIAN is 10; the profile ring_presence asks 16 within 5."
+   }
+  ],
+  "rounds": 1,
+  "false_positives": [],
+  "words_at_silence": 935
+ },
+ {
+  "chapter": "07-the-form-of-a-text.md",
+  "words": 896,
+  "findings": [
+   {
+    "code": "HEDGE",
+    "severity": "warning",
+    "subject": "hedges",
+    "line": 14,
+    "message": "\"kind of\" is on the list hedges. State the claim at its true size."
+   },
+   {
+    "code": "CALQUE",
+    "severity": "error",
+    "subject": "calques",
+    "line": 136,
+    "message": "\"The hole\" is on the list calques. Write \"whole\"."
+   },
+   {
+    "code": "CALQUE",
+    "severity": "error",
+    "subject": "calques",
+    "line": 136,
+    "message": "\"A hole\" is on the list calques. Write \"whole\"."
+   }
+  ],
+  "rounds": 1,
+  "false_positives": [
+   {
+    "code": "HEDGE",
+    "line": 14,
+    "reason": "\"kind of\" is the noun kind followed by of (a kind of declaration, a kind of text), and hedges nothing; excused by an ALLOW in book.proz"
+   },
+   {
+    "code": "CALQUE",
+    "line": 136,
+    "reason": "\"hole\" is the framework's term for an [AUTHOR] marker (or a quotation of the 2020 calque), and no misspelling of whole; excused by an ALLOW in book.proz"
+   },
+   {
+    "code": "CALQUE",
+    "line": 136,
+    "reason": "\"hole\" is the framework's term for an [AUTHOR] marker (or a quotation of the 2020 calque), and no misspelling of whole; excused by an ALLOW in book.proz"
+   }
+  ],
+  "words_at_silence": 875
+ },
+ {
+  "chapter": "08-the-reading-beside-the-court.md",
+  "words": 1057,
+  "findings": [
+   {
+    "code": "CALQUE",
+    "severity": "error",
+    "subject": "calques",
+    "line": 119,
+    "message": "\"the hole\" is on the list calques. Write \"whole\"."
+   },
+   {
+    "code": "CALQUE",
+    "severity": "error",
+    "subject": "calques",
+    "line": 119,
+    "message": "\"hole program\" is on the list calques. Write \"whole\"."
+   },
+   {
+    "code": "CALQUE",
+    "severity": "error",
+    "subject": "calques",
+    "line": 119,
+    "message": "\"a hole\" is on the list calques. Write \"whole\"."
+   }
+  ],
+  "rounds": 1,
+  "false_positives": [
+   {
+    "code": "CALQUE",
+    "line": 119,
+    "reason": "\"hole\" is the framework's term for an [AUTHOR] marker (or a quotation of the 2020 calque), and no misspelling of whole; excused by an ALLOW in book.proz"
+   },
+   {
+    "code": "CALQUE",
+    "line": 119,
+    "reason": "\"hole\" is the framework's term for an [AUTHOR] marker (or a quotation of the 2020 calque), and no misspelling of whole; excused by an ALLOW in book.proz"
+   },
+   {
+    "code": "CALQUE",
+    "line": 119,
+    "reason": "\"hole\" is the framework's term for an [AUTHOR] marker (or a quotation of the 2020 calque), and no misspelling of whole; excused by an ALLOW in book.proz"
+   }
+  ],
+  "words_at_silence": 1055
+ },
+ {
+  "chapter": "09-the-ai-agent-under-the-court.md",
+  "words": 966,
+  "findings": [],
+  "rounds": 0,
+  "false_positives": []
+ },
+ {
+  "chapter": "10-a-house-writes-its-law.md",
+  "words": 1036,
+  "findings": [
+   {
+    "code": "TERM_SYNONYM",
+    "severity": "error",
+    "subject": "programmer",
+    "line": 30,
+    "message": "\"developers\" stands for the person who writes programs: the house word is \"programmer\"."
+   },
+   {
+    "code": "CALQUE",
+    "severity": "error",
+    "subject": "calques",
+    "line": 117,
+    "message": "\"The hole\" is on the list calques. Write \"whole\"."
+   },
+   {
+    "code": "HEDGE",
+    "severity": "warning",
+    "subject": "hedges",
+    "line": 134,
+    "message": "\"kind of\" is on the list hedges. State the claim at its true size."
+   }
+  ],
+  "rounds": 1,
+  "false_positives": [
+   {
+    "code": "CALQUE",
+    "line": 117,
+    "reason": "\"hole\" is the framework's term for an [AUTHOR] marker (or a quotation of the 2020 calque), and no misspelling of whole; excused by an ALLOW in book.proz"
+   },
+   {
+    "code": "HEDGE",
+    "line": 134,
+    "reason": "\"kind of\" is the noun kind followed by of (a kind of declaration, a kind of text), and hedges nothing; excused by an ALLOW in book.proz"
+   }
+  ],
+  "words_at_silence": 1031
+ }
+]

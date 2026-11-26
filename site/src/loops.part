@@ -1,0 +1,59 @@
+<p class="sub">A loop of Prosa is the cycle in which a remark or a draft meets the court: the author's loop turns a remark into a rule, and the AI agent's loop turns a finding into a repair. The two loops ensure that the author rules once and that the AI agent meets each refusal at the moment of writing.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>The author's loop: from a remark to a rule</h2>
+    <ol>
+      <li>The author reads a draft and makes a remark.</li>
+      <li>The AI agent writes the remark as a rule: the quote as <code>EVIDENCE</code>, the faulty sentence as <code>REFUSED</code>, the corrected one as <code>WRITTEN</code>.</li>
+      <li>The court tests the rule against its own two examples at level 2.</li>
+      <li>The author accepts or declines the rule, and the commit carries it.</li>
+      <li>The court enforces the rule on every book and every site that follows the style.</li>
+    </ol>
+    <p>The rule below, from the constitution, has this shape: its evidence cites the framework of the first house, and its two examples are its test.</p>
+    <!--proz: constitution/reader_rights.proz typed_hole_filler-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The AI agent's loop: from a brief to a silent court</h2>
+    <ol>
+      <li>The AI agent receives the contract of <code>prosa brief</code> before it drafts.</li>
+      <li>The AI agent drafts the text.</li>
+      <li>The AI agent runs <code>prosa check --json</code> and reads each finding as data.</li>
+      <li>The AI agent repairs each finding by its code: the message shows the written form, and <code>cites</code> names the rule.</li>
+      <li>The cycle ends when the court prints zero errors.</li>
+    </ol>
+    <p>A reading of level 5 comes last, on a text already clean of what a machine decides.</p>
+    <!--run: brief conformance/fixtures/term-synonym.proz --piece the_page-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The Claude Code hook</h2>
+    <p>The hook runs the court on every write to a governed file. The AI agent meets the refusal at the moment of writing, with the code and the written form, and repairs the line before it moves on.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The MCP surface</h2>
+    <p>The MCP surface serves check, brief and measure to AI tools. An AI tool that speaks the protocol asks the court for a verdict, a contract or a profile as it asks any other tool.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>What each party does in the two cycles</h2>
+    <div class="scroll" role="region" aria-label="The parties and their work" tabindex="0"><table>
+      <thead><tr><th scope="col">Party</th><th scope="col">What it does</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">The author</th><td>Makes a remark once, rules on each rule, and answers the readings.</td></tr>
+        <tr><th scope="row">The AI agent</th><td>Writes rules from remarks, drafts under the brief, and repairs findings by code.</td></tr>
+        <tr><th scope="row">The court</th><td>Refuses by name what the declaration forbids, with the same verdict on every machine.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>

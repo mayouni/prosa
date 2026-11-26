@@ -1,0 +1,4 @@
+// Expected: UNKNOWN_KIND
+DEFINE VIBE loud (
+  LANGUAGES [en]
+)

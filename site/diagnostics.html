@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnostics: every code the court raises</title>
+<meta name="description" content="A diagnostic of Prosa is a finding the court raises: it names the file and the line, the code, the rule and the ruling the rule comes from. The page lists every code of the contract.">
+<meta name="prosa:subject" content="diagnostic">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="prosa.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+      <a class="brand" href="index.html">Prosa</a>
+      <a href="approach.html">Approach</a>
+      <a class="here" aria-current="true" href="kinds.html">Language</a>
+      <a href="try.html">Live court</a>
+      <a href="commands.html">Use</a>
+      <a href="book.html">Book</a>
+      <a href="softanza.html">Softanza</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <div class="wrap">
+    <a href="kinds.html">The kinds</a>
+    <a href="levels.html">Levels</a>
+    <a aria-current="page" href="diagnostics.html">Diagnostics</a>
+    <a href="text.html">Text model</a>
+  </div>
+</nav>
+</div>
+
+<header class="page">
+  <div class="narrow">
+    <div class="kicker">Language</div>
+    <h1>The diagnostics of the court</h1>
+    <p class="sub">A diagnostic of Prosa is a finding of the court: it names the file and the line, the code, the rule and the ruling the rule comes from. It lets the user, a person or an AI agent, repair a text by its code and learn the house from each refusal.</p>
+  </div>
+</header>
+
+<main id="main">
+<section>
+  <div class="narrow">
+    <h2>The eight parts of a finding</h2>
+    <p>A finding has six parts in the envelope C2 of the Softanza family: <code>code</code>, <code>severity</code>, <code>message</code>, <code>span</code>, <code>cites</code> and <code>language</code>. The Prosa court adds <code>level</code> and <code>subject</code>. The option <code>--json</code> prints the findings as data:</p>
+    <pre class="term"><span class="dim">$ prosa check conformance/fixtures/term-synonym.proz --json</span>
+{
+ "diagnostics": [
+  {
+   "code": "TERM_SYNONYM",
+   "severity": "error",
+   "message": "\"developer\" stands for the person who writes programs: the house word is \"programmer\".",
+   "span": {
+    "file": "conformance/fixtures/term-synonym.md",
+    "line": 3
+   },
+   "cites": [
+    "rule:programmer",
+    "evidence:The author, 2026-11-26: a ruling written for this fixture"
+   ],
+   "language": "prosa",
+   "level": 3,
+   "subject": "programmer"
+  }
+ ]
+}</pre>
+    <p>A code is a stable UPPER_SNAKE name, and a code is used for one meaning for the whole life of the language. The field <code>cites</code> holds the name of the rule and its evidence.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>The 31 codes the court raises by itself, by level</h2>
+    <p>The tables below are written at build time from <code>conformance/violations.json</code>, contract 0.1: the page and the court read the same file.</p>
+    <h3>Level 1: the syntax of a .proz file</h3>
+<div class="scroll" role="region" aria-label="Level 1: the syntax of a .proz file" tabindex="0"><table>
+<thead><tr><th scope="col">Code</th><th scope="col">Severity</th><th scope="col">What the court says</th><th scope="col">The invariant</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>UNEXPECTED_TOKEN</code></th><td>error</td><td><code class="msg">Unexpected {token}.</code></td><td>A .proz file is a sequence of USE lines and DEFINE declarations.</td></tr>
+<tr><th scope="row"><code>UNTERMINATED_STRING</code></th><td>error</td><td><code class="msg">A quoted string is not closed on its line.</code></td><td>A string opens and closes on one line.</td></tr>
+<tr><th scope="row"><code>UNKNOWN_KIND</code></th><td>error</td><td><code class="msg">{kind} is not a kind of declaration.</code></td><td>The kinds are closed: STYLE, TERM, WORDLIST, PATTERN, PROFILE, FORM, ZONE, PIECE, ALLOW, READING.</td></tr>
+<tr><th scope="row"><code>UNKNOWN_FIELD</code></th><td>error</td><td><code class="msg">{field} is not a field of {kind}.</code></td><td>Each kind has a closed list of fields.</td></tr>
+<tr><th scope="row"><code>DUPLICATE_FIELD</code></th><td>error</td><td><code class="msg">The field {field} stands twice.</code></td><td>A field stands once in a declaration.</td></tr>
+<tr><th scope="row"><code>DUPLICATE_DECLARATION</code></th><td>error</td><td><code class="msg">The name {name} is already declared at line {first}.</code></td><td>A name is declared once across all kinds.</td></tr>
+<tr><th scope="row"><code>MISSING_FIELD</code></th><td>error</td><td><code class="msg">{kind} needs the field {field}.</code></td><td>A declaration carries its required fields.</td></tr>
+<tr><th scope="row"><code>BAD_VALUE</code></th><td>error</td><td><code class="msg">The value of {field} is not lawful: {why}.</code></td><td>A field's value has the shape its kind declares.</td></tr>
+</tbody></table></div>
+<h3>Level 2: the declaration</h3>
+<div class="scroll" role="region" aria-label="Level 2: the declaration" tabindex="0"><table>
+<thead><tr><th scope="col">Code</th><th scope="col">Severity</th><th scope="col">What the court says</th><th scope="col">The invariant</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>RULE_WITHOUT_EVIDENCE</code></th><td>error</td><td><code class="msg">This {kind} carries no EVIDENCE: a rule enters on a dated ruling or a measure.</code></td><td>Every rule cites the ruling or the measure it comes from.</td></tr>
+<tr><th scope="row"><code>UNKNOWN_REFERENCE</code></th><td>error</td><td><code class="msg">{field} names {name}, which is not a declared {kinds}.</code></td><td>A reference names a declaration of the right kind.</td></tr>
+<tr><th scope="row"><code>ADOPTION_CYCLE</code></th><td>error</td><td><code class="msg">{field} leads back to this declaration.</code></td><td>Adoption and extension form no cycle.</td></tr>
+<tr><th scope="row"><code>TERM_REFUSED_AND_REQUIRED</code></th><td>error</td><td><code class="msg">The style {style} asks for "{word}" and refuses it in {rule}.</code></td><td>A style never refuses the word it asks for.</td></tr>
+<tr><th scope="row"><code>EXAMPLE_NOT_REFUSED</code></th><td>error</td><td><code class="msg">The REFUSED example is not refused by its own pattern: "{text}".</code></td><td>A pattern refuses its own refused example.</td></tr>
+<tr><th scope="row"><code>EXAMPLE_NOT_LAWFUL</code></th><td>error</td><td><code class="msg">The WRITTEN example is refused by its own pattern: "{text}".</code></td><td>A pattern accepts its own written example.</td></tr>
+<tr><th scope="row"><code>PIECE_WITHOUT_SUBJECT</code></th><td>error</td><td><code class="msg">The form {form} places the subject, and the piece declares no SUBJECT.</code></td><td>A piece whose form places the subject declares it.</td></tr>
+<tr><th scope="row"><code>BOUND_INVERTED</code></th><td>error</td><td><code class="msg">The bound of {field} has its lower end above its upper end.</code></td><td>A bound's lower end is at most its upper end.</td></tr>
+</tbody></table></div>
+<h3>Level 3: the text</h3>
+<div class="scroll" role="region" aria-label="Level 3: the text" tabindex="0"><table>
+<thead><tr><th scope="col">Code</th><th scope="col">Severity</th><th scope="col">What the court says</th><th scope="col">The invariant</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>TITLE_TOO_LONG</code></th><td>error</td><td><code class="msg">The title holds {n} words; the form allows {max}.</code></td><td>A title names its subject in few words.</td></tr>
+<tr><th scope="row"><code>TITLE_MISSING</code></th><td>error</td><td><code class="msg">The piece has no title.</code></td><td>A governed text has a title.</td></tr>
+<tr><th scope="row"><code>TITLE_WITHOUT_SUBJECT</code></th><td>error</td><td><code class="msg">The title does not name the subject "{subject}".</code></td><td>A title names its subject.</td></tr>
+<tr><th scope="row"><code>LEDE_WITHOUT_SUBJECT</code></th><td>error</td><td><code class="msg">The first sentence does not name the subject "{subject}".</code></td><td>The first sentence names the subject and says what it is.</td></tr>
+<tr><th scope="row"><code>SUBJECT_NOT_FOUND</code></th><td>error</td><td><code class="msg">The piece takes its subject from the front matter, and the page declares none.</code></td><td>A page declares its subject.</td></tr>
+<tr><th scope="row"><code>SAY_ONCE</code></th><td>error</td><td><code class="msg">"{pair}" stands twice in the first {limit} words (first at line {first}).</code></td><td>A statement is made once per screen.</td></tr>
+<tr><th scope="row"><code>HEADING_MISSING</code></th><td>error</td><td><code class="msg">The form's heading "{heading}" is missing.</code></td><td>A form's fixed headings are all present.</td></tr>
+<tr><th scope="row"><code>HEADING_OUT_OF_ORDER</code></th><td>error</td><td><code class="msg">The heading "{heading}" stands before a heading the form places ahead of it.</code></td><td>A form's fixed headings keep their order.</td></tr>
+<tr><th scope="row"><code>HEADING_NOT_SENTENCE_CASE</code></th><td>warning</td><td><code class="msg">The heading "{heading}" capitalizes every word.</code></td><td>A heading is written in sentence case.</td></tr>
+<tr><th scope="row"><code>CLOSES_ON_SUMMARY</code></th><td>error</td><td><code class="msg">The text closes on "{phrase}".</code></td><td>A text closes on something new for its reader.</td></tr>
+<tr><th scope="row"><code>HOLE_OPEN</code></th><td>error</td><td><code class="msg">A hole is still open at status {status}: {hole}</code></td><td>A hole is closed by the author before the text is reviewed.</td></tr>
+<tr><th scope="row"><code>ALLOW_STALE</code></th><td>error</td><td><code class="msg">This ALLOW excuses {code} on a line holding "{holds}", and no such finding stands.</code></td><td>An excuse lives as long as the line it excuses.</td></tr>
+<tr><th scope="row"><code>PIECE_FILE_NOT_FOUND</code></th><td>error</td><td><code class="msg">The piece names {path}, and no such file stands.</code></td><td>A piece names a text that exists.</td></tr>
+<tr><th scope="row"><code>TERM_SYNONYM</code></th><td>error</td><td><code class="msg">A refused word stands for a declared term.</code></td><td>One thing has one word.</td></tr>
+</tbody></table></div>
+<h3>Level 4: the measure</h3>
+<div class="scroll" role="region" aria-label="Level 4: the measure" tabindex="0"><table>
+<thead><tr><th scope="col">Code</th><th scope="col">Severity</th><th scope="col">What the court says</th><th scope="col">The invariant</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>OFF_PROFILE</code></th><td>warning</td><td><code class="msg">A measure of the text stands outside the declared profile.</code></td><td>A text keeps the measure of its voice.</td></tr>
+</tbody></table></div>
+
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The codes a style declares for its own rules</h2>
+    <p>A <code>TERM</code>, a <code>WORDLIST</code>, a <code>PATTERN</code> or a <code>PROFILE</code> raises the code its declaration names. <code>TERM_SYNONYM</code> and <code>OFF_PROFILE</code> are the defaults of <code>TERM</code> and <code>PROFILE</code>. The style of the first house declares these codes:</p>
+    <ul>
+      <li><code>FORBIDDEN_WORD</code> refuses a word of the forbidden list and shows the written form.</li>
+      <li><code>CALQUE</code> refuses a calque or a homophone and shows the intended word.</li>
+      <li><code>INTENSIFIER</code>, <code>HEDGE</code> and <code>SUPERLATIVE</code> warn on the three lists of noise.</li>
+      <li><code>EMOJI_IN_TEXT</code> refuses an emoji in text a reader sees.</li>
+      <li><code>LACK_LISTED</code> refuses a line of a public page that lists a lack.</li>
+      <li><code>VOICE_ABSENT</code> warns when a long text stands below the lower bounds of the voice.</li>
+    </ul>
+    <p>The constitution declares <code>PLACEHOLDER_LEFT</code>: a placeholder that stands where a fact belongs is refused in every governed text.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="narrow">
+    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  </div>
+</footer>
+</body>
+</html>

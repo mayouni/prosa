@@ -1,0 +1,61 @@
+<p class="sub">The live court of Prosa is the reference court running in this page: it judges the declaration and the text below and prints its verdict at every change. It lets a reader change a rule or a sentence and see which code the court raises.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>Two editors and the verdict of the court</h2>
+    <p>The left editor holds a <code>.proz</code> declaration, and the right one carries the Markdown text of its piece. The court judges both in this browser: the page sends nothing to a server.</p>
+    <form class="court-bar" id="court-form" onsubmit="return false">
+      <div class="field">
+        <label for="sample">Example</label>
+        <select id="sample"></select>
+      </div>
+      <div class="field">
+        <label for="level">Level of judgment</label>
+        <select id="level">
+          <option value="1">1 Syntax</option>
+          <option value="2">2 Declaration</option>
+          <option value="3">3 Text</option>
+          <option value="4" selected>4 Measure</option>
+        </select>
+      </div>
+    </form>
+    <div class="editors">
+      <div class="editor">
+        <label for="proz">The declaration (.proz)</label>
+        <textarea id="proz" class="code" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="proz-hint"></textarea>
+        <div class="hint" id="proz-hint">Press Escape, then Tab, to leave an editor with the keyboard.</div>
+      </div>
+      <div class="editor">
+        <label for="text">The text (Markdown)</label>
+        <textarea id="text" class="code wraps" spellcheck="false" aria-describedby="text-hint"></textarea>
+        <div class="hint" id="text-hint">The court reads this text as the file the piece names.</div>
+      </div>
+    </div>
+    <h3 id="verdict-title">The verdict</h3>
+    <div id="state" class="state" role="status" aria-live="polite">The court runs when the page has loaded its script.</div>
+    <pre class="term" id="verdict" tabindex="0" aria-labelledby="verdict-title"></pre>
+    <h3 id="brief-title">The writing contract an AI agent receives</h3>
+    <p>The court also writes the brief of the declared style: the contract an AI agent reads before it drafts.</p>
+    <pre class="shot" id="brief" tabindex="0" aria-labelledby="brief-title"></pre>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The three examples and the verdict each one gives</h2>
+    <ul>
+      <li>The example of a term declares the word "programmer" and refuses its synonym: the court raises one error, <code>TERM_SYNONYM</code>, on line 3 of the text.</li>
+      <li>The example of the affirmative rule declares a public page under the reader's rights: the court raises one error, <code>LACK_LISTED</code>, on the line that lists a lack.</li>
+      <li>The example of a profile declares two bounds on the voice: the court raises two warnings, <code>OFF_PROFILE</code>, one for the long sentences and one for the colons the profile asks for.</li>
+    </ul>
+    <p>Each example becomes lawful when its text is repaired: the court then prints a count of zero errors and zero warnings.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>How the page runs the reference court</h2>
+    <p>The page loads <code>prosa.js</code>, the same file the command <code>prosa</code> runs under Node, and the contract of diagnostics. It parses the declaration, checks it at level 2, and judges the text against the first <code>PIECE</code> of the declaration.</p>
+    <p>A line <code>USE "prosa:reader_rights"</code> reads the constitution, which the page carries with it. A declaration that spans several files is pasted into the left editor as one text.</p>
+  </div>
+</section>

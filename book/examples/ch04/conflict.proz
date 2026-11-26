@@ -1,0 +1,15 @@
+DEFINE STYLE house (
+  HOLDS [programmer, plain_words]
+)
+
+DEFINE TERM programmer (
+  MEANS "the person who writes programs",
+  REFUSES [developer, developers],
+  EVIDENCE "FRAMEWORK.md section 4: developer for programmer is a forbidden word"
+)
+
+DEFINE WORDLIST plain_words (
+  REFUSES [coder, programmer, engineer],
+  CODE JOB_TITLE,
+  EVIDENCE "A ruling written for this exercise"
+)

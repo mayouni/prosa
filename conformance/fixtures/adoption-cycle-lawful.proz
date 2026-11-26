@@ -1,0 +1,7 @@
+// Expected: none
+DEFINE STYLE house (
+  ADOPTS [press]
+)
+DEFINE STYLE press (
+  LANGUAGES [en]
+)

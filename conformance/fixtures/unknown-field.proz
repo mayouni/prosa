@@ -1,0 +1,4 @@
+// Expected: UNKNOWN_FIELD
+DEFINE STYLE house (
+  COLOUR "blue"
+)

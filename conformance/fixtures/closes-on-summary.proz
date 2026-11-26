@@ -1,0 +1,13 @@
+// Expected: CLOSES_ON_SUMMARY
+DEFINE STYLE house (
+  HOLDS []
+)
+DEFINE FORM page (
+  CLOSES_WITHOUT ["summary", "in conclusion"],
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "closes-on-summary.md",
+  FOLLOWS house,
+  FORM page
+)

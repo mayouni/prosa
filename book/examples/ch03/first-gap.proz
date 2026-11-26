@@ -1,0 +1,18 @@
+// first.proz : one correction, made once.
+
+DEFINE STYLE house (
+  HOLDS [lack_listed]
+)
+
+DEFINE PATTERN lack_listed (
+  MATCHES ["not yet", "nobody has"],
+  CODE LACK_LISTED,
+  REFUSED "The project has not yet shown a study, a user or a foreign application.",
+  WRITTEN "The verifier checks the declaration.",
+  EVIDENCE "The author, 2026-11-08: Avoid this role of transparency that hurts the project image"
+)
+
+DEFINE PIECE tour (
+  FILE "tour-gap.md",
+  FOLLOWS house
+)

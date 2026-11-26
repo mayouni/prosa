@@ -1,0 +1,5 @@
+// Expected: DUPLICATE_FIELD
+DEFINE STYLE house (
+  LANGUAGES [en],
+  LANGUAGES [fr]
+)

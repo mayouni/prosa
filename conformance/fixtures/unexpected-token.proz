@@ -1,0 +1,4 @@
+// Expected: UNEXPECTED_TOKEN
+DEFINE STYLE house (
+  HOLDS [a_rule] ;
+)

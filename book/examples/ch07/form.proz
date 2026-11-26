@@ -1,0 +1,23 @@
+// form.proz : the form of a chapter, and one piece bound to it.
+
+DEFINE STYLE house (
+  HOLDS []
+)
+
+DEFINE FORM chapter (
+  TITLE_WORDS AT_MOST 6,
+  TITLE_HOLDS subject,
+  FIRST_SENTENCE_HOLDS subject,
+  SAY_ONCE FIRST 150,
+  HEADINGS ["What I refused", "In your hands"],
+  CLOSES_WITHOUT ["summary", "in summary", "to sum up"],
+  HOLES_CLOSED_AT [review, published],
+  EVIDENCE "zayn/doc/design/WRITING.md rules 1 and 2; AYOUNI Writing Framework C4 and C9"
+)
+
+DEFINE PIECE grid_chapter (
+  FILE "grid.md",
+  FOLLOWS house,
+  FORM chapter,
+  SUBJECT "grid"
+)

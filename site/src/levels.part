@@ -1,0 +1,73 @@
+<p class="sub">A level of Prosa is one of the five stages at which the court judges, in a fixed order: syntax, declaration, text, measure and reading. The order ensures that a text is judged only against a lawful declaration: an error at one stage stops the next.</p>
+<!--main-->
+<section>
+  <div class="narrow">
+    <h2>What each stage judges and what it needs</h2>
+    <div class="scroll" role="region" aria-label="The five levels" tabindex="0"><table>
+      <thead><tr><th scope="col">Level</th><th scope="col">What is judged</th><th scope="col">The court needs</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">1 Syntax</th><td>The <code>.proz</code> file parses and each field has its shape</td><td>The file</td></tr>
+        <tr><th scope="row">2 Declaration</th><td>The style and the piece are lawful by themselves</td><td>Every file reached through <code>USE</code></td></tr>
+        <tr><th scope="row">3 Text</th><td>Words, terms, patterns and positions</td><td>The text of each piece</td></tr>
+        <tr><th scope="row">4 Measure</th><td>The profile, and the budget of a word list, over a whole piece</td><td>The text of each piece</td></tr>
+        <tr><th scope="row">5 Reading</th><td>A declared question, listed as recorded or due</td><td>The folder of records</td></tr>
+      </tbody>
+    </table></div>
+    <p>The option <code>--level N</code> stops the court at the stage asked. Levels 1 to 4 use no AI model and no language toolkit: the same text gives the same verdict on every machine.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 1: a field that stands twice</h2>
+    <p>The court reads the file as <code>USE</code> lines and <code>DEFINE</code> declarations and checks the shape of each field.</p>
+    <!--file: conformance/fixtures/duplicate-field.proz-->
+    <!--run: check conformance/fixtures/duplicate-field.proz-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 2: a pattern that fails its own example</h2>
+    <p>The court judges the declaration by itself: every reference names a declaration of the right kind, every rule cites its evidence, and every pattern passes its own examples. The pattern below accepts the sentence it declares as refused, so the court refuses the pattern before it reaches a text.</p>
+    <!--file: conformance/fixtures/example-not-refused.proz-->
+    <!--run: check conformance/fixtures/example-not-refused.proz-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 3: a statement made twice in the first 150 words</h2>
+    <p>The court reads the text zone by zone and judges words, terms, patterns and positions. The form below asks that a statement stand once per screen, and the text repeats two content words in a row.</p>
+    <!--file: conformance/fixtures/say-once.proz-->
+    <!--file: conformance/fixtures/say-once.md-->
+    <!--run: check conformance/fixtures/say-once.proz-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 4: three measures outside the profile</h2>
+    <p>The court measures the whole piece and compares each measure with its bound. A finding of this stage stands on line 1 and names the measure, its value and the bound the profile asks.</p>
+    <!--proz: conformance/fixtures/off-profile.proz voice-->
+    <!--run: check conformance/fixtures/off-profile.proz-->
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 5: a reading listed as recorded or due</h2>
+    <p>A <code>READING</code> puts a question to a reader, a person or an AI model. The record of a reading is a Markdown file in the declared folder, named after the text and the reading. The court lists each reading as recorded or due: a reading carries no code and leaves the exit code unchanged.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The three exit codes of the court</h2>
+    <ul>
+      <li>The court exits with 0 when no error stands: warnings are allowed.</li>
+      <li>The court exits with 1 when an error stands.</li>
+      <li>The court exits with 2 on a usage error or a file it fails to read.</li>
+    </ul>
+  </div>
+</section>

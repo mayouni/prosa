@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Levels: the five stages of the court</title>
+<meta name="description" content="A level of Prosa is one of the five stages at which the court judges: syntax, declaration, text, measure and reading. The page shows a real refusal at each level.">
+<meta name="prosa:subject" content="level">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2312332e'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23f2c66d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="prosa.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<div class="bars">
+<nav class="site" aria-label="Main menu">
+  <div class="wrap">
+    <div class="menu">
+      <a class="brand" href="index.html">Prosa</a>
+      <a href="approach.html">Approach</a>
+      <a class="here" aria-current="true" href="kinds.html">Language</a>
+      <a href="try.html">Live court</a>
+      <a href="commands.html">Use</a>
+      <a href="book.html">Book</a>
+      <a href="softanza.html">Softanza</a>
+    </div>
+  </div>
+</nav>
+<nav class="band" aria-label="Pages of the section">
+  <div class="wrap">
+    <a href="kinds.html">The kinds</a>
+    <a aria-current="page" href="levels.html">Levels</a>
+    <a href="diagnostics.html">Diagnostics</a>
+    <a href="text.html">Text model</a>
+  </div>
+</nav>
+</div>
+
+<header class="page">
+  <div class="narrow">
+    <div class="kicker">Language</div>
+    <h1>The five levels of judgment</h1>
+    <p class="sub">A level of Prosa is one of the five stages at which the court judges, in a fixed order: syntax, declaration, text, measure and reading. The order ensures that a text is judged only against a lawful declaration: an error at one stage stops the next.</p>
+  </div>
+</header>
+
+<main id="main">
+<section>
+  <div class="narrow">
+    <h2>What each stage judges and what it needs</h2>
+    <div class="scroll" role="region" aria-label="The five levels" tabindex="0"><table>
+      <thead><tr><th scope="col">Level</th><th scope="col">What is judged</th><th scope="col">The court needs</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">1 Syntax</th><td>The <code>.proz</code> file parses and each field has its shape</td><td>The file</td></tr>
+        <tr><th scope="row">2 Declaration</th><td>The style and the piece are lawful by themselves</td><td>Every file reached through <code>USE</code></td></tr>
+        <tr><th scope="row">3 Text</th><td>Words, terms, patterns and positions</td><td>The text of each piece</td></tr>
+        <tr><th scope="row">4 Measure</th><td>The profile, and the budget of a word list, over a whole piece</td><td>The text of each piece</td></tr>
+        <tr><th scope="row">5 Reading</th><td>A declared question, listed as recorded or due</td><td>The folder of records</td></tr>
+      </tbody>
+    </table></div>
+    <p>The option <code>--level N</code> stops the court at the stage asked. Levels 1 to 4 use no AI model and no language toolkit: the same text gives the same verdict on every machine.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 1: a field that stands twice</h2>
+    <p>The court reads the file as <code>USE</code> lines and <code>DEFINE</code> declarations and checks the shape of each field.</p>
+    <pre class="shot"><span class="c">// Expected: DUPLICATE_FIELD</span>
+<span class="k">DEFINE</span> <span class="k">STYLE</span> house (
+  <span class="k">LANGUAGES</span> [en],
+  <span class="k">LANGUAGES</span> [fr]
+)</pre>
+    <pre class="term"><span class="dim">$ prosa check conformance/fixtures/duplicate-field.proz</span>
+conformance/fixtures/duplicate-field.proz:4  <span class="bad">error</span>  <span class="bad">DUPLICATE_FIELD</span>  house
+<span class="dim">    The field LANGUAGES stands twice.</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 4</pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 2: a pattern that fails its own example</h2>
+    <p>The court judges the declaration by itself: every reference names a declaration of the right kind, every rule cites its evidence, and every pattern passes its own examples. The pattern below accepts the sentence it declares as refused, so the court refuses the pattern before it reaches a text.</p>
+    <pre class="shot"><span class="c">// Expected: EXAMPLE_NOT_REFUSED</span>
+<span class="k">DEFINE</span> <span class="k">PATTERN</span> lack_listed (
+  <span class="k">MATCHES</span> [<span class="s">"not yet"</span>, <span class="s">"never"</span> <span class="k">WITHIN</span> 3 <span class="s">"run"</span>],
+  <span class="k">CODE</span> <span class="k">LACK_LISTED</span>,
+  <span class="k">REFUSED</span> <span class="s">"The verifier checks the declaration."</span>,
+  <span class="k">WRITTEN</span> <span class="s">"The verifier checks the declaration."</span>,
+  <span class="k">EVIDENCE</span> <span class="s">"The author, 2026-11-26: a ruling written for this fixture"</span>
+)</pre>
+    <pre class="term"><span class="dim">$ prosa check conformance/fixtures/example-not-refused.proz</span>
+conformance/fixtures/example-not-refused.proz:5  <span class="bad">error</span>  <span class="bad">EXAMPLE_NOT_REFUSED</span>  lack_listed
+<span class="dim">    The REFUSED example is not refused by its own pattern: "The verifier checks the declaration.".</span>
+
+1 error(s), 0 warning(s) across 1 file(s) at level 4</pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 3: a statement made twice in the first 150 words</h2>
+    <p>The court reads the text zone by zone and judges words, terms, patterns and positions. The form below asks that a statement stand once per screen, and the text repeats two content words in a row.</p>
+    <pre class="shot"><span class="c">// Expected: SAY_ONCE</span>
+<span class="k">DEFINE</span> <span class="k">STYLE</span> house (
+  <span class="k">HOLDS</span> []
+)
+<span class="k">DEFINE</span> <span class="k">FORM</span> page (
+  <span class="k">SAY_ONCE</span> <span class="k">FIRST</span> 150,
+  <span class="k">EVIDENCE</span> <span class="s">"The author, 2026-11-26: a ruling written for this fixture"</span>
+)
+<span class="k">DEFINE</span> <span class="k">PIECE</span> the_page (
+  <span class="k">FILE</span> <span class="s">"say-once.md"</span>,
+  <span class="k">FOLLOWS</span> house,
+  <span class="k">FORM</span> page,
+  <span class="k">SUBJECT</span> <span class="s">"court"</span>
+)</pre>
+    <pre class="shot"># The court of Prosa
+
+The court refuses every forbidden sentence by name.
+
+## What the court refuses
+
+The court names every forbidden sentence it refuses.</pre>
+    <pre class="term"><span class="dim">$ prosa check conformance/fixtures/say-once.proz</span>
+conformance/fixtures/say-once.md:7  <span class="bad">error</span>  <span class="bad">SAY_ONCE</span>  the_page
+<span class="dim">    "forbidden sentence" stands twice in the first 150 words (first at line 3).</span>
+<span class="dim">    Rule page · The author, 2026-11-26: a ruling written for this fixture</span>
+
+1 error(s), 0 warning(s) across 2 file(s) at level 4</pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 4: three measures outside the profile</h2>
+    <p>The court measures the whole piece and compares each measure with its bound. A finding of this stage stands on line 1 and names the measure, its value and the bound the profile asks.</p>
+    <pre class="shot"><span class="k">DEFINE</span> <span class="k">PROFILE</span> voice (
+  <span class="k">SENTENCES_OVER</span> 40 <span class="k">AT_MOST</span> 10 <span class="k">PER_HUNDRED</span>,
+  <span class="k">DASHES</span> <span class="k">AT_MOST</span> 4 <span class="k">PER_THOUSAND</span>,
+  <span class="k">SENTENCE_MEDIAN</span> 6 <span class="k">WITHIN</span> 4,
+  <span class="k">MIN_WORDS</span> 50,
+  <span class="k">EVIDENCE</span> <span class="s">"The author, 2026-11-26: a ruling written for this fixture"</span>
+)</pre>
+    <pre class="term"><span class="dim">$ prosa check conformance/fixtures/off-profile.proz</span>
+conformance/fixtures/off-profile.md:1  <span class="warn">warning</span>  <span class="warn">OFF_PROFILE</span>  SENTENCES_OVER 40
+<span class="dim">    The measure SENTENCES_OVER 40 is 33.3; the profile voice asks at most 10 per hundred.</span>
+<span class="dim">    Rule voice · The author, 2026-11-26: a ruling written for this fixture</span>
+
+conformance/fixtures/off-profile.md:1  <span class="warn">warning</span>  <span class="warn">OFF_PROFILE</span>  DASHES
+<span class="dim">    The measure DASHES is 42.4; the profile voice asks at most 4 per thousand words.</span>
+<span class="dim">    Rule voice · The author, 2026-11-26: a ruling written for this fixture</span>
+
+conformance/fixtures/off-profile.md:1  <span class="warn">warning</span>  <span class="warn">OFF_PROFILE</span>  SENTENCE_MEDIAN
+<span class="dim">    The measure SENTENCE_MEDIAN is 16; the profile voice asks 6 within 4.</span>
+<span class="dim">    Rule voice · The author, 2026-11-26: a ruling written for this fixture</span>
+
+0 error(s), 3 warning(s) across 2 file(s) at level 4</pre>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2>Level 5: a reading listed as recorded or due</h2>
+    <p>A <code>READING</code> puts a question to a reader, a person or an AI model. The record of a reading is a Markdown file in the declared folder, named after the text and the reading. The court lists each reading as recorded or due: a reading carries no code and leaves the exit code unchanged.</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="narrow">
+    <h2>The three exit codes of the court</h2>
+    <ul>
+      <li>The court exits with 0 when no error stands: warnings are allowed.</li>
+      <li>The court exits with 1 when an error stands.</li>
+      <li>The court exits with 2 on a usage error or a file it fails to read.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="narrow">
+    <p class="fine">Prosa is a <a href="https://mayouni.github.io/stzsite/index.html">Softanza</a> project. This site is governed by its own declaration, <a href="site.proz"><code>site.proz</code></a>, and judged by the court it describes.</p>
+  </div>
+</footer>
+</body>
+</html>

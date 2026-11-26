@@ -53,6 +53,14 @@
   </div>
 </section>
 
+<section>
+  <div class="narrow">
+    <h2>The docket: five verdicts of the conformance suite</h2>
+    <p>Each row below is the first finding of a real run of the court on one fixture of the suite. An error refuses the text; a warning names a measure the text leaves.</p>
+    <!--docket: term-synonym heading-out-of-order lede-without-subject heading-case off-profile-->
+  </div>
+</section>
+
 <section class="alt">
   <div class="narrow">
     <h2>The figures of the reference court</h2>

@@ -1,45 +1,49 @@
 /* prosa.css : the Prosa site, under the design system of its sister language Zayn (doc/design/DESIGN-SYSTEM.md there).
-   The theme is Vellum and Lamplight. A law of written text is a manuscript: the page is vellum, the text is iron-gall ink, a
-   link is lapis, and the brand is the vermilion of the rubric, the red heading a scribe gave each law of a code. Lamplight is
-   the same desk at night. Every colour and size is a token below; every text holds 7:1 against what is painted under it.
+   The theme is the Docket. A law of written text is judged in a court, and a court keeps a record: the page is the paper of
+   the record, the text is black, and the one colour is the signal yellow a clerk lays on a refused line. Night is the same
+   record on black. Every colour and size is a token below; every text holds 7:1 against what is painted under it.
    One scroll: nothing scrolls inside the page. Code wraps under its own line's indentation, and a code block or a table takes
-   the room it needs to its right (site.js measures it). The site makes no external request and holds no animation. */
+   the room it needs to its right (site.js measures it). The site makes no external request and holds no animation: IBM Plex
+   is used where the reader has it, and the system's own faces stand in for it. */
 :root {
   --size-small: 1.125rem; --size-reading: 1.3125rem; --size-lead: 1.5rem; --size-section: 1.75rem; --size-title: 2.125rem; --size-hero: 2.6rem;
-  --leading-reading: 1.7; --leading-title: 1.2; --measure: 31.5em;
+  --leading-reading: 1.65; --leading-title: 1.12; --measure: 31.5em;
   --space-1: .5rem; --space-2: 1rem; --space-3: 2rem; --space-4: 4rem; --gutter: 1.4rem; --page: 80rem;
-  --radius: 6px; --target: 24px;
-  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --mono: ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
-  /* Vellum */
-  --paper: #f4eee1; --surface: #fbf8f1; --tint: #ebe3d1; --band: #e9e1ce;
-  --ink: #1e1b24; --ink-2: #46404f; --line: #d6ccb6; --edge: #7d7466;
-  --link: #1b3f72; --focus: #b8401f;
-  --bar: #2a1f1b; --on-bar: #f6efe2; --bar-rule: #6b5a50; --brand: #ff8c69;
-  --term: #221d27; --on-term: #ede6d8; --term-dim: #b9b0bf; --term-bad: #ff9d8a; --term-warn: #f0c674; --term-good: #8fdcae;
-  --c-comment: #48434f; --c-key: #1b3f72; --c-str: #653a0b;
+  --radius: 0; --target: 24px;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+  /* Day */
+  --paper: #f7f7f4; --surface: #ffffff; --tint: #edede8; --band: #e9e9e3;
+  --ink: #111111; --ink-2: #3a3a38; --line: #c9c9c1; --edge: #6b6b63;
+  --link: #0b3d91; --focus: #111111;
+  --bar: #111111; --on-bar: #f7f7f4; --bar-rule: #5c5c56; --brand: #ffd23f;
+  --signal: #ffd23f; --on-signal: #111111;
+  --sev-fill: var(--signal); --sev-ink: inherit; /* one emphasis: by day the signal is laid under the word, by night it is the word's colour */
+  --term: #111111; --on-term: #f2f2ec; --term-dim: #c4c4bb; --term-bad: #ffd23f; --term-warn: #9ecbff; --term-good: #9fe3c1;
+  --c-comment: #3a3a38; --c-key: #0b3d91; --c-str: #6b3a00;
   --danger: #861c10; --success: #1b5233;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --paper: #16120e; --surface: #1f1a15; --tint: #1b1712; --band: #1f1a15;
-    --ink: #efe6d4; --ink-2: #c9bda8; --line: #3a3229; --edge: #8a7d6a;
-    --link: #a9c8f2; --focus: #ff9a7a;
-    --bar: #0d0a08; --on-bar: #efe6d4; --bar-rule: #5a4d42; --brand: #ff8c69;
-    --term: #0b0907; --on-term: #efe6d4; --term-dim: #b9ad9a;
-    --c-comment: #c9bda8; --c-key: #a9c8f2; --c-str: #e8b887;
-    --danger: #ff9d8a; --success: #8fdcae;
+    --paper: #0f0f0e; --surface: #191917; --tint: #161614; --band: #191917;
+    --ink: #f1f1ea; --ink-2: #c8c8bf; --line: #3a3a36; --edge: #8a8a82;
+    --link: #a8c8ff; --focus: #ffd23f;
+    --bar: #000000; --on-bar: #f1f1ea; --bar-rule: #4a4a45; --brand: #ffd23f;
+    --term: #000000; --on-term: #f1f1ea; --term-dim: #c4c4bb;
+    --c-comment: #c8c8bf; --c-key: #a8c8ff; --c-str: #f0c48a;
+    --danger: #ff9d8a; --success: #9fe3c1; --sev-fill: transparent; --sev-ink: var(--signal);
     color-scheme: dark;
   }
 }
-:root[data-theme="lamplight"] {
-  --paper: #16120e; --surface: #1f1a15; --tint: #1b1712; --band: #1f1a15;
-  --ink: #efe6d4; --ink-2: #c9bda8; --line: #3a3229; --edge: #8a7d6a;
-  --link: #a9c8f2; --focus: #ff9a7a;
-  --bar: #0d0a08; --on-bar: #efe6d4; --bar-rule: #5a4d42; --brand: #ff8c69;
-  --term: #0b0907; --on-term: #efe6d4; --term-dim: #b9ad9a;
-  --c-comment: #c9bda8; --c-key: #a9c8f2; --c-str: #e8b887;
-  --danger: #ff9d8a; --success: #8fdcae;
+:root[data-theme="night"] {
+  --paper: #0f0f0e; --surface: #191917; --tint: #161614; --band: #191917;
+  --ink: #f1f1ea; --ink-2: #c8c8bf; --line: #3a3a36; --edge: #8a8a82;
+  --link: #a8c8ff; --focus: #ffd23f;
+  --bar: #000000; --on-bar: #f1f1ea; --bar-rule: #4a4a45; --brand: #ffd23f;
+  --term: #000000; --on-term: #f1f1ea; --term-dim: #c4c4bb;
+  --c-comment: #c8c8bf; --c-key: #a8c8ff; --c-str: #f0c48a;
+  --danger: #ff9d8a; --success: #9fe3c1; --sev-fill: transparent; --sev-ink: var(--signal);
   color-scheme: dark;
 }
 @media (max-width: 47.5rem) { :root { --target: 48px; } }
@@ -52,7 +56,7 @@ nav a { text-decoration: none; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 button, input, select, textarea { font: inherit; color: inherit; }
 code, pre, kbd, textarea.code { font-family: var(--mono); }
-code { font-size: var(--size-small); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 0 .25em; overflow-wrap: anywhere; }
+code { font-size: var(--size-small); background: var(--surface); border: 1px solid var(--line); padding: 0 .25em; overflow-wrap: anywhere; }
 .wrap { max-width: var(--page); margin: 0 auto; padding: 0 var(--gutter); }
 .skip { position: absolute; left: .6rem; top: -6rem; z-index: 20; display: inline-flex; align-items: center; min-height: 48px; padding: 0 .9rem; color: var(--ink); }
 .skip:focus { top: .6rem; background: var(--bar); color: var(--on-bar); }
@@ -64,8 +68,10 @@ nav.site .menu { display: flex; align-items: center; flex-wrap: wrap; gap: 0; mi
 nav.site a { color: var(--on-bar); display: inline-flex; align-items: center; min-height: max(var(--target), 3rem); padding: 0 .9rem; }
 nav.site .entries { display: flex; flex-wrap: wrap; }
 nav.site .entries a + a { border-left: 1px solid var(--bar-rule); }
-nav.site .brand { color: var(--brand); font-weight: 800; letter-spacing: .04em; padding-left: 0; margin-right: var(--space-3); }
-nav.site a[aria-current] { font-weight: 800; }
+nav.site .brand { color: var(--on-bar); font-weight: 600; font-size: var(--size-lead); padding-left: 0; margin-right: var(--space-3); gap: .55rem; }
+nav.site .brand::before { content: ""; width: .7rem; height: .7rem; background: var(--brand); }
+nav.site .entries a[aria-current] { background: var(--signal); color: var(--on-signal); font-weight: 600; }
+nav.site .entries a[aria-current] + a, nav.site .entries a + a[aria-current] { border-left-color: transparent; }
 nav.site .end { margin-left: auto; display: flex; align-items: center; gap: 0 .4rem; }
 nav.site select { min-height: var(--target); background: var(--bar); color: var(--on-bar); border: 1px solid var(--bar-rule); border-radius: var(--radius); padding: .1rem .4rem; font-size: var(--size-small); }
 nav.site option { background: var(--surface); color: var(--ink); }
@@ -73,22 +79,18 @@ nav.band { background: var(--band); }
 nav.band .wrap { display: flex; flex-wrap: wrap; gap: 0 1.6rem; }
 nav.band a { color: var(--ink); display: inline-flex; align-items: center; min-height: max(calc(var(--target) + 2px), 2.75rem); min-width: calc(var(--target) + 2px); font-size: var(--size-small); }
 @media (max-width: 47.5rem) { nav.band .wrap { display: grid; grid-template-columns: repeat(2, max-content); gap: 0 1.6rem; } }
-nav.band a[aria-current] { font-weight: 800; }
+nav.band a[aria-current] { font-weight: 600; box-shadow: inset 0 -4px 0 var(--ink); }
 @media (min-width: 48rem) { .bars { position: sticky; top: 0; z-index: 10; } h2[id], h3[id], section[id] { scroll-margin-top: 7.5rem; } }
 
 /* ---- the page head: kicker, title, lede, on the menu's container ---- */
 header.page { padding: var(--space-3) 0 var(--space-2); }
-.kicker { font-size: var(--size-small); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 .5rem; }
-h1 { margin: 0; font-weight: 800; font-size: var(--size-title); line-height: var(--leading-title); max-width: 24em; text-wrap: balance; }
+.kicker { font-family: var(--mono); font-size: var(--size-small); font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 .6rem; }
+h1 { margin: 0; font-weight: 600; font-size: var(--size-title); line-height: var(--leading-title); letter-spacing: -.01em; max-width: 24em; text-wrap: balance; }
 .sub { font-size: var(--size-lead); line-height: 1.5; max-width: var(--measure); margin: 1rem 0 0; }
 
-/* ---- the front page's hero: the claim on the bar's ground ---- */
-header.hero { background: var(--bar); color: var(--on-bar); padding: var(--space-4) 0 var(--space-3); }
-header.hero .kicker { color: var(--on-bar); }
-header.hero h1 { font-size: var(--size-hero); }
-header.hero .sub { color: var(--on-bar); }
-header.hero a { color: var(--on-bar); }
-header.hero code { background: transparent; border-color: var(--bar-rule); color: var(--on-bar); }
+/* ---- the front page's hero: the claim on the paper; a link stays a link (Zayn K08), no box draws around it (K07) ---- */
+header.hero { padding: var(--space-4) 0 var(--space-2); }
+header.hero h1 { font-size: var(--size-hero); letter-spacing: -.02em; max-width: 18em; }
 .actions { display: flex; flex-wrap: wrap; gap: .5rem 2rem; margin: 1.4rem 0 0; }
 .actions a { display: inline-flex; align-items: center; min-height: var(--target); }
 
@@ -109,12 +111,12 @@ main { min-width: 0; }
 /* ---- the sections ---- */
 main section { padding: var(--space-3) 0 0; }
 main .narrow { max-width: none; margin: 0; padding: 0; }
-h2 { font-size: var(--size-section); line-height: 1.25; font-weight: 800; margin: 0 0 1rem; max-width: 24em; text-wrap: balance; }
-h3 { font-size: var(--size-lead); line-height: 1.3; font-weight: 800; margin: var(--space-3) 0 .6rem; max-width: 26em; text-wrap: balance; }
+h2 { font-size: var(--size-section); line-height: 1.25; font-weight: 600; letter-spacing: -.01em; margin: 0 0 1rem; max-width: 24em; text-wrap: balance; }
+h3 { font-size: var(--size-lead); line-height: 1.3; font-weight: 600; margin: var(--space-3) 0 .6rem; max-width: 26em; text-wrap: balance; }
 main p, main ul, main ol { max-width: var(--measure); margin: 0 0 1rem; }
 main ul, main ol { padding-left: 1.3rem; }
 main li { margin: 0 0 .5rem; }
-.lbl { font-weight: 800; font-size: var(--size-small); color: var(--ink-2); margin: 1.4rem 0 .4rem; }
+.lbl { font-family: var(--mono); font-weight: 500; font-size: var(--size-small); color: var(--ink-2); margin: 1.4rem 0 .4rem; }
 .caption { font-size: var(--size-small); color: var(--ink-2); }
 
 /* ---- code: a declaration (pre.shot) and a terminal (pre.term). Never a scroll: each source line wraps under its own
@@ -135,11 +137,15 @@ pre.term .good { color: var(--term-good); font-weight: 700; }
 
 /* ---- tables: never a scroll; the table takes the room to its right and its cells wrap ---- */
 .table { width: max-content; max-width: 100%; margin: 0 0 1.4rem; }
-table { border-collapse: collapse; width: 100%; border: 1px solid var(--line); background: var(--surface); font-size: var(--size-small); line-height: 1.5; }
-th, td { text-align: left; vertical-align: top; padding: .55rem .8rem; border-bottom: 1px solid var(--line); }
-thead th { background: var(--tint); font-weight: 800; border-bottom: 1px solid var(--edge); }
+table { border-collapse: collapse; width: 100%; border-bottom: 1px solid var(--line); font-size: var(--size-small); line-height: 1.5; }
+th, td { text-align: left; vertical-align: top; padding: .6rem .9rem .6rem 0; border-bottom: 1px solid var(--line); }
+thead th { font-family: var(--mono); font-weight: 500; border-bottom: 3px solid var(--ink); }
 tbody tr:last-child > * { border-bottom: 0; }
-tbody th { font-weight: 700; }
+tbody th { font-weight: 600; }
+/* the severity of a verdict on the docket: an error carries the signal under its word, a warning stands in plain weight */
+.sev { font-family: var(--mono); font-weight: 600; }
+table.docket code { overflow-wrap: normal; } /* a code and a file name break only after a hyphen or an underscore (build.js puts a <wbr> there) */
+.sev.error { background: var(--sev-fill); color: var(--sev-ink); padding: 0 .35rem; }
 td code, th code { overflow-wrap: anywhere; }
 td code.msg { border: 0; background: transparent; padding: 0; }
 /* on a phone the rows stack: each row is a group under a hairline, each cell named by its column; the table never scrolls */
@@ -158,7 +164,7 @@ td code.msg { border: 0; background: transparent; padding: 0; }
 /* ---- the live court: one flow, the editors grow with their text ---- */
 .court-bar { display: flex; flex-wrap: wrap; align-items: end; gap: .8rem 1.6rem; margin: 0 0 1.2rem; }
 .field { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
-.field label, .editor label { font-weight: 800; font-size: var(--size-small); }
+.field label, .editor label { font-weight: 600; font-size: var(--size-small); }
 .field select { min-height: max(var(--target), 2.75rem); padding: .2rem .6rem; background: var(--surface); border: 1px solid var(--edge); border-radius: var(--radius); max-width: 100%; }
 .field option { background: var(--surface); color: var(--ink); }
 .editors { display: flex; flex-direction: column; gap: 1.4rem; margin: 0 0 1.2rem; }
@@ -167,7 +173,7 @@ td code.msg { border: 0; background: transparent; padding: 0; }
 textarea.code { width: 100%; resize: none; overflow: hidden; padding: .8rem .9rem; font-size: var(--size-small); line-height: 1.6; tab-size: 2;
   white-space: pre-wrap; overflow-wrap: anywhere; background: var(--surface); border: 1px solid var(--edge); border-radius: var(--radius); }
 #verdict { min-height: 4rem; }
-.state { font-weight: 800; min-height: 1.7em; }
+.state { font-weight: 600; min-height: 1.7em; }
 .state.refused { color: var(--danger); }
 .state.lawful { color: var(--success); }
 

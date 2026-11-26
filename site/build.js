@@ -111,8 +111,20 @@ function fill(html, page) {
   html = html.replace(/<!--proz: (\S+) (\S+)-->/g, (m, f, n) => '<pre class="shot">' + hiProz(cut(f, n)) + '</pre>');
   html = html.replace(/<!--file: (\S+)-->/g, (m, f) => '<pre class="shot">' + (f.endsWith('.proz') ? hiProz(read(f).replace(/\s+$/, '')) : esc(read(f).replace(/\s+$/, ''))) + '</pre>');
   html = html.replace(/<!--diagnostics-->/g, diagnosticsTables);
+  html = html.replace(/<!--docket: (.+?)-->/g, (m, a) => docket(a.trim().split(/\s+/), page));
   html = html.replace(/\{\{(\w+)\}\}/g, (m, k) => (FACTS[k] !== undefined ? FACTS[k] : die(page + ': no fact ' + k)));
   return html;
+}
+function docket(names, page) { // one row per fixture: the first finding of a real run of the court on it
+  let out = '<div class="table"><table class="docket">\n<thead><tr><th scope="col">Severity</th><th scope="col">File and line</th><th scope="col">Code</th><th scope="col">What the court says</th></tr></thead>\n<tbody>\n';
+  for (const n of names) {
+    const lines = cli(['check', 'conformance/fixtures/' + n + '.proz']).split('\n');
+    const k = lines.findIndex(l => /^\S+:\d+  (error|warning)  [A-Z][A-Z0-9_]*/.test(l)); if (k === -1) die(page + ': the court refuses nothing in ' + n);
+    const h = /^(\S+:\d+)  (error|warning)  ([A-Z][A-Z0-9_]*)/.exec(lines[k]);
+    const brk = s => esc(s).replace(/([-_])/g, '$1<wbr>'); // a narrow cell breaks a name only where it joins two words
+    out += '<tr><td><span class="sev ' + h[2] + '">' + h[2] + '</span></td><td><code>' + brk(h[1].replace(/^conformance\/fixtures\//, '')) + '</code></td><th scope="row"><code>' + brk(h[3]) + '</code></th><td>' + esc(lines[k + 1].trim()) + '</td></tr>\n';
+  }
+  return out + '</tbody></table></div>';
 }
 function diagnosticsTables() {
   const names = { 1: 'Level 1: the syntax of a .proz file', 2: 'Level 2: the declaration', 3: 'Level 3: the text', 4: 'Level 4: the measure' };
@@ -150,10 +162,10 @@ function hang(html) { // each source line of a code block wraps under its own in
   }).join('') + c);
 }
 function labels(html) { // each cell of a table carries its column's name, read on a phone where the rows stack
-  return html.replace(/<table>([\s\S]*?)<\/table>/g, (m, t) => {
+  return html.replace(/<table(\s[^>]*)?>([\s\S]*?)<\/table>/g, (m, at, t) => {
     const head = /<thead>([\s\S]*?)<\/thead>/.exec(t); if (!head) return m;
     const names = [...head[1].matchAll(/<th[^>]*>([\s\S]*?)<\/th>/g)].map(x => x[1].replace(/<[^>]+>/g, '').replace(/"/g, '&quot;'));
-    return '<table>' + t.replace(/<tr>([\s\S]*?)<\/tr>/g, (r, cells) => {
+    return '<table' + (at || '') + '>' + t.replace(/<tr>([\s\S]*?)<\/tr>/g, (r, cells) => {
       if (/<th scope="col"/.test(cells)) return r;
       let k = 0; return '<tr>' + cells.replace(/<(td|th)(\s[^>]*)?>/g, (c, tag, at) => '<' + tag + (at || '') + ' data-label="' + (names[k++] || '') + '">') + '</tr>';
     }) + '</table>';
@@ -195,9 +207,9 @@ function shell(name) {
 <title>${esc(p.title)}</title>
 <meta name="description" content="${esc(p.description)}">
 <meta name="prosa:subject" content="${p.subject}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1f1b'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23ff8c69'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111111'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23ffd23f'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="prosa.css">
-<script>try{var t=localStorage.getItem('prosa-theme');if(t==='vellum'||t==='lamplight')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('prosa-theme');if(t==='day'||t==='night')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body${front ? ' class="front"' : ''}>
 <a class="skip" href="#main">Skip to the content</a>
@@ -212,8 +224,8 @@ ${menu}
       <div class="end">
         <select id="theme" aria-label="Colour theme">
           <option value="system">System</option>
-          <option value="vellum">Vellum</option>
-          <option value="lamplight">Lamplight</option>
+          <option value="day">Day</option>
+          <option value="night">Night</option>
         </select>
         <a href="${REPO}">GitHub</a>
       </div>

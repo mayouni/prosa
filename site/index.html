@@ -6,9 +6,9 @@
 <title>Prosa: a declarative language that governs written text</title>
 <meta name="description" content="Prosa is a declarative language that governs written text by compilation: a writing style is declared in .proz files, and a court refuses, by name, every sentence the declaration forbids.">
 <meta name="prosa:subject" content="prosa">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232a1f1b'/%3E%3Cpath d='M9 8h9a6 6 0 0 1 0 12h-5v5H9z' fill='%23ff8c69'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111111'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23ffd23f'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="prosa.css">
-<script>try{var t=localStorage.getItem('prosa-theme');if(t==='vellum'||t==='lamplight')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('prosa-theme');if(t==='day'||t==='night')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body class="front">
 <a class="skip" href="#main">Skip to the content</a>
@@ -27,8 +27,8 @@
       <div class="end">
         <select id="theme" aria-label="Colour theme">
           <option value="system">System</option>
-          <option value="vellum">Vellum</option>
-          <option value="lamplight">Lamplight</option>
+          <option value="day">Day</option>
+          <option value="night">Night</option>
         </select>
         <a href="https://github.com/mayouni/prosa">GitHub ↗</a>
       </div>
@@ -57,6 +57,7 @@
     <li><a href="#the-three-layers-of-a-governed-text">The three layers of a governed text</a></li>
     <li><a href="#why-a-style-written-in-a-prompt-drifts-back">Why a style written in a prompt drifts back</a></li>
     <li><a href="#a-declaration-a-text-and-the-verdict-of-the-court">A declaration, a text and the verdict of the court</a></li>
+    <li><a href="#the-docket-five-verdicts-of-the-conformance-suite">The docket: five verdicts of the conformance suite</a></li>
     <li><a href="#the-figures-of-the-reference-court">The figures of the reference court</a></li>
     <li><a href="#four-entry-points-into-the-site">Four entry points into the site</a></li>
   </ul>
@@ -108,6 +109,22 @@
       </div>
     </div>
     <p>The verdict names the file and the line, the code, the refused word, the house word, the rule and the ruling the rule comes from. The same text gives the same verdict on every machine: the court uses no AI model to judge words, positions and measures.</p>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <h2 id="the-docket-five-verdicts-of-the-conformance-suite">The docket: five verdicts of the conformance suite</h2>
+    <p>Each row below is the first finding of a real run of the court on one fixture of the suite. An error refuses the text; a warning names a measure the text leaves.</p>
+    <div class="table"><table class="docket">
+<thead><tr><th scope="col">Severity</th><th scope="col">File and line</th><th scope="col">Code</th><th scope="col">What the court says</th></tr></thead>
+<tbody>
+<tr><td data-label="Severity"><span class="sev error">error</span></td><td data-label="File and line"><code>term-<wbr>synonym.md:3</code></td><th scope="row" data-label="Code"><code>TERM_<wbr>SYNONYM</code></th><td data-label="What the court says">"developer" stands for the person who writes programs: the house word is "programmer".</td></tr>
+<tr><td data-label="Severity"><span class="sev error">error</span></td><td data-label="File and line"><code>heading-<wbr>out-<wbr>of-<wbr>order.md:5</code></td><th scope="row" data-label="Code"><code>HEADING_<wbr>OUT_<wbr>OF_<wbr>ORDER</code></th><td data-label="What the court says">The heading "The principle" stands before a heading the form places ahead of it.</td></tr>
+<tr><td data-label="Severity"><span class="sev error">error</span></td><td data-label="File and line"><code>lede-<wbr>without-<wbr>subject.md:3</code></td><th scope="row" data-label="Code"><code>LEDE_<wbr>WITHOUT_<wbr>SUBJECT</code></th><td data-label="What the court says">The first sentence does not name the subject "court".</td></tr>
+<tr><td data-label="Severity"><span class="sev warning">warning</span></td><td data-label="File and line"><code>heading-<wbr>case.md:5</code></td><th scope="row" data-label="Code"><code>HEADING_<wbr>NOT_<wbr>SENTENCE_<wbr>CASE</code></th><td data-label="What the court says">The heading "What The Court Refuses Today" capitalizes every word.</td></tr>
+<tr><td data-label="Severity"><span class="sev warning">warning</span></td><td data-label="File and line"><code>off-<wbr>profile.md:1</code></td><th scope="row" data-label="Code"><code>OFF_<wbr>PROFILE</code></th><td data-label="What the court says">The measure SENTENCES_OVER 40 is 33.3; the profile voice asks at most 10 per hundred.</td></tr>
+</tbody></table></div>
   </div>
 </section>
 

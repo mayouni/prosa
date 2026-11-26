@@ -1,5 +1,5 @@
 // site.js : what every page of the Prosa site does once it is painted, after the design system of Zayn (site/stz.js there).
-// 1. The theme: Vellum or Lamplight, chosen in the bar and kept on this browser; "System" follows the reader's system.
+// 1. The theme: Day or Night, chosen in the bar and kept on this browser; "System" follows the reader's system.
 // 2. The room (K24 WIDE_ROOM): a code block or a table whose content needs more than the column takes the room free to its
 //    right, up to the window less the gutter, and wraps only past that. Nothing ever scrolls inside the page.
 // 3. The last line (K11 BALANCE): running text fills its measure, narrowed only as far as its last line needs to hold a third
@@ -9,7 +9,7 @@
   var html = document.documentElement, sel = document.getElementById('theme');
   if (sel) {
     var kept = null; try { kept = localStorage.getItem('prosa-theme'); } catch (e) { kept = null; }
-    sel.value = kept === 'vellum' || kept === 'lamplight' ? kept : 'system';
+    sel.value = kept === 'day' || kept === 'night' ? kept : 'system';
     sel.addEventListener('change', function () {
       var v = sel.value;
       if (v === 'system') { delete html.dataset.theme; try { localStorage.removeItem('prosa-theme'); } catch (e) { /* kept nowhere */ } }

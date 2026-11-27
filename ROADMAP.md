@@ -1,6 +1,6 @@
 # The Prosa roadmap
 
-The roadmap of Prosa is the list of its nine milestones, each with its state on 2026-11-26 and the work that remains. Every
+The roadmap of Prosa is the list of its nine milestones, each with its state on 2026-11-27 and the work that remains. Every
 figure on this page comes from a command anyone can run again.
 
 ## The state of each milestone
@@ -14,7 +14,7 @@ figure on this page comes from a command anyone can run again.
 | M5. The Haro twin and the Zig binary | Built | Zig: 185 of 185 cases identical. Twin: 56 of 66 fixtures, 10 named seams |
 | M6. The drift measure | Built | 36.5 colons per thousand words in the 2026 drafts, 15.1 in the Ring book |
 | M7. A second house | Example only | `styles/plain_manual` passes on 4 files |
-| M8. The website | Built | 12 pages, 0 findings across 15 files; Zayn's UI audit passes K01 to K37 at six widths |
+| M8. The website | Built | 12 pages in the Docket theme, set in IBM Plex, 0 findings across 15 files; Zayn's UI audit passes K01 to K37 at six widths, by Day and by Night |
 | M9. The book | Draft | 11 chapters, about 10,000 words, 0 findings across 14 files |
 
 ## What remains
@@ -50,6 +50,14 @@ figure on this page comes from a command anyone can run again.
 
 **For the site and the repository.**
 
+- The site is published at <https://mayouni.github.io/prosa/> by a workflow of GitHub Pages on every push that touches
+  `site/`.
+- The Docket theme sets the site on a paper ground with black ink, a blue link and a yellow signal. It holds two themes, Day
+  and Night, and "System" follows the reader's system. The front page carries a docket: the first finding of five real runs
+  of the court on fixtures of the suite.
+- IBM Plex Sans and IBM Plex Mono are carried in `site/fonts/` under the SIL Open Font License, in four Latin1 files of 79
+  KB in all. Each page preloads them, and a face that arrives late is left for the next page: nothing moves once painted
+  (K22).
 - Zayn's UI audit raises one finding per page on the trail: it takes the root of the Zayn repository as the site's root. The
   trail of each page starts at the Prosa front page.
 - The three house checkers stay in service in their own repositories. Their retirement is the author's decision.

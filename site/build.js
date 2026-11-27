@@ -208,6 +208,7 @@ function shell(name) {
 <meta name="description" content="${esc(p.description)}">
 <meta name="prosa:subject" content="${p.subject}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111111'/%3E%3Crect x='8' y='8' width='16' height='16' fill='%23ffd23f'/%3E%3C/svg%3E">
+${['IBMPlexSans-Regular', 'IBMPlexSans-SemiBold', 'IBMPlexMono-Regular', 'IBMPlexMono-SemiBold'].map(f => '<link rel="preload" href="fonts/' + f + '-Latin1.woff2" as="font" type="font/woff2" crossorigin>').join('\n')}
 <link rel="stylesheet" href="prosa.css">
 <script>try{var t=localStorage.getItem('prosa-theme');if(t==='day'||t==='night')document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>

@@ -3,8 +3,17 @@
    the record, the text is black, and the one colour is the signal yellow a clerk lays on a refused line. Night is the same
    record on black. Every colour and size is a token below; every text holds 7:1 against what is painted under it.
    One scroll: nothing scrolls inside the page. Code wraps under its own line's indentation, and a code block or a table takes
-   the room it needs to its right (site.js measures it). The site makes no external request and holds no animation: IBM Plex
-   is used where the reader has it, and the system's own faces stand in for it. */
+   the room it needs to its right (site.js measures it). The site makes no external request and holds no animation.
+   The faces are IBM Plex Sans and IBM Plex Mono, carried in fonts/: the Latin1 cut of IBM's release, in two weights each,
+   under the SIL Open Font License (fonts/OFL.txt). Each page preloads them, and a face that comes late is left for the next page: nothing moves once painted (K22). */
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: optional; src: local("IBM Plex Sans"), local("IBMPlexSans"), url("fonts/IBMPlexSans-Regular-Latin1.woff2") format("woff2");
+  unicode-range: U+0000, U+000D, U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2074, U+20AC, U+2122, U+2212, U+FB01-FB02; }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: optional; src: local("IBM Plex Sans SemiBold"), local("IBMPlexSans-SemiBold"), url("fonts/IBMPlexSans-SemiBold-Latin1.woff2") format("woff2");
+  unicode-range: U+0000, U+000D, U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2074, U+20AC, U+2122, U+2212, U+FB01-FB02; }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: optional; src: local("IBM Plex Mono"), local("IBMPlexMono"), url("fonts/IBMPlexMono-Regular-Latin1.woff2") format("woff2");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02; }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: optional; src: local("IBM Plex Mono SemiBold"), local("IBMPlexMono-SemiBold"), url("fonts/IBMPlexMono-SemiBold-Latin1.woff2") format("woff2");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02; }
 :root {
   --size-small: 1.125rem; --size-reading: 1.3125rem; --size-lead: 1.5rem; --size-section: 1.75rem; --size-title: 2.125rem; --size-hero: 2.6rem;
   --leading-reading: 1.65; --leading-title: 1.12; --measure: 31.5em;
@@ -147,6 +156,7 @@ tbody th { font-weight: 600; }
 table.docket code { overflow-wrap: normal; } /* a code and a file name break only after a hyphen or an underscore (build.js puts a <wbr> there) */
 .sev.error { background: var(--sev-fill); color: var(--sev-ink); padding: 0 .35rem; }
 td code, th code { overflow-wrap: anywhere; }
+td a, th a { padding-block: 2px; } /* a link in a cell is a target of 24 px at least (K17) */
 td code.msg { border: 0; background: transparent; padding: 0; }
 /* on a phone the rows stack: each row is a group under a hairline, each cell named by its column; the table never scrolls */
 @media (max-width: 47.5rem) {

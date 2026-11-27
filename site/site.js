@@ -72,5 +72,6 @@
   window.ProsaLay = lay;
   lay();
   window.addEventListener('load', lay);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(lay); // Plex changes where the lines break: measure again
   var t = null; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(lay, 60); });
 })();

@@ -93,14 +93,17 @@ function runCheck(a) {
         jobs.push({ file: pc.file, target: { piece: pc.piece.name, subject: a.subject } });
       }
     }
+    // a file two pieces bind is judged twice, and each finding names the piece and the style that raised it
+    const jobsOn = {}; for (const j of jobs) jobsOn[j.file] = (jobsOn[j.file] || 0) + 1;
     for (const j of jobs) {
       const r = P.judge(L.decls, j.target, readText(j.file), { contract, level, file: rel(j.file), allowMatches });
+      if (jobsOn[j.file] > 1) for (const d of r.diagnostics) if (d.span.file === rel(j.file)) d.by = { piece: j.target.piece || '', style: r.style || '' };
       diags = diags.concat(r.diagnostics); judged.add(rel(j.file));
       if (level >= 5) readings = readings.concat(readingsOf(L.decls, j, r));
     }
   }
   diags = diags.filter(d => d.level <= level);
-  const seenD = new Set(); diags = diags.filter(d => { const k = [d.code, d.span.file, d.span.line, d.subject, d.message].join('|'); if (seenD.has(k)) return false; seenD.add(k); return true; });
+  const seenD = new Set(); diags = diags.filter(d => { const k = [d.code, d.span.file, d.span.line, d.col || 0, d.subject, d.message, d.by ? d.by.piece : ''].join('|'); if (seenD.has(k)) return false; seenD.add(k); return true; });
   if (a.json) process.stdout.write(JSON.stringify(P.envelope(diags), null, 1) + '\n');
   else if (!a.quiet) {
     process.stdout.write(P.reportText(diags, judged.size, level) + '\n');

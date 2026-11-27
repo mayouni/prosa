@@ -115,8 +115,11 @@ A `FORM` declares the structure of a kind of text: a chapter, a page, a post.
 - **The first sentence** is the first sentence of the first prose paragraph.
 - **`SAY_ONCE FIRST 150`** reads the first 150 words a reader meets, in order: the title, the headings and the prose. It
   refuses two content words in a row that stand twice there. A content word has three letters or more and is not on the
-  language's list of function words. A pair that holds a word of the subject term is left out.
-- **`HEADINGS`** lists the level-2 headings the form fixes, in their order. Other headings may stand between them.
+  language's list of function words. A pair that holds a word of the subject term, or its plural, is left out: the subject
+  `commitment` leaves out `five commitments`, and the subject `entries` leaves out `entry list`. A plural adds `s` or `es`,
+  or turns a closing `y` into `ies`.
+- **`HEADINGS`** lists the level-2 headings the form fixes, in their order. Other headings may stand between them. One bare
+  heading, `HEADINGS "In your hands"`, is a list of one.
 - **`HEADING_CASE sentence`** refuses a heading of three long words or more in which every long word is capitalized.
 - **`CLOSES_WITHOUT`** refuses a last level-2 heading that holds one of the phrases, and a last paragraph that opens on one.
 - **`HOLES_CLOSED_AT [review, published]`** refuses an open `[AUTHOR: …]` hole when the front matter's `status` is on the list.

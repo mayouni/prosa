@@ -8,7 +8,7 @@ pub var gpa: std.mem.Allocator = undefined;
 pub var crashed: bool = false;
 
 pub const U = []const u16;
-pub const version_court = "0.1.0";
+pub const version_court = "0.1.1";
 pub const version_language = "0.1";
 
 fn oom() noreturn {
@@ -238,6 +238,11 @@ pub const Diag = struct {
     line: i64,
     subject: []const u8,
     cites: []const []const u8,
+    /// The column of a rule's match on its line: it keeps two matches with one message apart. Never printed.
+    col: i64 = 0,
+    /// Set on a file two pieces bind: the piece and the style that raised the finding.
+    piece: ?[]const u8 = null,
+    style: []const u8 = "",
 };
 pub const KV = struct { k: []const u8, v: []const u8 };
 pub const Extra = struct { message: ?[]const u8 = null, severity: ?[]const u8 = null, level: ?i64 = null, cites: []const []const u8 = &.{} };
@@ -1929,7 +1934,7 @@ fn maskText(s: U, mentions: bool) []u16 {
 }
 
 pub const Ctx = struct { file: []const u8 = "", title: U = &.{}, words: i64 = 0 };
-const RuleHit = struct { hit: U, line: i64, entry: *const Entry };
+const RuleHit = struct { hit: U, line: i64, col: i64 = 0, entry: *const Entry };
 
 const Scanner = struct {
     entries: []const Entry,
@@ -1974,7 +1979,8 @@ const Scanner = struct {
                 if (!ok) continue;
             }
             const a = toks[h.from].at;
-            s.hits.add(.{ .hit = text[a..toks[h.to - 1].end], .line = line + ucountCh(text[0..a], '\n'), .entry = h.entry });
+            const nl = std.mem.lastIndexOfScalar(u16, text[0..a], '\n');
+            s.hits.add(.{ .hit = text[a..toks[h.to - 1].end], .line = line + ucountCh(text[0..a], '\n'), .col = @intCast(if (nl) |x| a - x else a + 1), .entry = h.entry });
         }
     }
 };
@@ -2049,7 +2055,10 @@ pub fn judgeRule(d: *const Decl, blocks: []const Block, lang: []const u8, c: *co
                 if (written) |w| cat(&.{ " Written form: ", w }) else if (ew) |w| cat(&.{ " Write \"", w, "\"." }) else "",
             });
         }
-        out.add(diag(c, code, file, h.line, d.name, &.{}, .{ .severity = severity, .level = 3, .cites = cites.items(), .message = msg }));
+        // the column keeps two matches on one line apart when the message is the same for both (a PATTERN with SAYS)
+        var x = diag(c, code, file, h.line, d.name, &.{}, .{ .severity = severity, .level = 3, .cites = cites.items(), .message = msg });
+        x.col = h.col;
+        out.add(x);
     }
     return out.items();
 }
@@ -2186,8 +2195,19 @@ fn judgeForm(form: *const Form, jd: *const JDoc, piece: []const u8, c: *const Co
         var stop = std.StringHashMap(void).init(gpa);
         var it = std.mem.splitScalar(u8, if (eq(lang, "fr")) STOP_FR else STOP_EN, ' ');
         while (it.next()) |w| stop.put(w, {}) catch oom();
+        // the subject excuses its own words and their plurals: "commitments" for the subject "commitment", and back
         var subj = std.StringHashMap(void).init(gpa);
-        for (tokens(subject, false)) |t| subj.put(toU8(t.w), {}) catch oom();
+        for (tokens(subject, false)) |t| {
+            if (!isWord(t.w)) continue;
+            const s = toU8(t.w);
+            subj.put(s, {}) catch oom();
+            subj.put(cat(&.{ s, "s" }), {}) catch oom();
+            subj.put(cat(&.{ s, "es" }), {}) catch oom();
+            if (s.len > 1 and s[s.len - 1] == 'y') subj.put(cat(&.{ s[0 .. s.len - 1], "ies" }), {}) catch oom();
+            if (s.len > 1 and s[s.len - 1] == 's') subj.put(s[0 .. s.len - 1], {}) catch oom();
+            if (s.len > 2 and std.mem.endsWith(u8, s, "es")) subj.put(s[0 .. s.len - 2], {}) catch oom();
+            if (s.len > 3 and std.mem.endsWith(u8, s, "ies")) subj.put(cat(&.{ s[0 .. s.len - 3], "y" }), {}) catch oom();
+        }
         var seen = std.StringHashMap(i64).init(gpa);
         var told = std.StringHashMap(void).init(gpa);
         var n: f64 = 0;
@@ -2233,14 +2253,9 @@ fn judgeForm(form: *const Form, jd: *const JDoc, piece: []const u8, c: *const Co
         if (h.level == 2) h2.add(h);
     }
     if (form.get("HEADINGS")) |hf| {
-        const vals = hf.decl.get("HEADINGS").?.values;
-        if (vals.len == 0 or vals[0].t != 'l') {
-            crashed = true; // values[0].items is undefined: the JavaScript court throws here
-            return fj.out.items();
-        }
         var last: i64 = -1;
-        for (vals[0].items) |it| {
-            const w = valStr(it[0]);
+        for (flat(hf.decl, "HEADINGS")) |wq| { // a list of headings, or one bare heading
+            const w = wq orelse continue;
             const nw = norm(toU16(w));
             var k: i64 = -1;
             for (h2.items(), 0..) |h, x| {
@@ -2468,6 +2483,7 @@ pub fn reportText(w: *std.Io.Writer, diags: []const Diag, files: usize, level: [
             if (ev) |e| try w.print(" \xc2\xb7 {s}", .{e});
             try w.writeAll("\n");
         }
+        if (d.piece) |p| try w.print("    Piece {s} \xc2\xb7 style {s}\n", .{ p, d.style });
         try w.writeAll("\n");
     }
     try w.print("{d} error(s), {d} warning(s) across {d} file(s) at level {s}\n", .{ countSeverity(diags, "error"), countSeverity(diags, "warning"), files, level });
@@ -2538,7 +2554,7 @@ pub fn envelope(diags: []const Diag) J {
     var a: Vec(J) = .{};
     for (diags) |d| {
         const span = gpa.dupe(J.Pair, &.{ .{ .k = "file", .v = .{ .s = d.file } }, .{ .k = "line", .v = .{ .i = d.line } } }) catch oom();
-        a.add(.{ .obj = gpa.dupe(J.Pair, &.{
+        const base = [_]J.Pair{
             .{ .k = "code", .v = .{ .s = d.code } },
             .{ .k = "severity", .v = .{ .s = d.severity } },
             .{ .k = "message", .v = .{ .s = d.message } },
@@ -2547,7 +2563,9 @@ pub fn envelope(diags: []const Diag) J {
             .{ .k = "language", .v = .{ .s = "prosa" } },
             .{ .k = "level", .v = .{ .i = d.level } },
             .{ .k = "subject", .v = .{ .s = d.subject } },
-        }) catch oom() });
+        };
+        const by = [_]J.Pair{ .{ .k = "piece", .v = .{ .s = d.piece orelse "" } }, .{ .k = "style", .v = .{ .s = d.style } } };
+        a.add(.{ .obj = if (d.piece != null) std.mem.concat(gpa, J.Pair, &.{ &base, &by }) catch oom() else gpa.dupe(J.Pair, &base) catch oom() });
     }
     return .{ .obj = gpa.dupe(J.Pair, &.{.{ .k = "diagnostics", .v = .{ .arr = a.items() } }}) catch oom() };
 }

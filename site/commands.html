@@ -76,7 +76,7 @@
   <div class="narrow">
     <h2 id="the-syntax-of-the-eight-verbs">The syntax of the eight verbs</h2>
     <p>The program prints its own syntax when it runs with no argument. The reference court runs under Node as <code>node tools/prosa/cli.js</code>, and this page writes it <code>prosa</code>.</p>
-    <pre class="term"><span class="ln"><span class="dim">$ prosa</span></span><span class="ln">prosa 0.1.0 (language 0.1)</span><span class="ln"></span><span class="ln" style="--ind:2">  prosa check &lt;path&gt;... [--level N] [--style S --form F --subject T --lang L] [--proz F]... [--json] [--quiet]</span><span class="ln" style="--ind:2">  prosa measure &lt;path&gt;... [--as NAME] [--json]</span><span class="ln" style="--ind:2">  prosa brief &lt;file.proz&gt; [--piece P | --style S [--form F] [--lang L]]</span><span class="ln" style="--ind:2">  prosa drift &lt;drafts&gt;... --against &lt;corpus&gt; [--lang L] [--json]</span><span class="ln" style="--ind:2">  prosa readings &lt;path&gt;...</span><span class="ln" style="--ind:2">  prosa conformance [dir]</span><span class="ln" style="--ind:2">  prosa pack &lt;file.proz&gt; [-o out.json]      prosa pack --check</span><span class="ln" style="--ind:2">  prosa version</span><span class="ln"></span><span class="ln">Exit codes: 0 no error (warnings allowed), 1 an error, 2 a usage or read error.</span></pre>
+    <pre class="term"><span class="ln"><span class="dim">$ prosa</span></span><span class="ln">prosa 0.1.1 (language 0.1)</span><span class="ln"></span><span class="ln" style="--ind:2">  prosa check &lt;path&gt;... [--level N] [--style S --form F --subject T --lang L] [--proz F]... [--json] [--quiet]</span><span class="ln" style="--ind:2">  prosa measure &lt;path&gt;... [--as NAME] [--json]</span><span class="ln" style="--ind:2">  prosa brief &lt;file.proz&gt; [--piece P | --style S [--form F] [--lang L]]</span><span class="ln" style="--ind:2">  prosa drift &lt;drafts&gt;... --against &lt;corpus&gt; [--lang L] [--json]</span><span class="ln" style="--ind:2">  prosa readings &lt;path&gt;...</span><span class="ln" style="--ind:2">  prosa conformance [dir]</span><span class="ln" style="--ind:2">  prosa pack &lt;file.proz&gt; [-o out.json]      prosa pack --check</span><span class="ln" style="--ind:2">  prosa version</span><span class="ln"></span><span class="ln">Exit codes: 0 no error (warnings allowed), 1 an error, 2 a usage or read error.</span></pre>
   </div>
 </section>
 
@@ -125,7 +125,7 @@
   <div class="narrow">
     <h2 id="prosa-conformance-runs-every-fixture-and-its-lawful-twin">prosa conformance runs every fixture and its lawful twin</h2>
     <p>The verb <code>conformance</code> runs the suite of the standard. Each refused fixture names the code it expects on its first line, and its lawful twin expects silence.</p>
-    <pre class="term"><span class="ln"><span class="dim">$ prosa conformance</span></span><span class="ln"><span class="good">66 of 66 fixtures pass</span></span></pre>
+    <pre class="term"><span class="ln"><span class="dim">$ prosa conformance</span></span><span class="ln"><span class="good">73 of 73 fixtures pass</span></span></pre>
   </div>
 </section>
 
@@ -133,7 +133,7 @@
   <div class="narrow">
     <h2 id="prosa-pack-and-prosa-version-state-what-a-court-runs">prosa pack and prosa version state what a court runs</h2>
     <p>The verb <code>pack</code> compiles a <code>.proz</code> file and every file it uses into one JSON pack: the declarations as data, with the SHA-256 sum of each source. The form <code>prosa pack --check</code> compares the versions of the court with the manifest of the protocol. The verb <code>version</code> prints the three versions a verdict depends on.</p>
-    <pre class="term"><span class="ln"><span class="dim">$ prosa version</span></span><span class="ln">prosa 0.1.0 (language 0.1, contract 0.1)</span></pre>
+    <pre class="term"><span class="ln"><span class="dim">$ prosa version</span></span><span class="ln">prosa 0.1.1 (language 0.1, contract 0.1)</span></pre>
   </div>
 </section>
 

@@ -1,0 +1,13 @@
+// Expected: TERM_SYNONYM
+DEFINE STYLE house (
+  HOLDS [constructor]
+)
+DEFINE TERM constructor (
+  MEANS "the function that builds an object",
+  REFUSES [ctor],
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "name-constructor.md",
+  FOLLOWS house
+)

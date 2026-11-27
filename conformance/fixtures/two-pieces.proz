@@ -1,0 +1,26 @@
+// Expected: FORBIDDEN_WORD, TERM_SYNONYM
+DEFINE STYLE house (
+  HOLDS [programmer]
+)
+DEFINE STYLE plain (
+  HOLDS [forbidden_words]
+)
+DEFINE TERM programmer (
+  MEANS "the person who writes programs",
+  REFUSES [developer, developers],
+  MENTIONS skipped,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE WORDLIST forbidden_words (
+  REFUSES [leverage WRITE "use"],
+  CODE FORBIDDEN_WORD, SEVERITY error,
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "two-pieces.md",
+  FOLLOWS house
+)
+DEFINE PIECE the_plain_page (
+  FILE "two-pieces.md",
+  FOLLOWS plain
+)

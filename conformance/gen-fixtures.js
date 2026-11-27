@@ -93,6 +93,22 @@ const zone = file => withPattern(file) + `DEFINE ZONE record (\n  EXEMPT_FROM [L
 proz('zone-lawful', 'none', zone('zone-lawful.md'), page('The court judges.\n\n<!-- prosa:zone record -->\n\nThe audit is not yet written.\n\n<!-- prosa:end -->\n\nThe court judges again.'));
 proz('zone-ended', 'LACK_LISTED', zone('zone-ended.md'), page('The court judges.\n\n<!-- prosa:zone record -->\n\nThe audit reads the page.\n\n<!-- prosa:end -->\n\nThe audit is not yet written.'));
 proz('piece-file-not-found', 'PIECE_FILE_NOT_FOUND', style('') + piece('no-such-page.md'));
+// a declaration named like a property of a JavaScript object is a name like any other
+const ctor = file => style('constructor', `DEFINE TERM constructor (\n  MEANS "the function that builds an object",\n  REFUSES [ctor],\n  ${EV}\n)\n`) + piece(file);
+proz('name-constructor', 'TERM_SYNONYM', ctor('name-constructor.md'), page('The ctor builds the object.'));
+proz('name-constructor-lawful', 'none', ctor('name-constructor-lawful.md'), page('The constructor builds the object.'));
+// HEADINGS with one bare word asks for one heading
+proz('headings-bare-word', 'HEADING_MISSING', withForm('headings-bare-word.md', 'HEADINGS "In your hands"'), page('The court judges.\n\n## The field\n\nOne.'));
+proz('headings-bare-word-lawful', 'none', withForm('headings-bare-word-lawful.md', 'HEADINGS "In your hands"'), page('The court judges.\n\n## In your hands\n\nOne.'));
+// SAY_ONCE excuses the plural of the subject as it excuses the subject
+proz('say-once-plural-lawful', 'none', withForm('say-once-plural-lawful.md', 'SAY_ONCE FIRST 150', 'SUBJECT "commitment"'), page('Each commitment states one principle.\n\n## Five commitments\n\nThe five commitments decide what the language declares.'));
+// two matches of one PATTERN with SAYS on one line are two findings
+const says = file => style('lack_listed', `DEFINE PATTERN lack_listed (\n  MATCHES ["not yet"],\n  CODE LACK_LISTED,\n  SAYS "The text states a lack: state what stands.",\n  ${EV}\n)\n`) + piece(file);
+proz('pattern-says-twice', 'LACK_LISTED', says('pattern-says-twice.md'), page('The audit is not yet written, and the index is not yet built.'));
+// two pieces on one file: each finding names the piece and the style that raised it
+proz('two-pieces', 'FORBIDDEN_WORD, TERM_SYNONYM', `DEFINE STYLE house (\n  HOLDS [programmer]\n)\nDEFINE STYLE plain (\n  HOLDS [forbidden_words]\n)\n` + termRule +
+  `DEFINE WORDLIST forbidden_words (\n  REFUSES [leverage WRITE "use"],\n  CODE FORBIDDEN_WORD, SEVERITY error,\n  ${EV}\n)\n` +
+  `DEFINE PIECE the_page (\n  FILE "two-pieces.md",\n  FOLLOWS house\n)\nDEFINE PIECE the_plain_page (\n  FILE "two-pieces.md",\n  FOLLOWS plain\n)\n`, page('A developer can leverage the rule.'));
 
 // ---- level 4: the measure
 const long = 'The court reads the page and then it reads the page again and then it reads every other page of the book and then it reads the site and the posts and the letters and the notes and every line that a reader may one day meet in print. ';

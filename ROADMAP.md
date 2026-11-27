@@ -7,11 +7,11 @@ figure on this page comes from a command anyone can run again.
 
 | Milestone | State | Measured |
 |---|---|---|
-| M1. Language 0.1 and the reference court | Built | 66 of 66 fixtures pass; 31 diagnostic codes in contract 0.1 |
+| M1. Language 0.1 and the reference court | Built | Court 0.1.1: 73 of 73 fixtures pass; 31 diagnostic codes in contract 0.1 |
 | M2. The AYOUNI house as the first style | Built | Lint parity on 123 pages; voice gate parity on 151 of 153 files |
 | M3. The agent loop: hook, MCP server, brief | Built | The hook and the three MCP tools ran on test input |
 | M4. A book chapter under the court | Open for the author | First verdicts recorded: 14 findings, 3 true |
-| M5. The Haro twin and the Zig binary | Built | Zig: 185 of 185 cases identical. Twin: 56 of 66 fixtures, 10 named seams |
+| M5. The Haro twin and the Zig binary | Built | Zig: 206 of 206 cases identical. Twin: 63 of 73 fixtures, 10 named seams |
 | M6. The drift measure | Built | 36.5 colons per thousand words in the 2026 drafts, 15.1 in the Ring book |
 | M7. A second house | Example only | `styles/plain_manual` passes on 4 files |
 | M8. The website | Built | 12 pages in the Docket theme, set in IBM Plex, 0 findings across 15 files; Zayn's UI audit passes K01 to K37 at six widths, by Day and by Night |
@@ -31,18 +31,23 @@ figure on this page comes from a command anyone can run again.
 
 **For the court.**
 
-- `SAY_ONCE` excuses the exact subject word. Its inflections ("commitments" for "commitment") come next.
-- Two matches of one `PATTERN` with `SAYS` on one line give one finding. Two findings come next.
-- Two pieces on one file give one merged report.
-- A `HEADINGS` field with one bare word passes level 2 and then stops the court. A level 2 diagnostic comes next.
-- Declarations named `constructor` or `toString` meet the objects of JavaScript. A map with no prototype comes next.
-- `readHtml` takes about 68 seconds on the Zayn book's HTML because of unclosed tags.
+Court 0.1.1 closes the six gaps the trial found. Each has a fixture, and the Zig binary judges each one as the reference
+court does.
+
+- `SAY_ONCE` excuses the subject's plural as it excuses the subject: "five commitments" stands twice under the subject
+  "commitment".
+- Two matches of one `PATTERN` with `SAYS` on one line are two findings.
+- A file that two pieces bind is judged once per piece, and each finding names its piece and its style.
+- A `HEADINGS` field with one bare heading is a list of one. Court 0.1.0 stopped on it.
+- A declaration named `constructor` is a name like any other: the maps of names have no prototype.
+- `readHtml` reads the 3 MB page of the Zayn book in about 1 second, against 126 seconds before, with the same model on 48
+  pages and on 20,000 generated pages of unclosed tags.
 
 **For the Zig binary.**
 
 - It carries `check`, `measure`, `conformance` and `version`. The commands `brief`, `drift`, `readings` and `pack` stay with
   the JavaScript court, as does the readings block of level 5.
-- The WebAssembly build (191 KB) gives the expected codes on 63 of 66 fixtures. The three others need a file system.
+- The WebAssembly build (193 KB) gives the expected codes on 70 of 73 fixtures. The three others need a file system.
 
 **For the Haro twin.**
 

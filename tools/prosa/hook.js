@@ -28,10 +28,12 @@ function judgeFile(file) {
   for (const pz of governing(file)) {
     let L; try { L = load([pz]); } catch (e) { continue; }
     if (L.diagnostics.some(d => d.severity === 'error') || P.checkDeclarations(L.decls, contract).some(d => d.severity === 'error')) continue;
-    for (const pc of piecesFor(L.decls)) {
-      if (pc.missing || path.resolve(pc.file) !== file) continue;
+    const mine = piecesFor(L.decls).filter(pc => !pc.missing && path.resolve(pc.file) === file);
+    for (const pc of mine) {
       governed = true;
-      diags = diags.concat(P.judge(L.decls, { piece: pc.piece.name }, fs.readFileSync(file, 'utf8').replace(/^﻿/, ''), { contract, level: 4, file: path.relative(process.cwd(), file).split(path.sep).join('/'), allowMatches }).diagnostics);
+      const r = P.judge(L.decls, { piece: pc.piece.name }, fs.readFileSync(file, 'utf8').replace(/^﻿/, ''), { contract, level: 4, file: path.relative(process.cwd(), file).split(path.sep).join('/'), allowMatches });
+      if (mine.length > 1) for (const d of r.diagnostics) d.by = { piece: pc.piece.name, style: r.style || '' }; // two pieces: each finding names its own
+      diags = diags.concat(r.diagnostics);
     }
     if (governed) break;
   }

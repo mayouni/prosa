@@ -221,13 +221,7 @@ fn readOrDie(f: []const u8) []const u8 {
     };
 }
 fn judgeFile(decls: []const *core.Decl, target: core.Target, f: []const u8, level: i64) []core.Diag {
-    const r = core.judge(decls, target, readOrDie(f), &contract, level, rel(f), &allowMatches);
-    if (core.crashed) {
-        err.writeAll("prosa: TypeError: the JavaScript court throws on this declaration (HEADINGS without a list)\n") catch {};
-        err.flush() catch {};
-        std.process.exit(1);
-    }
-    return r;
+    return core.judge(decls, target, readOrDie(f), &contract, level, rel(f), &allowMatches);
 }
 
 // ---------------------------------------------------------------- the commands
@@ -319,7 +313,7 @@ fn runCheck(a: *Args) u8 {
         if (eq(d.severity, "error") and d.level <= 2) decl_bad = true;
     }
     if (level >= 3 and !decl_bad) {
-        const Job = struct { file: []const u8, target: core.Target };
+        const Job = struct { file: []const u8, target: core.Target, style: []const u8 = "" };
         var jobs: Vec(Job) = .{};
         const pieces = piecesFor(l.decls.items());
         var explicit = false;
@@ -329,7 +323,7 @@ fn runCheck(a: *Args) u8 {
             if (k == .file or texts.len() > 0) explicit = true;
         }
         if (truthy(a.style)) |style| {
-            for (texts.items()) |f| jobs.add(.{ .file = f, .target = .{ .style = style, .form = a.form, .subject = a.subject, .language = a.lang } });
+            for (texts.items()) |f| jobs.add(.{ .file = f, .target = .{ .style = style, .form = a.form, .subject = a.subject, .language = a.lang }, .style = style });
         } else {
             for (pieces) |pc| {
                 if (pc.missing) {
@@ -337,11 +331,24 @@ fn runCheck(a: *Args) u8 {
                     continue;
                 }
                 if (explicit and texts.len() > 0 and !has(texts.items(), pc.file)) continue;
-                jobs.add(.{ .file = pc.file, .target = .{ .piece = pc.piece.name, .subject = a.subject } });
+                jobs.add(.{ .file = pc.file, .target = .{ .piece = pc.piece.name, .subject = a.subject }, .style = core.idv(pc.piece, "FOLLOWS") orelse "" });
             }
         }
+        // a file two pieces bind is judged twice, and each finding names the piece and the style that raised it
+        var jobs_on = std.StringHashMap(usize).init(gpa);
         for (jobs.items()) |j| {
-            diags.addAll(judgeFile(l.decls.items(), j.target, j.file, @intFromFloat(@min(level, 1000))));
+            const g = jobs_on.getOrPut(j.file) catch oom();
+            g.value_ptr.* = if (g.found_existing) g.value_ptr.* + 1 else 1;
+        }
+        for (jobs.items()) |j| {
+            const r = judgeFile(l.decls.items(), j.target, j.file, @intFromFloat(@min(level, 1000)));
+            if (jobs_on.get(j.file).? > 1) for (r) |*d| {
+                if (eq(d.file, rel(j.file))) {
+                    d.piece = j.target.piece orelse "";
+                    d.style = j.style;
+                }
+            };
+            diags.addAll(r);
             judged.put(rel(j.file), {}) catch oom();
         }
     }
@@ -349,7 +356,7 @@ fn runCheck(a: *Args) u8 {
     var seen = std.StringHashMap(void).init(gpa);
     for (diags.items()) |d| {
         if (!(@as(f64, @floatFromInt(d.level)) <= level)) continue;
-        const key = cat(&.{ d.code, "|", d.file, "|", core.intStr(d.line), "|", d.subject, "|", d.message });
+        const key = cat(&.{ d.code, "|", d.file, "|", core.intStr(d.line), "|", core.intStr(d.col), "|", d.subject, "|", d.message, "|", d.piece orelse "" });
         if (seen.contains(key)) continue;
         seen.put(key, {}) catch oom();
         kept.add(d);

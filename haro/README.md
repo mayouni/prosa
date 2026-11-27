@@ -41,7 +41,9 @@ when the court is not forged.
 ## The measured result
 
 Measured on 2026-11-26, on the forge of Haro commit 989d6e6: the meta-court accepts `prosa.stzu`, and the forged court judges
-the 66 fixtures of `conformance/manifest.json` at level 2, the last level that judges a declaration without its text.
+the 66 fixtures of `conformance/manifest.json` at level 2, the last level that judges a declaration without its text. On
+2026-11-27 the suite grew to 73 fixtures, and the same forge agrees on the 7 new ones: 63 of 73 agree, with the same 10
+differences.
 
 - **56 of 66 agree with `prosa.js`.** All 50 declarations that are lawful at level 2 are judged clean. Six of the 16 refused
   ones are refused under the same code: `MISSING_FIELD`, `UNKNOWN_KIND`, `RULE_WITHOUT_EVIDENCE`, `UNKNOWN_REFERENCE`,

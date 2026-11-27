@@ -1,0 +1,13 @@
+// Expected: HEADING_MISSING
+DEFINE STYLE house (
+  HOLDS []
+)
+DEFINE FORM page (
+  HEADINGS "In your hands",
+  EVIDENCE "The author, 2026-11-26: a ruling written for this fixture"
+)
+DEFINE PIECE the_page (
+  FILE "headings-bare-word.md",
+  FOLLOWS house,
+  FORM page
+)

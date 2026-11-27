@@ -42,6 +42,9 @@ one sentence that names a dated ruling of the author or a measure on a named cor
 
 A finding has six parts, in the Softanza family envelope C2: `code`, `severity`, `message`, `span` (file and line), `cites`
 and `language`. The Prosa court adds `level` and `subject`. Findings are always wrapped in `{"diagnostics": [...]}`.
+On a file that two pieces bind, the court judges the file once per piece, and each finding also holds `piece` and `style`:
+the report prints them on a line `Piece <name> · style <name>` under the rule. Two matches of one rule on one line are two
+findings, even when their messages are the same.
 
 ```
 src/04-the-court.md:57  error  TERM_SYNONYM  programmer
@@ -59,7 +62,7 @@ Exit codes: 0 when no error stands (warnings are allowed), 1 on an error, 2 on a
 
 ## Versions
 
-The language is 0.1, the contract of diagnostics is 0.1, and the reference court is 0.1.0. The three are printed by
+The language is 0.1, the contract of diagnostics is 0.1, and the reference court is 0.1.1. The three are printed by
 `prosa version` and cross-checked by `prosa pack --check` against `protocol/MANIFEST.json`. A change that makes a lawful
 declaration unlawful, or a silent text refused, raises the language's minor version.
 

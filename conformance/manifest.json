@@ -116,6 +116,16 @@
    ]
   },
   {
+   "file": "conformance/fixtures/headings-bare-word-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/headings-bare-word.proz",
+   "expect_ids": [
+    "HEADING_MISSING"
+   ]
+  },
+  {
    "file": "conformance/fixtures/headings-lawful.proz",
    "expect_ids": []
   },
@@ -150,6 +160,16 @@
    ]
   },
   {
+   "file": "conformance/fixtures/name-constructor-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/name-constructor.proz",
+   "expect_ids": [
+    "TERM_SYNONYM"
+   ]
+  },
+  {
    "file": "conformance/fixtures/off-profile.proz",
    "expect_ids": [
     "OFF_PROFILE"
@@ -171,6 +191,12 @@
    "file": "conformance/fixtures/pattern-position.proz",
    "expect_ids": [
     "OPENS_ON_HOWEVER"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/pattern-says-twice.proz",
+   "expect_ids": [
+    "LACK_LISTED"
    ]
   },
   {
@@ -211,6 +237,10 @@
   },
   {
    "file": "conformance/fixtures/say-once-lawful.proz",
+   "expect_ids": []
+  },
+  {
+   "file": "conformance/fixtures/say-once-plural-lawful.proz",
    "expect_ids": []
   },
   {
@@ -267,6 +297,13 @@
    "file": "conformance/fixtures/title-without-subject.proz",
    "expect_ids": [
     "TITLE_WITHOUT_SUBJECT"
+   ]
+  },
+  {
+   "file": "conformance/fixtures/two-pieces.proz",
+   "expect_ids": [
+    "FORBIDDEN_WORD",
+    "TERM_SYNONYM"
    ]
   },
   {

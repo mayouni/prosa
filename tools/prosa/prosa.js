@@ -6,7 +6,7 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  const VERSION = { language: '0.1', court: '0.1.0' };
+  const VERSION = { language: '0.1', court: '0.1.1' };
 
   const KINDS = ['STYLE', 'TERM', 'WORDLIST', 'PATTERN', 'PROFILE', 'FORM', 'ZONE', 'PIECE', 'ALLOW', 'READING'];
   const RULE_KINDS = ['TERM', 'WORDLIST', 'PATTERN', 'PROFILE'];
@@ -316,26 +316,47 @@
 
   // readHtml(text) -> the same model, from a page: h1 to h6 are headings, p and blockquote are prose, li, td, th, dd, dt,
   // figcaption and summary are list items, pre is code. Scripts, styles, code, templates and nav menus are not read.
+  // An element runs from its opening tag to the first closing tag of its name, as a lazy match would take it; an opening tag
+  // with no closing tag after it is passed over. Each search for a closing tag is kept, so a page of unclosed tags reads in
+  // one pass instead of one pass per tag.
+  function elements(t, open, each) {
+    const next = Object.create(null); // tag -> { from, at }: the first closing tag at or after `from`, -1 for none
+    const closing = (tag, from) => {
+      const c = next[tag];
+      if (c && c.from <= from && (c.at === -1 || c.at >= from)) return c.at;
+      const re = new RegExp('</' + tag + '>', 'gi'); re.lastIndex = from; const m = re.exec(t);
+      next[tag] = { from, at: m ? m.index : -1 }; return next[tag].at;
+    };
+    open.lastIndex = 0; let m;
+    while ((m = open.exec(t))) {
+      const tag = m[1] && m[1].toLowerCase(); if (!tag) { each(m, null); continue; }
+      const from = m.index + m[0].length, at = closing(tag, from);
+      if (at === -1) { open.lastIndex = m.index + 1; continue; }
+      each(m, tag, t.slice(from, at), at + tag.length + 3);
+      open.lastIndex = at + tag.length + 3;
+    }
+  }
   function readHtml(text) {
     text = text.replace(/\r\n?/g, '\n');
-    const lineOf = at => text.slice(0, at).split('\n').length;
+    const starts = [0]; for (let k = text.indexOf('\n'); k !== -1; k = text.indexOf('\n', k + 1)) starts.push(k + 1);
+    const lineOf = at => { let lo = 0, hi = starts.length - 1; while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (starts[mid] <= at) lo = mid; else hi = mid - 1; } return lo + 1; };
     const blank = s => s.replace(/[^\n]/g, ' ');
-    let t = text.replace(/<(script|style|code|template|nav)\b[\s\S]*?<\/\1>/gi, blank);
+    const cut = []; elements(text, /<(script|style|code|template|nav)\b/gi, (m, tag, body, end) => cut.push([m.index, end]));
+    let t = ''; let was = 0; for (const [a, b] of cut) { t += text.slice(was, a) + blank(text.slice(a, b)); was = b; } t += text.slice(was);
     const dec = s => s.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&rsquo;/g, "'").replace(/&mdash;/g, '—').replace(/&hellip;/g, '…').replace(/\s+/g, ' ').trim();
     const blocks = []; let zone = null; const front = {};
     const tm = /<title>([\s\S]*?)<\/title>/i.exec(t); if (tm) front.page_title = dec(tm[1]);
     const lang = /<html[^>]*\blang="([a-z]{2})/i.exec(t); if (lang) front.lang = lang[1];
     const metaRe = /<meta\s+name="prosa:([a-z_]+)"\s+content="([^"]*)"/gi; let mm; while ((mm = metaRe.exec(t))) front[mm[1]] = mm[2];
-    const re = /<!--\s*prosa:(zone\s+([a-z][a-z0-9_]*)|end)\s*-->|<(h[1-6]|p|li|blockquote|pre|td|th|dd|dt|figcaption|summary)\b[^>]*>([\s\S]*?)<\/\3>/gi; let m;
-    while ((m = re.exec(t))) {
+    const open = /<(h[1-6]|p|li|blockquote|pre|td|th|dd|dt|figcaption|summary)\b[^>]*>|<!--\s*prosa:(zone\s+([a-z][a-z0-9_]*)|end)\s*-->/gi;
+    elements(t, open, (m, tag, body) => {
+      if (!tag) { zone = m[3] || null; return; }
       const line = lineOf(m.index);
-      if (m[1]) { zone = m[2] || null; continue; }
-      const tag = m[3].toLowerCase();
-      if (tag === 'pre') { blocks.push({ kind: 'code', text: m[4], line, list: false, quote: false, headings: [], zone }); continue; }
-      const s = dec(m[4]); if (!s) continue;
+      if (tag === 'pre') { blocks.push({ kind: 'code', text: body, line, list: false, quote: false, headings: [], zone }); return; }
+      const s = dec(body); if (!s) return;
       if (tag[0] === 'h') blocks.push({ kind: 'skip', text: s, line, list: false, quote: false, headings: [{ level: +tag[1], text: s, line }], zone });
       else blocks.push({ kind: 'prose', text: s, line, list: tag !== 'p' && tag !== 'blockquote', quote: tag === 'blockquote', headings: [], zone });
-    }
+    });
     return { front, blocks };
   }
   function read(text, file) { return /\.html?$/i.test(file || '') ? readHtml(text) : readMarkdown(text); }
@@ -394,7 +415,8 @@
 
   // ---------------------------------------------------------------- level 2: the declaration by itself
 
-  function index(decls) { const ix = {}; for (const d of decls) if (!ix[d.name]) ix[d.name] = d; return ix; }
+  // A map of names has no prototype: a declaration named constructor is a name like any other.
+  function index(decls) { const ix = Object.create(null); for (const d of decls) if (!ix[d.name]) ix[d.name] = d; return ix; }
   function chain(ix, start, field, kind) { // the declarations reached through ADOPTS or EXTENDS, nearest first; null on a cycle
     const seen = [], todo = [start];
     while (todo.length) {
@@ -422,7 +444,7 @@
 
   function checkDeclarations(decls, contract) {
     const out = []; const ix = index(decls); const D = (code, d, vars, line) => out.push(diag(contract, code, d.file, line || d.line, d.name, vars));
-    const seen = {};
+    const seen = Object.create(null);
     for (const d of decls) { if (seen[d.name]) D('DUPLICATE_DECLARATION', d, { name: d.name, first: seen[d.name].line }); else seen[d.name] = d; }
     const ref = (d, field, kinds) => { for (const x of flat(d, field)) if (x && (!ix[x] || !kinds.includes(ix[x].kind))) D('UNKNOWN_REFERENCE', d, { field, name: x, kinds: kinds.join(' or ') }, d.fields[field].line); };
     for (const d of decls) {
@@ -496,7 +518,8 @@
         if (at === 'sentence_start' && !starts.has(h.from)) continue;
         if (at === 'sentence_end' && !ends.has(to) && !ends.has(h.to)) continue;
         const hit = text.slice(toks[h.from].at, toks[h.to - 1].end);
-        hitsAll.push({ hit, line: line + count(text.slice(0, toks[h.from].at), '\n'), entry: h.entry, zone });
+        const before = text.slice(0, toks[h.from].at);
+        hitsAll.push({ hit, line: line + count(before, '\n'), col: before.length - before.lastIndexOf('\n'), entry: h.entry, zone });
       }
     };
     const lede = blocks.find(b => b.kind === 'prose');
@@ -518,7 +541,8 @@
         message: 'The list ' + d.name + ' stands ' + hitsAll.length + ' times, ' + rate + ' per thousand words; the style allows ' + budget.max + '. First: "' + hitsAll[0].hit + '".' }));
       return out;
     }
-    for (const h of hitsAll) out.push(diag(contract, code, ctx && ctx.file, h.line, d.name, {}, { severity, level: 3, cites, message: msg(h) }));
+    // the column keeps two matches on one line apart when the message is the same for both (a PATTERN with SAYS)
+    for (const h of hitsAll) { const x = diag(contract, code, ctx && ctx.file, h.line, d.name, {}, { severity, level: 3, cites, message: msg(h) }); x.col = h.col; out.push(x); }
     return out;
   }
 
@@ -542,7 +566,10 @@
     const under = h1 ? prose.filter(b => b.line > h1.line) : prose; // the first sentence under the title: a kicker above the title is not the lede
     if (F('FIRST_SENTENCE_HOLDS') && subject && under.length) { const s = sentences(under[0].text)[0] || under[0].text; if (!holds(s, subject)) D('LEDE_WITHOUT_SUBJECT', under[0].line, { subject }, 'FIRST_SENTENCE_HOLDS'); }
     if (F('SAY_ONCE')) {
-      const limit = F('SAY_ONCE').values[1].v; const stop = new Set(STOP[lang] || STOP.en); const subj = new Set(tokens(subject).map(t => t.w));
+      const limit = F('SAY_ONCE').values[1].v; const stop = new Set(STOP[lang] || STOP.en); const subjWords = tokens(subject).map(t => t.w).filter(isWord);
+      // the subject excuses its own words and their plurals: "commitments" for the subject "commitment", and back
+      const plural = (a, b) => a === b + 's' || a === b + 'es' || (b.length > 1 && b.endsWith('y') && a === b.slice(0, -1) + 'ies');
+      const subj = { has: w => subjWords.some(s => w === s || plural(w, s) || plural(s, w)) };
       const seen = {}; let n = 0; const units = [{ text: title, line: titleLine }];
       for (const b of blocks) { for (const h of b.headings || []) if (h !== h1) units.push({ text: h.text, line: h.line }); if (b.kind === 'prose') units.push({ text: b.text, line: b.line }); }
       const told = new Set();
@@ -561,7 +588,7 @@
       }
     }
     if (F('HEADINGS')) {
-      const want = form.fields.HEADINGS.decl.fields.HEADINGS.values[0].items.map(it => String(it[0].v)); const h2 = heads.filter(h => h.level === 2);
+      const want = flat(form.fields.HEADINGS.decl, 'HEADINGS'); const h2 = heads.filter(h => h.level === 2);
       const norm = s => s.toLowerCase().replace(/\s+/g, ' ').trim(); let last = -1;
       for (const w of want) { const k = h2.findIndex(h => norm(h.text) === norm(w)); if (k === -1) D('HEADING_MISSING', titleLine, { heading: w }, 'HEADINGS'); else { if (k < last) D('HEADING_OUT_OF_ORDER', h2[k].line, { heading: w }, 'HEADINGS'); last = Math.max(last, k); } }
     }
@@ -593,7 +620,7 @@
     if (!t.subject && piece && idv(piece, 'SUBJECT_FROM') === 'front_matter') t.subject = doc.front.subject || '';
     const lang = t.language || doc.front.lang || doc.front.language || 'en';
     doc.subject = t.subject || '';
-    const zones = {}; for (const d of decls) if (d.kind === 'ZONE') zones[d.name] = flat(d, 'EXEMPT_FROM');
+    const zones = Object.create(null); for (const d of decls) if (d.kind === 'ZONE') zones[d.name] = flat(d, 'EXEMPT_FROM');
     doc.exempt = (z, code) => !!(zones[z] && zones[z].includes(code));
     const name = piece ? piece.name : t.style || '';
     if (level >= 3) {
@@ -649,6 +676,7 @@
       L.push('    ' + d.message);
       const rule = d.cites.find(c => c.startsWith('rule:')), ev = d.cites.find(c => c.startsWith('evidence:'));
       if (rule) L.push('    Rule ' + rule.slice(5) + (ev ? ' · ' + ev.slice(9) : ''));
+      if (d.by) L.push('    Piece ' + d.by.piece + ' · style ' + d.by.style);
       L.push('');
     }
     const e = diags.filter(d => d.severity === 'error').length, w = diags.filter(d => d.severity === 'warning').length;
@@ -656,7 +684,7 @@
     return L.join('\n');
   }
   function envelope(diags) {
-    return { diagnostics: diags.map(d => ({ code: d.code, severity: d.severity, message: d.message, span: d.span, cites: d.cites, language: 'prosa', level: d.level, subject: d.subject })) };
+    return { diagnostics: diags.map(d => Object.assign({ code: d.code, severity: d.severity, message: d.message, span: d.span, cites: d.cites, language: 'prosa', level: d.level, subject: d.subject }, d.by ? { piece: d.by.piece, style: d.by.style } : {})) };
   }
 
   // brief(decls, target) -> the contract an AI agent receives before it drafts. It states what to write.
